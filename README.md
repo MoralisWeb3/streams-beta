@@ -194,7 +194,7 @@ will contain the metadata such as NFT name or Token Name and much more! 🔥
 }
 ```
 
-### Custom Parsed Data (NOT YET IMPLEMENTED)
+### Custom Parsed Data
 
 If you are monitoring a custom custom contract you can parse the data yourself.
 with the following code:
