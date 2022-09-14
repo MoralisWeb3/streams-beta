@@ -1,6 +1,6 @@
 ## Moralis Streams API
 
-A enterprise grade API for monitoring assets, contracts and all kinds of events
+An enterprise-grade API for monitoring assets, contracts and all kinds of events
 on the blockchain.
 
 # Table of Contents
