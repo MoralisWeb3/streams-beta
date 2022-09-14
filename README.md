@@ -54,7 +54,7 @@ Settings.
 
 ### Programmatically
 
-```typscript
+```typescript
 import Moralis from 'moralis';
 
 Moralis.start({
