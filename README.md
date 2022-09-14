@@ -44,7 +44,28 @@ create a stream to monitor a specific contract, asset, wallet or nft.
 ### Pre-requisites
 
 Create an account on https://moralis.io/ or login if you already have an
-account.
+account. Before you can create a stream you need to configure your settings.
+
+#### Programmatically
+
+```typescript
+import Moralis from "moralis";
+
+Moralis.start({
+  apiKey: "YOUR_API_KEY",
+});
+
+await Moralis.Streams.setSettings({
+  secretKey: "notsosecret", // to validate incoming webhooks
+  region: "eu-central-1", // choose the region closest to your backend
+});
+```
+
+#### Manually
+
+Log in to your Moralis Account. Click on Settings on the left side, choose the
+(nearest) region to your backend and specify a secret key which is used to
+validate incoming webhooks.
 
 ### Let's go 🚀
 
@@ -93,7 +114,27 @@ monitoring occurs, you will receive a webhook with the transaction details.
 
 ## DATA MODEL
 
-Example of a Webhook Body that streams all transfers of a token.
+The Webhook will set a `x-singature` header. It is for verifying if the data you
+will receive is from Moralis.
+
+You can verify the webhook with the following code:
+
+```typescript
+import { sha3 } from "web3-utils";
+import { SECRET } from "./env"
+
+
+const signature = req.headers["x-signature"];
+const data = req.body;
+/** hash the stringified the body and your secret key */
+const hash = sha3(JSON.stringify(data) + SECRET_KEY);
+/** compare the hash with the signature */
+if (hash === signature) // request valid
+```
+
+### Automatic Parsed Data
+
+Example of a Webhook Body that's monitoring all transfers of a token.
 
 🔥 If an event matches a erc standard, the event will be parsed and the data will
 contain the metadata such as NFT name or Token Name and much more! 🔥
@@ -151,4 +192,6 @@ contain the metadata such as NFT name or Token Name and much more! 🔥
   "nftTransfers": [],
   "nftApprovals": []
 }
+
+### Custom Parsed Data
 ```
