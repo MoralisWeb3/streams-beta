@@ -1,79 +1,36 @@
-## Setup
+## Moralis Streams API
 
-- run npm install
-- Copy the `.env.example` file to `.env`;
-- run npm start:dev
+A enterprise grade API for monitoring assets, contracts and all kinds of events
+on the blockchain.
 
-To receive real webhooks from the API, you need to expose your local server to
-the internet. You can use [ngrok](https://ngrok.com/) for this or deploy to
-heroku or production.
+## STREAMS
 
-NOTE: Heroku free hosting will be discontinued on 28th November
+Streams are a way to monitor events on the blockchain in real-time. You can
+create a stream to monitor a specific contract, asset, wallet or nft.
 
-## Receive Webhook
+## EXAMPLE SITUATION
 
-In this example we are receiving a webhook which handles ERC20 Transfers. Every
-POST Request to the endpoint `YOUR_URL/token` calls the `handleWebhook`
-function.
+- Alice monitors all transactions from Bob's wallet with Moralis Streams API
+- Bob buys a new NFT
+- Alice gets a message that Bob bought a new NFT
+- Bob sends USDT to Charlie
+- Alice gets a message that Bob sent USDT to Charlie
 
-```typescript
-@UseGuards(VerifySignature)
-  @Post('token')
-  receiveWebhook(@Body() body: IWebhook) {
-    return this.appService.handleWebhook(body);
-  }
-```
+## TUTORIALS
 
-The `handleWebhook` function is called with the body of the POST Request. Which
-contains the logs of the event(s)
+- [How to monitor a wallet with Moralis Streams API]("")
 
-```typescript
-@Injectable()
-export class AppService {
-  handleWebhook(body: IWebhook) {
-    const { erc20Transfers } = body;
+## EXAMPLES
 
-    erc20Transfers.map(
-      ({ from, to, valueWithDecimals, transaction_hash, tokenName }) => {
-        console.log(
-          `${from} sends ${to} ${valueWithDecimals} ${tokenName} tokens @${transaction_hash}`,
-        );
-      },
-    );
+[NestJS](https://github.com/MoralisWeb3/streams-beta/tree/main/examples/nestjs)
 
-    return { handled: true };
-  }
-}
-```
+## CREATE A STREAM
 
-In this case we are only console logging the events. But you can do whatever you
-want with the data. For example you can send an email to the user who received
-the tokens or save the data in a database of your choice.
+Create an account on https://moralis.io/ or login if you already have an
+account.
 
-## Guards / Signature Verification
+Go to the Streams tab and click on "Create Stream".
 
-This Guard check if the signature (x-signature). Is valid. If not, it will
-return a 403 Forbidden. The verification ensures that the webhook is coming from
-the correct source.
+![Create Stream](picture)
 
-```typescript
-@Injectable()
-export class VerifySignature implements CanActivate {
-  canActivate(context: ExecutionContext): boolean {
-    const request = context.switchToHttp().getRequest();
-    const signature = request.headers["x-signature"];
-    const body = request.body;
-    if (!signature) return false;
-    const hash = sha3(JSON.stringify(body) + process.env.SECRET_KEY);
-    return signature === hash;
-  }
-}
-```
-
-The signature is defined by your Secret Key and a stringified JSON body which is
-hashed with sha3. If this hash matches the signature, the request is valid.
-
-```typescript
-const hash = sha3(JSON.stringify(body) + process.env.SECRET_KEY);
-hash === signature; // -> valid request;
-```
+Fill in the form and click on "Create Stream".
