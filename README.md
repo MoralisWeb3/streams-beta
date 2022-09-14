@@ -43,8 +43,16 @@ create a stream to monitor a specific contract, asset, wallet or nft.
 
 ### Pre-requisites
 
-Create an account on https://moralis.io/ or login if you already have an
-account. Before you can create a stream you need to configure your settings.
+Create an account on [Moralis.io](https://moralis.io) or login and get your API
+KEY for free! You can find the key [here](http://admin.moralis.io/web3apis)
+
+## Configure Stream Settings
+
+Before we can start any streams we need to setup the stream settings. We need to
+specifiy the region and and a secret key for our streams.
+
+Select a region which is closest to your backend. Learn more about the Secret
+Key in the Data
 
 #### Programmatically
 
@@ -63,9 +71,9 @@ await Moralis.Streams.setSettings({
 
 #### Manually
 
-Log in to your Moralis Account. Click on Settings on the left side, choose the
-(nearest) region to your backend and specify a secret key which is used to
-validate incoming webhooks.
+1. Go to [Settings](http://admin.moralis.io/settings)
+2. Choose a region which is closest to your backend
+3. Set a secret key for your streams
 
 ### Let's go 🚀
 
@@ -117,6 +125,8 @@ monitoring occurs, you will receive a webhook with the transaction details.
 # Webhook Data
 
 ## Header
+
+### x-signature
 
 The Webhook will set a `x-signature` header. It is for verifying if the data you
 will receive is from Moralis.
