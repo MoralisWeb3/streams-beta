@@ -114,9 +114,7 @@ monitoring occurs, you will receive a webhook with the transaction details.
 
 ## DATA MODEL
 
-#### Header
-
-The Webhook will set a `x-singature` header. It is for verifying if the data you
+The Webhook will set a `x-signature` header. It is for verifying if the data you
 will receive is from Moralis.
 
 You can verify the webhook with the following code:
