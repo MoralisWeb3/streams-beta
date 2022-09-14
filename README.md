@@ -80,6 +80,12 @@ await Moralis.Streams.setSettings({
 In this example we will monitor a wallet. Meaning all incoming and outgoing
 transactions of that wallet will be monitored!
 
+NOTE: The following tutorial considers Manual Steps and shows programmatically
+steps using JavaScript (TypeScript). If you want to use other languages you can
+directly use the API endpoints via HTTP.
+
+[Swagger Docs](https://streams-api.aws-prod-streams-master-1.moralis.io/api-docs/#/)
+
 ### Programmatically
 
 We will use Moralis SDK to create a stream. You need an API Key which you will
