@@ -39,7 +39,7 @@ create a stream to monitor a specific contract, asset, wallet or nft.
 
 [NestJS](https://github.com/MoralisWeb3/streams-beta/tree/main/examples/nestjs)
 
-## CREATE A STREAM
+# CREATE A STREAM
 
 ### Pre-requisites
 
@@ -69,11 +69,13 @@ validate incoming webhooks.
 
 ### Let's go 🚀
 
-In this example we are going to monitor all transactions from a wallet. We will
-use Moralis SDK to create a stream. You will find your API Key in your Account
-Settings.
+In this example we will monitor a wallet. Meaning all incoming and outgoing
+transactions of that wallet will be monitored!
 
 ### Programmatically
+
+We will use Moralis SDK to create a stream. You need an API Key which you will
+find your Account Settings.
 
 ```typescript
 import Moralis from 'moralis';
@@ -98,21 +100,23 @@ newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
 
 ### Manually
 
-Click on the Streams tab in the left sidebar. You will see a list of your
-streams. Press the `Addresses` tab and click on `New Address Stream`.
+1. Go to http://admin.moralis.io/streams/wallets/new
+2. Click on `New Address Stream`.
+3. Fill out the Form:
+   - Address: `BOBS_WALLET`
+   - Webhook URL: `https://YOUR_WEBHOOK_URL`
+   - Tag: `bob`
+   - Select Blockchain (e.g. Ethereum Mainnet)
+4. Click on `Create Stream`
 
-Fill in the Address you wish to monitor, your webhook URL and a tag.
-
-Select the blockchains where you want to monitor the address. Optionally, you
-can include Native Transactions associated to contract events to be included in
-the stream.
-
-Click on `Create Stream`.
+### We are live! 🎉
 
 Now whenever an ingoing or outgoing transaction involving the address you are
 monitoring occurs, you will receive a webhook with the transaction details.
 
-## DATA MODEL
+# Webhook Data
+
+## Header
 
 The Webhook will set a `x-signature` header. It is for verifying if the data you
 will receive is from Moralis.
