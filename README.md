@@ -1,12 +1,5 @@
 ## Moralis Streams API
 
-## About
-
-This repo is a demo on how to use [Moralis Streams API](https://moralis.io/streams/). 
-In this particular example we are using NestJS as a backend that receives and handles webhooks.
-
-## Setup
-
 A enterprise grade API for monitoring assets, contracts and all kinds of events
 on the blockchain.
 
