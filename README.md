@@ -156,8 +156,8 @@ if (hash === signature) // request valid
 
 The body contains the data you are interested in. Logs is in array containing
 raw events and stream information such as tag and the streamId. The body also
-contains a chainId, internal transactions, the abis and a confirmed field that
-indicates if the block is confirmed.
+contains a chainId, the blocknumber, internal transactions, the abis and a
+confirmed field that indicates if the block is confirmed.
 
 ```json
 {
@@ -180,7 +180,8 @@ indicates if the block is confirmed.
   ],
   "txs": [],
   "chainId": "0x1",
-  "confirmed": true
+  "confirmed": true,
+  "block": "15534209"
 }
 ```
 
