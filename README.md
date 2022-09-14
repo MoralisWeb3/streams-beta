@@ -180,17 +180,7 @@ indicates if the block is confirmed.
   ],
   "txs": [],
   "chainId": "0x1",
-  "confirmed": true,
-  "abis": {
-    "c63fff7a-1f49-45d8-ab99-1fe1f3aee449": {
-      "anonymous": false,
-      "inputs": [
-        null
-      ],
-      "name": "Transfer",
-      "type": "event"
-    }
-  }
+  "confirmed": true
 }
 ```
 
