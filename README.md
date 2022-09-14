@@ -31,6 +31,6 @@ account.
 
 Go to the Streams tab and click on "Create Stream".
 
-![Create Stream](picture)
+... more to come
 
 Fill in the form and click on "Create Stream".
