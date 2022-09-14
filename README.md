@@ -3,12 +3,27 @@
 A enterprise grade API for monitoring assets, contracts and all kinds of events
 on the blockchain.
 
-## STREAMS
+# Table of Contents
+
+[About](#headers)
+
+- [Streams](#header-1)
+- [Example Scenario](#header-2)
+
+[API](#emphasis)
+
+- [Streams](#header-3)
+  - [Create](#header-33)
+  - [Get](#header-4)
+  - [Update](#header-5)
+  - [Delete](#header-6)
+
+# STREAMS
 
 Streams are a way to monitor events on the blockchain in real-time. You can
 create a stream to monitor a specific contract, asset, wallet or nft.
 
-## EXAMPLE SITUATION
+### Example Scenario
 
 - Alice monitors all transactions from Bob's wallet with Moralis Streams API
 - Bob buys a new NFT
