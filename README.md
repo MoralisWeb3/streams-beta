@@ -254,3 +254,39 @@ const decodedLogs = decodeLogs<MyEvent>();
 
 decodedLogs[0]; // { from: '0x...', to: '0x...' }
 ```
+
+# Filter Streams
+
+In some cases you might want to filter the data you receive from the webhook.
+For example you are monitoring a nft collection but you only want to know if a
+specific nft is transfered.
+
+You can do this by adding a filter to the stream.
+
+## Programmatically
+
+```typescript
+import { Moralis } from "moralis";
+
+const options = {
+    address: '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4' // address to monitor
+    chains: ['0x1'] // list of blockchains to monitor
+    description: 'monitor one NFT from Collection', // your description
+    network: 'evm',
+    tag: 'mySpecialNft', // give it a tag
+    type: 'contract' // contract as NFT is a contract,
+    abi: {}, // abi of the event
+    filter: {"eq": ["tokenId", "1"]}, // only receive events where tokenId is 1
+    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
+  }
+
+const stream = await Moralis.Streams.add(stream);
+```
+
+## Manually
+
+1. Create a new Smart Contract Stream
+2. Fill out the form
+3. Add a filter
+   - {"eq": ["tokenId", "1"]}
+4. Save the stream
