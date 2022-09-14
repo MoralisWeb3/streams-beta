@@ -62,7 +62,7 @@ Moralis.start({
 });
 
 const stream = {
-    address: '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B' // address to monitor
+    address: '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4' // address to monitor
     chains: ['0x1'] // list of blockchains to monitor
     description: 'monitor Bobs wallet', // your description
     network: 'evm',
@@ -91,5 +91,64 @@ Click on `Create Stream`.
 Now whenever an ingoing or outgoing transaction involving the address you are
 monitoring occurs, you will receive a webhook with the transaction details.
 
-```
+## DATA MODEL
+
+Example of a Webhook Body that streams all transfers of a token.
+
+🔥 If an event matches a erc standard, the event will be parsed and the data will
+contain the metadata such as NFT name or Token Name and much more! 🔥
+
+```json
+{
+  "logs": [
+    {
+      "log_index": "48",
+      "transaction_hash": "0xb9730dd1b49061f3b5a6f93e0a66a03be199cad6f21ba5e8747a8087754e3e",
+      "transaction_index": "40",
+      "transaction_value": "0",
+      "address": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+      "data": "0x0000000000000000000000000000000000000000204f8a5f22b432605d238000",
+      "topic0": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+      "topic1": "0x00000000000000000000000068b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4",
+      "topic2": "0x0000000000000000000000002faf487a4414fe77e2327f0bf4ae2a264a776ad2",
+      "topic3": null,
+      "tag": "shib_transfers",
+      "streamType": "contract",
+      "streamId": "c63fff7a-1f49-45d8-ab99-1fe1f3aee449"
+    }
+  ],
+  "txs": [],
+  "chainId": "0x1",
+  "confirmed": true,
+  "abis": {
+    "c63fff7a-1f49-45d8-ab99-1fe1f3aee449": {
+      "anonymous": false,
+      "inputs": [
+        null
+      ],
+      "name": "Transfer",
+      "type": "event"
+    }
+  },
+  "block": "15533549",
+  "erc20Transfers": [
+    {
+      "from": "0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4",
+      "to": "0x2faf487a4414fe77e2327f0bf4ae2a264a776ad2",
+      "value": "9999678895548600000000000000",
+      "transaction_hash": "0xb9730dd1b49061f3b5a6f93e0a66a03be199cad6f21ba5e8747a8087754e3e",
+      "transaction_index": "40",
+      "log_index": "48",
+      "tag": "shib_transfers",
+      "tokenAddress": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+      "tokenName": "SHIBA INU",
+      "tokenSymbol": "SHIB",
+      "tokenDecimals": "18",
+      "valueWithDecimals": "9999678895.5486"
+    }
+  ],
+  "erc20Approvals": [],
+  "nftTransfers": [],
+  "nftApprovals": []
+}
 ```
