@@ -87,7 +87,7 @@ const stream = {
     chains: ['0x1'] // list of blockchains to monitor
     description: 'monitor Bobs wallet', // your description
     network: 'evm',
-    tag: 'test', // give it a tag
+    tag: 'bob', // give it a tag
     type: 'wallet' // can be wallet or contract,
     webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
   }
@@ -114,6 +114,8 @@ monitoring occurs, you will receive a webhook with the transaction details.
 
 ## DATA MODEL
 
+#### Header
+
 The Webhook will set a `x-singature` header. It is for verifying if the data you
 will receive is from Moralis.
 
@@ -132,12 +134,12 @@ const hash = sha3(JSON.stringify(data) + SECRET_KEY);
 if (hash === signature) // request valid
 ```
 
-### Automatic Parsed Data
+#### Body
 
-Example of a Webhook Body that's monitoring all transfers of a token.
-
-🔥 If an event matches an erc standard, the event will be parsed and the data
-will contain the metadata such as NFT name or Token Name and much more! 🔥
+The body contains the data you are interested in. Logs is in array containing
+raw events and stream information such as tag and the streamId. The body also
+contains a chainId, internal transactions, the abis and a confirmed field that
+indicates if the block is confirmed.
 
 ```json
 {
@@ -153,7 +155,7 @@ will contain the metadata such as NFT name or Token Name and much more! 🔥
       "topic1": "0x00000000000000000000000068b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4",
       "topic2": "0x0000000000000000000000002faf487a4414fe77e2327f0bf4ae2a264a776ad2",
       "topic3": null,
-      "tag": "shib_transfers",
+      "tag": "bob",
       "streamType": "contract",
       "streamId": "c63fff7a-1f49-45d8-ab99-1fe1f3aee449"
     }
@@ -170,8 +172,29 @@ will contain the metadata such as NFT name or Token Name and much more! 🔥
       "name": "Transfer",
       "type": "event"
     }
-  },
-  "block": "15533549",
+  }
+}
+```
+
+### Automatic Parsed Data
+
+In a case where you are receiveng a webhook that monitors a wallet or a contract
+and includes ERC Standard Events such as ERC20 transfers and approvals aswell as
+ERC115/ERC721 transfers and approvals:
+
+🔥 The Streams API will automatically parse the logs and also adds metadata
+information about the contract 🔥
+
+Example Body:
+
+```json
+{
+  "logs": [
+    {
+      ...rawLogs,
+    }
+  ],
+  ...,
   "erc20Transfers": [
     {
       "from": "0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4",
