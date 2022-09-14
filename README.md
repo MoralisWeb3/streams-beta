@@ -126,7 +126,7 @@ import { SECRET } from "./env"
 
 const signature = req.headers["x-signature"];
 const data = req.body;
-/** hash the stringified the body and your secret key */
+/** hash the stringified body and your secret key */
 const hash = sha3(JSON.stringify(data) + SECRET_KEY);
 /** compare the hash with the signature */
 if (hash === signature) // request valid
@@ -136,8 +136,8 @@ if (hash === signature) // request valid
 
 Example of a Webhook Body that's monitoring all transfers of a token.
 
-🔥 If an event matches a erc standard, the event will be parsed and the data will
-contain the metadata such as NFT name or Token Name and much more! 🔥
+🔥 If an event matches an erc standard, the event will be parsed and the data
+will contain the metadata such as NFT name or Token Name and much more! 🔥
 
 ```json
 {
@@ -196,12 +196,13 @@ contain the metadata such as NFT name or Token Name and much more! 🔥
 
 ### Custom Parsed Data (NOT YET IMPLEMENTED)
 
-If you are monitoring a custom custom contract you can parse the data yourself
+If you are monitoring a custom custom contract you can parse the data yourself.
 with the following code:
 
 ```typescript
 // event MyEvent(address indexed from, address indexed to);
 import Moralis from "moralis";
+import AbiUtils from "web3-eth-abi";
 
 interface MyEvent {
   from: string;
@@ -210,10 +211,16 @@ interface MyEvent {
 
 const webhook = { ...body, logs: [...logs] };
 
-const decodedLogs = Moralis.Streams.decodeLog<MyEvent>(webhook.logs);
+function decodeLogs<T>() {
+  return webhook.logs.map((log) => {
+    const { data, topic1, topic2, topic3, streamId } = log;
+    const topics = [topic1, topic2, topic3];
+    const abi = webhook.abis[streamId];
+    return AbiUtils.decodeLog(abi.inputs, data, topics);
+  }) as unknown as T[];
+}
 
-decodedLogs.forEach((log) => {
-  const { from, to } = log.params;
-  console.log(from, to);
-});
+const decodedLogs = decodeLogs<MyEvent>();
+
+decodedLogs[0]; // { from: '0x...', to: '0x...' }
 ```
