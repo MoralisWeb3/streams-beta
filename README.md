@@ -261,7 +261,8 @@ In some cases you might want to filter the data you receive from the webhook.
 For example you are monitoring a nft collection but you only want to know if a
 specific nft is transfered.
 
-You can do this by adding a filter to the stream.
+You can do this by adding a filter to the stream. Important: You must add a
+(valid!) ABI of the event you want to filter! Otherwise the stream will not work
 
 ## Programmatically
 
@@ -287,6 +288,15 @@ const stream = await Moralis.Streams.add(stream);
 
 1. Create a new Smart Contract Stream
 2. Fill out the form
-3. Add a filter
+3. Add the Abi and choose from the topic dropdown
+4. Add a filter
    - {"eq": ["tokenId", "1"]}
-4. Save the stream
+5. Save the stream
+
+# Get Error
+
+...
+
+# Retry Failed Webhook
+
+...
