@@ -192,6 +192,28 @@ contain the metadata such as NFT name or Token Name and much more! 🔥
   "nftTransfers": [],
   "nftApprovals": []
 }
+```
 
-### Custom Parsed Data
+### Custom Parsed Data (NOT YET IMPLEMENTED)
+
+If you are monitoring a custom custom contract you can parse the data yourself
+with the following code:
+
+```typescript
+// event MyEvent(address indexed from, address indexed to);
+import Moralis from "moralis";
+
+interface MyEvent {
+  from: string;
+  to: string;
+}
+
+const webhook = { ...body, logs: [...logs] };
+
+const decodedLogs = Moralis.Streams.decodeLog<MyEvent>(webhook.logs);
+
+decodedLogs.forEach((log) => {
+  const { from, to } = log.params;
+  console.log(from, to);
+});
 ```
