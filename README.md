@@ -201,7 +201,6 @@ with the following code:
 
 ```typescript
 // event MyEvent(address indexed from, address indexed to);
-import Moralis from "moralis";
 import AbiUtils from "web3-eth-abi";
 
 interface MyEvent {
