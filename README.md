@@ -209,7 +209,7 @@ confirmed field that indicates if the block is confirmed.
     }
   ],
   "txs": [],
-  "internalTxs": [],
+  "txsInternal": [],
   "chainId": "0x1",
   "confirmed": true,
   "block": "15534209"
