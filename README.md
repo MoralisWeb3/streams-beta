@@ -218,12 +218,14 @@ confirmed field that indicates if the block is confirmed.
 
 ### 🔥 Automatic Parsed Data 🔥
 
-In a case where you are receiveng a webhook that monitors a wallet or a contract
-and includes ERC Standard Events such as ERC20 transfers and approvals aswell as
-ERC115/ERC721 transfers and approvals:
+If a webhook that sends transaction details about a wallet or a contract that
+includes ERC Standard Events such as Token (ERC20) transfers and approvals
+aswell as NFT (ERC115/ERC721) transfers and approvals:
 
-The Streams API will automagically parse the logs and also adds metadata
-information about the contract
+🔮 The Streams API will automagically parse the logs and also adds metadata
+information about the token or NFT 🔮
+
+magician emoji
 
 Example Body:
 
