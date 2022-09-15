@@ -103,7 +103,7 @@ monitoring occurs, you will receive a webhook with the transaction details.
 
 ## Header
 
-### x-signature
+### Verify Webhooks
 
 The Webhook will set a `x-signature` header. It is for verifying if the data you
 will receive is from Moralis.
@@ -111,16 +111,11 @@ will receive is from Moralis.
 You can verify the webhook with the following code:
 
 ```typescript
-import { sha3 } from "web3-utils";
-import { SECRET } from "./env"
+import Moralis from "moralis";
 
+const { headers, body } = request;
 
-const signature = req.headers["x-signature"];
-const data = req.body;
-/** hash the stringified body and your secret key */
-const hash = sha3(JSON.stringify(data) + SECRET_KEY);
-/** compare the hash with the signature */
-if (hash === signature) // request valid
+Moralis.Streams.verifySignature(body, headers["x-signature"]); // returns true or false;
 ```
 
 #### Body
@@ -220,8 +215,9 @@ decodedLogs[0]; // { from: '0x...', to: '0x...' }
 
 ## Stream Settings
 
-Moralis sets default settings for your streams. You can change these settings
-any time.
+Moralis sets a default region for your stream. You can change the region
+anytime. Choose the region that is closest to your backend for the best
+performance.
 
 ### Set Settings
 
@@ -235,8 +231,7 @@ Moralis.start({
 });
 
 await Moralis.Streams.setSettings({
-  secretKey: "notsosecret", // to validate incoming webhooks
-  region: "eu-central-1", // choose the region closest to your backend
+  region: "eu-central-1", // 'us-east-1' | 'us-west-2' | 'eu-central-1'
 });
 ```
 
@@ -244,25 +239,7 @@ await Moralis.Streams.setSettings({
 
 1. Go to [Settings](http://admin.moralis.io/settings)
 2. Choose a region which is closest to your backend
-3. Set a secret key for your streams
-
-### Get Settings
-
-#### Programmatically
-
-```typescript
-import Moralis from "moralis";
-
-Moralis.start({
-  apiKey: "YOUR_API_KEY",
-});
-
-await Moralis.Streams.getSettings();
-```
-
-#### Manually
-
-1. Go to [Settings](http://admin.moralis.io/settings)
+3. Click on Save Changes
 
 # Filter Streams
 
