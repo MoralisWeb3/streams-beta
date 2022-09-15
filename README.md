@@ -39,14 +39,14 @@ create a stream to monitor a specific contract, asset, wallet or nft.
 
 [NestJS](https://github.com/MoralisWeb3/streams-beta/tree/main/examples/nestjs)
 
-# CREATE A STREAM
+# Let's get started
 
-### Pre-requisites
+## Pre-requisites
 
 Create an account on [Moralis.io](https://moralis.io) or login and get your API
 KEY for free! You can find the key [here](http://admin.moralis.io/web3apis)
 
-### Let's go 🚀
+## Create a stream 🚀
 
 In this example we will monitor a wallet. Meaning all incoming and outgoing
 transactions of that wallet will be monitored!
@@ -94,7 +94,7 @@ newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
    - Select Blockchain (e.g. Ethereum Mainnet)
 4. Click on `Create Stream`
 
-#### Important Note
+## Important Note
 
 Whenever you create or update a stream you will receive a test webhook so the
 Streams API ensures your endpoint is healthy. If the request is rejected by your
@@ -121,7 +121,7 @@ The test body will look like this:
 }
 ```
 
-### We are live! 🎉
+## We are live! 🎉
 
 Now whenever an ingoing or outgoing transaction involving the address you are
 monitoring occurs, you will receive a webhook with the transaction details.
@@ -132,8 +132,9 @@ monitoring occurs, you will receive a webhook with the transaction details.
 
 ### Verify Webhooks
 
-The Webhook will set a `x-signature` header. It is for verifying if the data you
-will receive is from Moralis.
+The Webhook will set a `x-signature` in the header. It is for verifying if the
+data you will receive is from Moralis. Essentially it is a hash (sha3) of the
+body and your API Key.
 
 You can verify the webhook with the following code:
 
@@ -146,14 +147,14 @@ const { headers, body } = request;
 Moralis.Streams.verifySignature(body, headers["x-signature"]); // returns true or false;
 ```
 
-#### Body
+## Body
 
 The body contains the data you are interested in. Logs is in array containing
 raw events and stream information such as tag and the streamId. The body also
 contains a chainId, the blocknumber, internal transactions, the abis and a
 confirmed field that indicates if the block is confirmed.
 
-#### Wallet Transaction
+### Wallet Transaction
 
 ```json
 {
@@ -187,7 +188,7 @@ confirmed field that indicates if the block is confirmed.
 }
 ```
 
-##### Smart Contract Events
+#### Smart Contract Events
 
 ```json
 {
@@ -352,7 +353,7 @@ const options = {
     network: 'evm',
     tag: 'mySpecialNft', // give it a tag
     type: 'contract' // contract as NFT is a contract,
-    abi: {}, // abi of the event
+    abi: {}, // valid abi of the event
     filter: {"eq": ["tokenId", "1"]}, // only receive events where tokenId is 1
     webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
   }
