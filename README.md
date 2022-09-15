@@ -225,8 +225,6 @@ aswell as NFT (ERC115/ERC721) transfers and approvals:
 🔮 The Streams API will automagically parse the logs and also adds metadata
 information about the token or NFT 🔮
 
-magician emoji
-
 Example Body:
 
 ```json
