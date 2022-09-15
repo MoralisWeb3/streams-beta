@@ -94,6 +94,33 @@ newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
    - Select Blockchain (e.g. Ethereum Mainnet)
 4. Click on `Create Stream`
 
+#### Important Note
+
+Whenever you create or update a stream you will receive a test webhook so the
+Streams API ensures your endpoint is healthy. If the request is rejected by your
+backend the stream will not start. So please ensure that your endpoint can
+handle the test webhook.
+
+The test body will look like this:
+
+```json
+{
+  "abis": [],
+  "txs": [],
+  "txsInternal": [],
+  "logs": [],
+  "chainId": "",
+  "description": "This is a test webhook, to check if your webhook url is healthy.",
+  "confirmed": true,
+  "lag": 1,
+  "retries": 0,
+  "erc20Approvals": [],
+  "erc20Transfers": [],
+  "nftApprovals": [],
+  "nftTransfers": []
+}
+```
+
 ### We are live! 🎉
 
 Now whenever an ingoing or outgoing transaction involving the address you are
