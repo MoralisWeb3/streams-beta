@@ -265,7 +265,6 @@ Sometimes you want to check if a stream is still active or if something went
 wrong. When you query all your streams you can see the status of the stream.
 There are three possible states: `active`, `paused` and `error`.
 
-````typescript
 ## Stream Settings
 
 Moralis sets a default region for your stream. You can change the region
@@ -286,7 +285,7 @@ Moralis.start({
 await Moralis.Streams.setSettings({
   region: "eu-central-1", // 'us-east-1' | 'us-west-2' | 'eu-central-1'
 });
-````
+```
 
 #### Manually
 
