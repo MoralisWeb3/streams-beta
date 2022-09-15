@@ -111,6 +111,7 @@ will receive is from Moralis.
 You can verify the webhook with the following code:
 
 ```typescript
+// YET TO IMPLEMENT IN SDK!!
 import Moralis from "moralis";
 
 const { headers, body } = request;
@@ -199,7 +200,7 @@ with the following code:
 
 ```typescript
 // event MyEvent(address indexed from, address indexed to);
-import { decodeLogs } from "@moralisweb3/evm-utils";
+import { decodeLogs } from "@moralisweb3/evm-utils"; // YET TO IMPLEMENT IN SDK!!
 
 interface MyEvent {
   from: string;
