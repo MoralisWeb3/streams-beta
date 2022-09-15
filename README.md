@@ -55,7 +55,7 @@ NOTE: The following tutorial considers Manual Steps and shows programmatically
 steps using JavaScript (TypeScript). If you want to use other languages you can
 directly use the API endpoints via HTTP.
 
-[Swagger Docs](https://streams-api.aws-prod-streams-master-1.moralis.io/api-docs/#/)
+[Swagger Docs](https://api.moralis-streams.com/api-docs/)
 
 ### Programmatically
 
@@ -212,6 +212,24 @@ const decodedLogs = decodeLogs<MyEvent>(webhook);
 
 decodedLogs[0]; // { from: '0x...', to: '0x...' }
 ```
+
+# Streams
+
+## GET Streams
+
+You can see a list of all your streams by calling the following method:
+
+```typescript
+const streams = await Moralis.Streams.getAll({
+    limit: 100 // limit the number of streams to return
+    network: 'evm', // filter by network
+});
+```
+
+Or you can see all streams in the [Admin Panel](http://admin.moralis.io/streams)
+
+Checkout the type reference of a Stream
+[here](https://api.moralis-streams.com/api-docs/)
 
 ## Stream Settings
 
