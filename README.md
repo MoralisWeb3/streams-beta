@@ -46,35 +46,6 @@ create a stream to monitor a specific contract, asset, wallet or nft.
 Create an account on [Moralis.io](https://moralis.io) or login and get your API
 KEY for free! You can find the key [here](http://admin.moralis.io/web3apis)
 
-## Configure Stream Settings
-
-Before we can start any streams we need to setup the stream settings. We need to
-specifiy the region and and a secret key for our streams.
-
-Select a region which is closest to your backend. Learn more about the Secret
-Key in the Data
-
-#### Programmatically
-
-```typescript
-import Moralis from "moralis";
-
-Moralis.start({
-  apiKey: "YOUR_API_KEY",
-});
-
-await Moralis.Streams.setSettings({
-  secretKey: "notsosecret", // to validate incoming webhooks
-  region: "eu-central-1", // choose the region closest to your backend
-});
-```
-
-#### Manually
-
-1. Go to [Settings](http://admin.moralis.io/settings)
-2. Choose a region which is closest to your backend
-3. Set a secret key for your streams
-
 ### Let's go 🚀
 
 In this example we will monitor a wallet. Meaning all incoming and outgoing
@@ -246,6 +217,52 @@ const decodedLogs = decodeLogs<MyEvent>(webhook);
 
 decodedLogs[0]; // { from: '0x...', to: '0x...' }
 ```
+
+## Stream Settings
+
+Moralis sets default settings for your streams. You can change these settings
+any time.
+
+### Set Settings
+
+#### Programmatically
+
+```typescript
+import Moralis from "moralis";
+
+Moralis.start({
+  apiKey: "YOUR_API_KEY",
+});
+
+await Moralis.Streams.setSettings({
+  secretKey: "notsosecret", // to validate incoming webhooks
+  region: "eu-central-1", // choose the region closest to your backend
+});
+```
+
+#### Manually
+
+1. Go to [Settings](http://admin.moralis.io/settings)
+2. Choose a region which is closest to your backend
+3. Set a secret key for your streams
+
+### Get Settings
+
+#### Programmatically
+
+```typescript
+import Moralis from "moralis";
+
+Moralis.start({
+  apiKey: "YOUR_API_KEY",
+});
+
+await Moralis.Streams.getSettings();
+```
+
+#### Manually
+
+1. Go to [Settings](http://admin.moralis.io/settings)
 
 # Filter Streams
 
