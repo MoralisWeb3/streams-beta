@@ -153,6 +153,57 @@ raw events and stream information such as tag and the streamId. The body also
 contains a chainId, the blocknumber, internal transactions, the abis and a
 confirmed field that indicates if the block is confirmed.
 
+#### Wallet Transaction
+
+```json
+"txs": [
+    {
+      "hash": "0x9e77b2e848c5bfa67cdd46a4fsd12df0daa2e8fde18f35db58c0406fe43e766f",
+      "block_number": "12990639",
+      "gas": "21000",
+      "gas_price": "1000000006",
+      "nonce": "13",
+      "input": "0x",
+      "transaction_index": "3",
+      "block_timestamp": null,
+      "block_hash": "0x92bb15d907dd201ea307c1ca893be24aa0f31754a68fc9586b3d3c7f3a612d08",
+      "from_address": "0x32ba4825204dce15c7147ea89b31178a00750f81",
+      "to_address": "0x0e1458c4b529f564a14ec8fc3ae7369786a1625d",
+      "value": "241000000000000000",
+      "type": "2",
+      "v": "0",
+      "r": "576982745954673806006784990416278341842152496504273944233060992947236722288",
+      "s": "22542532798662050842266238043505315399614658322386149246105065480312118160986",
+      "tag": "WALLET_1",
+      "streamType": "wallet",
+      "streamId": "4f08e7df-3753-41f0-83ff-3fb24f7d0266"
+    },
+    {
+      "hash": "0x9e77b2e848c5bfa68cdd46a4f6d12df0daa2e8fde18f35db58c0406fe43e766f",
+      "block_number": "12990639",
+      "gas": "21000",
+      "gas_price": "1000000006",
+      "nonce": "13",
+      "input": "0x",
+      "transaction_index": "3",
+      "block_timestamp": null,
+      "block_hash": "0x92bb15d907dd201ea307c17a893be24aa0f31754a68fc9586b3d3c7f3a612d08",
+      "from_address": "0x35ba4825204dce15c7147ea89b31178a00750f81",
+      "to_address": "0x0e1358c4b529f564a14ec8fc3ae7369786a1625d",
+      "value": "243000000000000000",
+      "type": "2",
+      "v": "0",
+      "r": "576982745954673606006784990416278341842152496504273944233060992947236722288",
+      "s": "22542532798662050842266238043505315399614658322386149246105065480312118160986",
+      "tag": "WALLET_2",
+      "streamType": "wallet",
+      "streamId": "e9bcb6c7-836d-4405-be21-0482c3211096"
+    }
+  ],
+```
+
+##### Smart Contract Events
+
 ```json
 {
   "logs": [
@@ -173,6 +224,7 @@ confirmed field that indicates if the block is confirmed.
     }
   ],
   "txs": [],
+  "internalTxs": [],
   "chainId": "0x1",
   "confirmed": true,
   "block": "15534209"
