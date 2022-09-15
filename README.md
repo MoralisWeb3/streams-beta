@@ -145,7 +145,10 @@ import Moralis from "moralis";
 
 const { headers, body } = request;
 
-Moralis.Streams.verifySignature(body, headers["x-signature"]); // returns true or false;
+Moralis.Streams.verifySignature({
+  body,
+  signature: headers['x-signature'],
+}); // throws error if not valid
 ```
 
 ## Body
