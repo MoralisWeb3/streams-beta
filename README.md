@@ -5,20 +5,21 @@ on the blockchain.
 
 # Table of Contents
 
-[About](#MoralisStreamsAPI)
+[Sreams API](#Moralis-Streams-API)
 
-- [Streams](#Streams-1)
-- [Example Scenario](#header-2)
+- [About](#about)
+- [Example Scenario](#example-scenario)
 
-[API](#emphasis)
+[API](#lets-get-started)
 
 - [Streams](#header-3)
-  - [Create](#header-33)
-  - [Get](#header-4)
+  - [Create](#create-a-stream3)
+  - [Data](#webhook-data)
+  - [Get](#get-streams)
   - [Update](#header-5)
   - [Delete](#header-6)
 
-# Streams
+# About
 
 Streams are a way to monitor events on the blockchain in real-time. You can
 create a stream to monitor a specific contract, asset, wallet or nft.
@@ -330,6 +331,35 @@ await Moralis.Streams.setSettings({
 1. Go to [Settings](http://admin.moralis.io/settings)
 2. Choose a region which is closest to your backend
 3. Click on Save Changes
+
+## Update Stream
+
+In some cases you want to add a chain to an already existing stream or change
+the webhook url. Luckily you can easily update your streams.
+
+### Programmatically
+
+Example on how to update the webhook url of a stream:
+
+```typescript
+import Moralis from "moralis";
+
+Moralis.start({
+  apiKey: "YOUR_API_KEY",
+});
+
+await Moralis.Streams.update({
+  id: "STREAM_ID",
+  webhook: "https://YOUR_NEW_WEBHOOK_URL",
+});
+```
+
+### Manually
+
+1. Go to [Streams](http://admin.moralis.io/streams)
+2. Click the `Edit` Button on the stream you want to update
+3. Change the things you want to update
+4. Click on `Save Changes`
 
 # Filter Streams
 
