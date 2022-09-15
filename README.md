@@ -5,9 +5,9 @@ on the blockchain.
 
 # Table of Contents
 
-[About](#headers)
+[About](#MoralisStreamsAPI)
 
-- [Streams](#header-1)
+- [Streams](#Streams-1)
 - [Example Scenario](#header-2)
 
 [API](#emphasis)
@@ -18,7 +18,7 @@ on the blockchain.
   - [Update](#header-5)
   - [Delete](#header-6)
 
-# STREAMS
+# Streams
 
 Streams are a way to monitor events on the blockchain in real-time. You can
 create a stream to monitor a specific contract, asset, wallet or nft.
@@ -100,7 +100,7 @@ Moralis.start({
 
 const stream = {
     address: '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4' // address to monitor
-    chains: ['0x1'] // list of blockchains to monitor
+    chains: [EvmChain.ETHEREUM, EvmChain.POLYGON] // list of blockchains to monitor
     description: 'monitor Bobs wallet', // your description
     network: 'evm',
     tag: 'bob', // give it a tag
@@ -233,7 +233,7 @@ with the following code:
 
 ```typescript
 // event MyEvent(address indexed from, address indexed to);
-import AbiUtils from "web3-eth-abi";
+import { decodeLogs } from "@moralisweb3/evm-utils";
 
 interface MyEvent {
   from: string;
@@ -242,16 +242,7 @@ interface MyEvent {
 
 const webhook = { ...body, logs: [...logs] };
 
-function decodeLogs<T>() {
-  return webhook.logs.map((log) => {
-    const { data, topic1, topic2, topic3, streamId } = log;
-    const topics = [topic1, topic2, topic3];
-    const abi = webhook.abis[streamId];
-    return AbiUtils.decodeLog(abi.inputs, data, topics);
-  }) as unknown as T[];
-}
-
-const decodedLogs = decodeLogs<MyEvent>();
+const decodedLogs = decodeLogs<MyEvent>(webhook);
 
 decodedLogs[0]; // { from: '0x...', to: '0x...' }
 ```
@@ -269,10 +260,11 @@ You can do this by adding a filter to the stream. Important: You must add a
 
 ```typescript
 import { Moralis } from "moralis";
+import { EvmChain } from '@moralisweb3/evm-utils'
 
 const options = {
     address: '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4' // address to monitor
-    chains: ['0x1'] // list of blockchains to monitor
+    chains: [EvmChain.ETHEREUM] // list of blockchains to monitor
     description: 'monitor one NFT from Collection', // your description
     network: 'evm',
     tag: 'mySpecialNft', // give it a tag
