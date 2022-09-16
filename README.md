@@ -10,8 +10,8 @@ Stream blockchain data into your backend via webhooks. Ethereum, Polygon, Avalan
 - Fully typed
 - Contract Factories supported
 
-[Swagger Docs](https://api.moralis-streams.com/api-docs/)
-[NestJS Demo](https://github.com/MoralisWeb3/streams-beta/tree/main/examples/nestjs)
+- [Swagger Docs](https://api.moralis-streams.com/api-docs/)
+- [NestJS Demo](https://github.com/MoralisWeb3/streams-beta/tree/main/examples/nestjs)
 
 
 ## Pre-requisites
