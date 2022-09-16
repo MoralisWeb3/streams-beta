@@ -9,8 +9,10 @@ export class AppService {
   handleContractEvent(body: IWebhook) {
     const { logs, abis } = body;
 
-    // custom parser for contract events
+    // Check and handle if the event contains ERC20/721/1155 events such as transfers or approvals.
+    this.checkForErcStandard(body);
 
+    // if the event contains custom events, you can decode the logs using the abi and a typed interface.
     interface MyContractEvent {
       player: string;
       bet: string;
@@ -47,6 +49,15 @@ export class AppService {
       });
     }
 
+    // Check and handle if the transaction contains ERC20/721/1155 events such as transfers or approvals.
+    this.checkForErcStandard(body);
+
+    return { success: true };
+  }
+
+  private checkForErcStandard(body) {
+    const { erc20Transfers, erc20Approvals, nftApprovals, nftTransfers } = body;
+
     if (erc20Transfers.length) {
       erc20Transfers.forEach((tx) => {
         console.log('from', tx.from);
@@ -81,7 +92,5 @@ export class AppService {
         console.log('txHash', tx.transaction_hash);
       });
     }
-
-    return { success: true };
   }
 }
