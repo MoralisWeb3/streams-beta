@@ -21,7 +21,7 @@ Useful links
 ## Pre-requisites
 
 - [x] Create an account on [Moralis.io](https://moralis.io)
-- [x] Get your API key here [Moralis.io](http://admin.moralis.io/web3apis)
+- [x] Get your API key [here](http://admin.moralis.io/web3apis)
 
 # Your first stream 🚀
 
