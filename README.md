@@ -1,67 +1,34 @@
-## Moralis Streams API
+# Moralis Streams API Beta ⚡️
 
-An enterprise-grade API for monitoring assets, contracts and all kinds of events
-on the blockchain.
+Stream blockchain data into your backend via webhooks. Ethereum, Polygon, Avalanche, BNB Chain, Fantom, Cronos and all testnets are supported. More networks are added soon.
 
-# Table of Contents
+- An address sends, receives, stakes, swaps or burns assets
+- An asset is being sent, received, staked, swaped or burned
+- A battle starts in your web3 game
+- Someone participates in your token sale
+- Any other smart contract event fires on-chain based on your filters
+- Fully typed
+- Contract Factories supported
 
-[Sreams API](#Moralis-Streams-API)
+[Swagger Docs](https://api.moralis-streams.com/api-docs/)
+[NestJS Demo](https://github.com/MoralisWeb3/streams-beta/tree/main/examples/nestjs)
 
-- [About](#about)
-- [Example Scenario](#example-scenario)
-
-[API](#lets-get-started)
-
-- [Streams](#header-3)
-  - [Create](#create-a-stream3)
-  - [Data](#webhook-data)
-  - [Get](#get-streams)
-  - [Update](#header-5)
-  - [Delete](#header-6)
-
-# About
-
-Streams are a way to monitor events on the blockchain in real-time. You can
-create a stream to monitor a specific contract, asset, wallet or nft.
-
-### Example Scenario
-
-- Alice monitors all transactions from Bob's wallet with Moralis Streams API
-- Bob buys a new NFT
-- Alice gets a message that Bob bought a new NFT
-- Bob sends USDT to Charlie
-- Alice gets a message that Bob sent USDT to Charlie
-
-## TUTORIALS
-
-- [How to monitor a wallet with Moralis Streams API]("")
-
-## EXAMPLES
-
-[NestJS](https://github.com/MoralisWeb3/streams-beta/tree/main/examples/nestjs)
-
-# Let's get started
 
 ## Pre-requisites
 
-Create an account on [Moralis.io](https://moralis.io) or login and get your API
-KEY for free! You can find the key [here](http://admin.moralis.io/web3apis)
+- [x] Create an account on [Moralis.io](https://moralis.io)
+- [x] Get your API key here [Moralis.io](http://admin.moralis.io/web3apis)
 
-## Create a stream 🚀
+# Your first stream 🚀
 
-In this example we will monitor a wallet. Meaning all incoming and outgoing
-transactions of that wallet will be monitored!
+In this example we will monitor a wallet. 
 
-NOTE: The following tutorial considers Manual Steps and shows programmatically
-steps using JavaScript (TypeScript). If you want to use other languages you can
-directly use the API endpoints via HTTP.
+Meaning all incoming and outgoing transactions of that wallet will be monitored!
 
-[Swagger Docs](https://api.moralis-streams.com/api-docs/)
 
 ### Programmatically
 
-We will use Moralis SDK to create a stream. You need an API Key which you will
-find your Account Settings.
+We will use Moralis SDK to create a stream. 
 
 ```typescript
 import Moralis from 'moralis';
@@ -84,7 +51,7 @@ const newStream = await Moralis.Streams.add(stream);
 newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
 ```
 
-### Manually
+### Via WebUI
 
 1. Go to http://admin.moralis.io/streams/wallets/new
 2. Click on `New Address Stream`.
@@ -221,14 +188,12 @@ confirmed field that indicates if the block is confirmed.
 }
 ```
 
-### 🔥 Automatic Parsed Data 🔥
+### 🔥 Automatically Parsed Data 🔥
 
-If a webhook that sends transaction details about a wallet or a contract that
-includes ERC Standard Events such as Token (ERC20) transfers and approvals
-aswell as NFT (ERC115/ERC721) transfers and approvals:
+Moralis automatically parses the following data for you:
 
-🔮 The Streams API will automagically parse the logs and also adds metadata
-information about the token or NFT 🔮
+- [x] ERC20 Transfers and Approvals
+- [x] NFT Transfers and Approvals
 
 Example Body:
 
@@ -410,3 +375,9 @@ const stream = await Moralis.Streams.add(stream);
 # Retry Failed Webhook
 
 ...
+
+# Roadmap 🚴‍♀️
+
+These are features that are not included in this beta but that will be out in the near future:
+
+- [ ] Including multiple assets or addresses in the same stream
