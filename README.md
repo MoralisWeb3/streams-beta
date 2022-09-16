@@ -437,3 +437,4 @@ These are features that are not included in this beta but that will be out in
 the near future:
 
 - [ ] Including multiple assets or addresses in the same stream
+- [ ] Mempool support
