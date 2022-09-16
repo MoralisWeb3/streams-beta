@@ -32,10 +32,6 @@ create a stream to monitor a specific contract, asset, wallet or nft.
 - Bob sends USDT to Charlie
 - Alice gets a message that Bob sent USDT to Charlie
 
-## TUTORIALS
-
-- [How to monitor a wallet with Moralis Streams API]("")
-
 ## EXAMPLES
 
 [NestJS](https://github.com/MoralisWeb3/streams-beta/tree/main/examples/nestjs)
