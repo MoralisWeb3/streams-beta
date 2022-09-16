@@ -120,7 +120,6 @@ body and your API Key.
 You can verify the webhook with the following code:
 
 ```typescript
-// YET TO IMPLEMENT IN SDK!!
 import Moralis from "moralis";
 
 const { headers, body } = request;
