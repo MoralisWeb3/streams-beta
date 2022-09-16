@@ -13,7 +13,7 @@ Stream blockchain data into your backend via webhooks. Ethereum, Polygon, Avalan
 
 This README will intorduce you to Moralis Streams API.
 
-Useful links
+### Useful links
 - This guide will be using Moralis SDK to interact with Moralis Streams API. But you can interact directly with with Streams API using these [Swagger Docs](https://api.moralis-streams.com/api-docs/)
 - [NestJS Demo](https://github.com/MoralisWeb3/streams-beta/tree/main/examples/nestjs)
 
