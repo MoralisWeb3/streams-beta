@@ -32,6 +32,15 @@ Forum]([https://forum.moralis.io/t/streams-api-beta/19664](https://forum.moralis
 - [x] Create an account on [Moralis.io](https://moralis.io)
 - [x] Get your API key [here](http://admin.moralis.io/web3apis)
 
+# Roadmap 🚴‍♀️
+
+These are features that are not included in this beta but that will be out in
+the near future:
+
+- [ ] Including multiple assets or addresses in the same stream
+- [ ] Mempool support
+- [ ] Automatic retries (browsing failed deliveries and manually retrying is possible in beta)
+
 # Your first stream 🚀
 
 In this example we will monitor a wallet.
@@ -435,10 +444,4 @@ The payload contains the webhook details.
 
 ...
 
-# Roadmap 🚴‍♀️
 
-These are features that are not included in this beta but that will be out in
-the near future:
-
-- [ ] Including multiple assets or addresses in the same stream
-- [ ] Mempool support
