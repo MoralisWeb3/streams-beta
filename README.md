@@ -21,8 +21,6 @@ This README will intorduce you to Moralis Streams API.
 
 If you have any questions - please ask [in this dedicated Moralis Forum]([https://forum.moralis.io/t/streams-api-beta/19664](https://forum.moralis.io/t/streams-api-beta/19664).
 
-
-
 ## Pre-requisites
 
 - [x] Create an account on [Moralis.io](https://moralis.io)
