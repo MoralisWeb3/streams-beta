@@ -39,7 +39,8 @@ the near future:
 
 - [ ] Including multiple assets or addresses in the same stream
 - [ ] Mempool support
-- [ ] Automatic retries (browsing failed deliveries and manually retrying is possible in beta)
+- [ ] Automatic retries (browsing failed deliveries and manually retrying is
+      possible in beta)
 
 # Your first stream 🚀
 
@@ -427,7 +428,7 @@ The payload contains the webhook details.
 {
   "result": [
     {
-      "id": "string",
+      "id": "WEBHOOK_ID",
       "date": "string",
       "payload": {
         // the failed webhook
@@ -442,6 +443,22 @@ The payload contains the webhook details.
 
 # Retry Failed Webhook
 
-...
+You can retry (replay) a failed webhook by calling the specific endpoint.
 
+## Programmatically
 
+```typescript
+await Moralis.Streams.retryWebhook({ id: "WEBHOOK_ID" });
+```
+
+## Manually
+
+You can use the Swagger UI or make an API call to the endpoint.
+
+```curl
+curl -X 'POST' \
+  'https://api.moralis-streams.com/history/retry/WEBHOOK_ID' \
+  -H 'accept: application/json' \
+  -H 'x-api-key: YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+```
