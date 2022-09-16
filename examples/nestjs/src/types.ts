@@ -2,6 +2,7 @@ export interface IWebhook {
   chainId: string;
   logs: ILog[];
   txs: ITransaction[];
+  txsInternal: ITransaction[];
   lag: number;
   abis: any;
   retries: any;
@@ -12,32 +13,44 @@ export interface IWebhook {
   nftApprovals?: INFTApproval[];
 }
 
-export interface ITransaction {
-  [key: string]: string;
+export interface ITransaction extends RootLog {
+  hash: string;
+  block_number: string;
+  gas: string;
+  gas_price: string;
+  nonce: string;
+  input: string;
+  transaction_index: string;
+  block_timestamp: any;
+  block_hash: string;
+  from_address: string;
+  to_address: string;
+  value: string;
+  type: string;
+  v: string;
+  r: string;
+  s: string;
 }
 
 export interface ILog extends RootLog {
   address: string;
+  data: string;
+  log_index: number;
+  tag: string;
   topic0: string;
   topic1: string;
   topic2: string;
   topic3: string;
-  data: string;
-  streamId: string;
 }
 
 export interface RootLog {
-  transaction_hash: string;
-  transaction_index: number;
-  log_index: number;
+  block_hash: string;
+  hash: string;
+  streamId: string;
+  streamType: 'contract' | 'wallet';
   tag: string;
-}
-export interface IERC20Transfer extends RootLog, IERC20Metadata {
-  contractAddress: string;
-  from: string;
-  to: string;
-  amount: string;
-  valueWithDecimals: string;
+  transaction_hash: string;
+  transaction_index: string;
 }
 
 export interface IERC20Metadata {
@@ -45,6 +58,7 @@ export interface IERC20Metadata {
   tokenDecimals: string;
   tokenName: string;
   tokenSymbol: string;
+  valueWithDecimals: string;
 }
 
 export interface INFTMetadata {
@@ -53,12 +67,20 @@ export interface INFTMetadata {
   tokenName: string;
   tokenSymbol: string;
 }
-export interface IERC20Approval extends RootLog {
+
+export interface IERC20Transfer extends RootLog, IERC20Metadata {
+  contractAddress: string;
+  from: string;
+  to: string;
+  amount: string;
+  valueWithDecimals: string;
+}
+
+export interface IERC20Approval extends RootLog, IERC20Metadata {
   contractAddress: string;
   owner: string;
   spender: string;
   value: string;
-  valueWithDecimals: string;
 }
 export interface INFTTransfer extends RootLog {
   contractAddress: string;

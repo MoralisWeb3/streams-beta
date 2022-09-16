@@ -8,8 +8,14 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @UseGuards(VerifySignature)
-  @Post('token')
-  receiveWebhook(@Body() body: IWebhook) {
-    return this.appService.handleWebhook(body);
+  @Post('wallet')
+  walletEvent(@Body() body: IWebhook) {
+    return this.appService.handleWalletEvent(body);
+  }
+
+  @UseGuards(VerifySignature)
+  @Post('contract')
+  contractEvent(@Body() body: IWebhook) {
+    return this.appService.handleContractEvent(body);
   }
 }
