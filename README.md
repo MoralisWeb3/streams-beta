@@ -441,9 +441,9 @@ The payload contains the webhook details.
 }
 ```
 
-# Retry Failed Webhook
+# Replay Failed Webhook
 
-You can retry (replay) a failed webhook by calling the specific endpoint.
+You can replay (replay) a failed webhook by calling the specific endpoint.
 
 ## Programmatically
 
@@ -457,7 +457,7 @@ You can use the Swagger UI or make an API call to the endpoint.
 
 ```curl
 curl -X 'POST' \
-  'https://api.moralis-streams.com/history/retry/WEBHOOK_ID' \
+  'https://api.moralis-streams.com/history/replay/WEBHOOK_ID' \
   -H 'accept: application/json' \
   -H 'x-api-key: YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
