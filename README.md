@@ -70,7 +70,7 @@ newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
 
 Whenever you create or update a stream you will receive a test webhook. 
 
-You have to return status code 200 for the stream to be start.
+**You have to return status code 200 for the stream to be start.**
 
 The test body will look like this:
 
