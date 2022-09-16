@@ -1,6 +1,8 @@
 # Moralis Streams API Beta ⚡️
 
-Stream blockchain data into your backend via webhooks. Ethereum, Polygon, Avalanche, BNB Chain, Fantom, Cronos and all testnets are supported. More networks are added soon.
+Stream blockchain data into your backend via webhooks. Ethereum, Polygon,
+Avalanche, BNB Chain, Fantom, Cronos and all testnets are supported. More
+networks are added soon.
 
 - An address sends, receives, stakes, swaps or burns assets
 - An asset is being sent, received, staked, swaped or burned
@@ -9,17 +11,21 @@ Stream blockchain data into your backend via webhooks. Ethereum, Polygon, Avalan
 - Any other smart contract event fires on-chain based on your filters
 - Fully typed
 - Contract Factories supported
-- Filters supported 
+- Filters supported
 
 This README will intorduce you to Moralis Streams API.
 
 ### Useful links
-- This guide will be using Moralis SDK to interact with Moralis Streams API. But you can interact directly with with Streams API using these [Swagger Docs](https://api.moralis-streams.com/api-docs/)
+
+- This guide will be using Moralis SDK to interact with Moralis Streams API. But
+  you can interact directly with with Streams API using these
+  [Swagger Docs](https://api.moralis-streams.com/api-docs/)
 - [NestJS Demo](https://github.com/MoralisWeb3/streams-beta/tree/main/examples/nestjs)
 
 ## Questions
 
-If you have any questions - please ask [in this dedicated Moralis Forum]([https://forum.moralis.io/t/streams-api-beta/19664](https://forum.moralis.io/t/streams-api-beta/19664).
+If you have any questions - please ask [in this dedicated Moralis
+Forum]([https://forum.moralis.io/t/streams-api-beta/19664](https://forum.moralis.io/t/streams-api-beta/19664).
 
 ## Pre-requisites
 
@@ -28,16 +34,15 @@ If you have any questions - please ask [in this dedicated Moralis Forum]([https:
 
 # Your first stream 🚀
 
-In this example we will monitor a wallet. 
+In this example we will monitor a wallet.
 
 Meaning all incoming and outgoing transactions of that wallet will be monitored!
-
 
 ### Programmatically
 
 We will use Moralis SDK to create a stream.
 
-You can install the Moralis SDK 
+You can install the Moralis SDK
 
 ```typescript
 import Moralis from 'moralis';
@@ -73,7 +78,7 @@ newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
 
 ### Mandatory Test Webhook 🚨
 
-Whenever you create or update a stream you will receive a test webhook. 
+Whenever you create or update a stream you will receive a test webhook.
 
 **You have to return status code 200 for the stream to be start.**
 
@@ -122,7 +127,7 @@ const { headers, body } = request;
 
 Moralis.Streams.verifySignature({
   body,
-  signature: headers['x-signature'],
+  signature: headers["x-signature"],
 }); // throws error if not valid
 ```
 
@@ -378,7 +383,27 @@ const stream = await Moralis.Streams.add(stream);
 
 # Get Error
 
-...
+The Streams API provides an endpoint to get all failed webhooks. It is useful to
+replay the failed webhooks.
+
+## Programmatically
+
+```typescript
+const history = await Moralis.Streams.getHistory({ limit: 100 });
+```
+
+## Manually
+
+You can use the Swagger UI or make an API call to the endpoint.
+
+[Swagger](https://api.moralis-streams.com/api-docs/#/History/GetHistory)
+
+```curl
+curl -X 'GET' \
+  'https://api.moralis-streams.com/history?limit=100' \
+  -H 'accept: application/json' \
+  -H 'x-api-key: YOUR_API_KEY'
+```
 
 # Retry Failed Webhook
 
@@ -386,6 +411,7 @@ const stream = await Moralis.Streams.add(stream);
 
 # Roadmap 🚴‍♀️
 
-These are features that are not included in this beta but that will be out in the near future:
+These are features that are not included in this beta but that will be out in
+the near future:
 
 - [ ] Including multiple assets or addresses in the same stream
