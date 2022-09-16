@@ -175,6 +175,11 @@ confirmed field that indicates if the block is confirmed.
 
 ```json
 {
+  "abis": {
+    "c63fff7a-1f49-45d8-ab99-1fe1f3aee449": {
+      // ... event abi
+    }
+  },
   "logs": [
     {
       "log_index": "48",
