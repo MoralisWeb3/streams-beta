@@ -405,6 +405,28 @@ curl -X 'GET' \
   -H 'x-api-key: YOUR_API_KEY'
 ```
 
+## Response
+
+The Response is a list of failed webhooks that are uniquely identified by id.
+The payload contains the webhook details.
+
+```json
+{
+  "result": [
+    {
+      "id": "string",
+      "date": "string",
+      "payload": {
+        // the failed webhook
+      },
+      "errorMessage": "string",
+      "webhookUrl": "string"
+    }
+  ],
+  "cursor": "string"
+}
+```
+
 # Retry Failed Webhook
 
 ...
