@@ -1,6 +1,5 @@
-// create a guard that verifies the signature which is in the header x-signature
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { sha3 } from 'web3-utils';
+import Moralis from 'moralis';
 
 @Injectable()
 export class VerifySignature implements CanActivate {
@@ -8,8 +7,7 @@ export class VerifySignature implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const signature = request.headers['x-signature'];
     const body = request.body;
-    if (!signature) return false;
-    const hash = sha3(JSON.stringify(body) + process.env.SECRET_KEY);
-    return signature === hash;
+    Moralis.Streams.verifySignature(body, signature);
+    return true;
   }
 }
