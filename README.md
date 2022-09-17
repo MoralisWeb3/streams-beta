@@ -470,3 +470,31 @@ curl -X 'POST' \
   -H 'x-api-key: YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
 ```
+
+# Get Stats
+
+You can get stats about your streams usage
+
+## Manually
+
+You can use the Swagger UI or make an API call to the endpoint.
+
+```curl
+curl -X 'GET' \
+  'https://api.moralis-streams.com/stats' \
+  -H 'accept: application/json' \
+  -H 'x-api-key: YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+```
+
+## Response
+
+```json
+{
+  "totalWebhooksDelivered": 15,
+  "totalWebhooksFailed": 32,
+  "totalLogsProcessed": 26,
+  "totalTxsProcessed": 45,
+  "totalTxsInternalProcessed": 3
+}
+```
