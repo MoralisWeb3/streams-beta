@@ -481,7 +481,7 @@ You can use the Swagger UI or make an API call to the endpoint.
 
 ```curl
 curl -X 'GET' \
-  'https://api.moralis-streams.com/stats' \
+  'https://api.moralis-streams.com/beta/stats' \
   -H 'accept: application/json' \
   -H 'x-api-key: YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
