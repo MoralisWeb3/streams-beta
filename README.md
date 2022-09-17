@@ -22,15 +22,23 @@ This README will intorduce you to Moralis Streams API.
   [Swagger Docs](https://api.moralis-streams.com/api-docs/)
 - [NestJS Demo](https://github.com/MoralisWeb3/streams-beta/tree/main/examples/nestjs)
 
-## Questions
-
-If you have any questions - please ask [in this dedicated Moralis
-Forum]([https://forum.moralis.io/t/streams-api-beta/19664](https://forum.moralis.io/t/streams-api-beta/19664).
-
 ## Pre-requisites
 
 - [x] Create an account on [Moralis.io](https://moralis.io)
 - [x] Get your API key [here](http://admin.moralis.io/web3apis)
+
+# Beta Limitations
+
+This is not a finished product but a preview.
+
+- High availability is not deployed yet
+- We may have to purge the history and logs
+- You may experience some bugs.
+
+## Bug reports and Questions
+
+If you experience any issues - please let us know [in this dedicated Moralis
+Forum](https://forum.moralis.io/t/streams-api-beta/19664).
 
 # Roadmap 🚴‍♀️
 
