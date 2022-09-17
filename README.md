@@ -275,7 +275,7 @@ const decodedLogs = decodeLogs<MyEvent>(webhook);
 decodedLogs[0]; // { from: '0x...', to: '0x...' }
 ```
 
-# Streams
+# Stream Management
 
 ## GET Streams
 
