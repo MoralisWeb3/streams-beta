@@ -471,7 +471,7 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
 ```
 
-# Get Stats
+# Get Stats (Beta - This endpoint could be replaced or removed)
 
 You can get stats about your streams usage
 
