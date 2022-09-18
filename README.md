@@ -104,14 +104,17 @@ The test body will look like this:
 
 ```json
 {
-  "abis": [],
+  "abis": {},
+  "block": {
+    "hash": "",
+    "number": "",
+    "timestamp": ""
+  },
   "txs": [],
   "txsInternal": [],
   "logs": [],
   "chainId": "",
-  "description": "This is a test webhook, to check if your webhook url is healthy.",
   "confirmed": true,
-  "lag": 1,
   "retries": 0,
   "erc20Approvals": [],
   "erc20Transfers": [],
@@ -251,9 +254,9 @@ Example Body:
       "from": "0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4",
       "to": "0x2faf487a4414fe77e2327f0bf4ae2a264a776ad2",
       "value": "9999678895548600000000000000",
-      "transaction_hash": "0xb9730dd1b49061f3b5a6f93e0a66a03be199cad6f21ba5e8747a8087754e3e",
-      "transaction_index": "40",
-      "log_index": "48",
+      "transactionHash": "0xb9730dd1b49061f3b5a6f93e0a66a03be199cad6f21ba5e8747a8087754e3e",
+      "transactionIndex": "40",
+      "logIndex": "48",
       "tag": "shib_transfers",
       "tokenAddress": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
       "tokenName": "SHIBA INU",
