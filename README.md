@@ -37,8 +37,8 @@ This is not a finished product but a preview.
 
 ## Bug reports and Questions
 
-If you experience any issues - please let us know [in this dedicated Moralis
-Forum](https://forum.moralis.io/t/streams-api-beta/19664).
+If you experience any issues - please let us know
+[in this dedicated Moralis Forum](https://forum.moralis.io/t/streams-api-beta/19664).
 
 # Roadmap 🚴‍♀️
 
@@ -162,16 +162,13 @@ confirmed field that indicates if the block is confirmed.
   "txs": [
     {
       "hash": "0x9e77b2e848c5bfa67cdd46a4fsd12df0daa2e8fde18f35db58c0406fe43e766f",
-      "block_number": "12990639",
       "gas": "21000",
-      "gas_price": "1000000006",
+      "gasPrice": "1000000006",
       "nonce": "13",
       "input": "0x",
-      "transaction_index": "3",
-      "block_timestamp": null,
-      "block_hash": "0x92bb15d907dd201ea307c1ca893be24aa0f31754a68fc9586b3d3c7f3a612d08",
-      "from_address": "0x32ba4825204dce15c7147ea89b31178a00750f81",
-      "to_address": "0x0e1458c4b529f564a14ec8fc3ae7369786a1625d",
+      "transactionIndex": "3",
+      "fromAddress": "0x32ba4825204dce15c7147ea89b31178a00750f81",
+      "toAddress": "0x0e1458c4b529f564a14ec8fc3ae7369786a1625d",
       "value": "241000000000000000",
       "type": "2",
       "v": "0",
@@ -183,9 +180,14 @@ confirmed field that indicates if the block is confirmed.
     },
     ...
   ],
+  "logs": [],
   "chainId": "0x1",
   "confirmed": true,
-  "block": "15534209"
+  "block": {
+    "hash": "0x9e77b2e848c5bfa67cdd46a4fsd12df0daa2e8fde18f35db58c0406fe43e766f",
+    "timestamp": "1627400000",
+    "number": "12990639",
+  }
 }
 ```
 
@@ -194,16 +196,16 @@ confirmed field that indicates if the block is confirmed.
 ```json
 {
   "abis": {
-    "c63fff7a-1f49-45d8-ab99-1fe1f3aee449": {
+    "d63fff7a-1f49-45d8-ab99-1fe1f3aee449": {
       // ... event abi
     }
   },
   "logs": [
     {
-      "log_index": "48",
-      "transaction_hash": "0xb9730dd1b49061f3b5a6f93e0a66a03be199cad6f21ba5e8747a8087754e3e",
-      "transaction_index": "40",
-      "transaction_value": "0",
+      "logIndex": "48",
+      "transactionHash": "0xb9730dd1b49061f3b5a6f93e0a66a03be199cad6f21ba5e8747a8087754e3e",
+      "transactionIndex": "40",
+      "transactionValue": "0",
       "address": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
       "data": "0x0000000000000000000000000000000000000000204f8a5f22b432605d238000",
       "topic0": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
@@ -212,14 +214,18 @@ confirmed field that indicates if the block is confirmed.
       "topic3": null,
       "tag": "bob",
       "streamType": "contract",
-      "streamId": "c63fff7a-1f49-45d8-ab99-1fe1f3aee449"
+      "streamId": "d63fff7a-1f49-45d8-ab99-1fe1f3aee449"
     }
   ],
   "txs": [],
   "txsInternal": [],
   "chainId": "0x1",
   "confirmed": true,
-  "block": "15534209"
+  "block": {
+    "hash": "0x9e77b2e848c5bfa67cdd46a4fsd12df0daa2e8fde18f35db58c0406fe43e766f",
+    "timestamp": "1627400000",
+    "number": "12990639"
+  }
 }
 ```
 
