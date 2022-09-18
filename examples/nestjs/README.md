@@ -82,10 +82,10 @@ The handler for a contract event can look like this.
 
 ```typescript
   handleContractEvent(body: IWebhook) {
-    const { logs, abis } = body;
+    const webhook = body;
 
     // Check and handle if the event contains ERC20/721/1155 events such as transfers or approvals.
-    this.checkForErcStandard(body);
+    this.checkForErcStandard(webhook);
 
     // if the event contains custom events, you can decode the logs using the abi and a typed interface.
     interface MyContractEvent {
@@ -94,19 +94,8 @@ The handler for a contract event can look like this.
       win: boolean;
     }
 
-    if (logs.length) {
-      logs.forEach((log) => {
-        const { bet, player, win } = decodeLog(abis[log.streamId], log.data, [
-          log.topic1,
-          log.topic2,
-          log.topic3,
-        ]) as unknown as MyContractEvent;
-
-        console.log('player', player);
-        console.log('bet', bet);
-        console.log('win', win);
-      });
-    }
+    const logs = Moralis.Streams.getDecodedLogs<MyEvent>() as unknown as MyContractEvent;
+    const { player, bet, win } = logs[0];
 
     return { success: true };
   }
