@@ -163,7 +163,7 @@ The first webhook will come as soon as the block is mined and have
 `confirmed:false`. This means that the block is still running the risk of being
 dropped due to a reorganization of the blockchain.
 
-The second webhook will come once enough blocks have been mined after the block containing your events. This number of blocks is also called `number of confirmations`.
+The second webhook will come once enough blocks have been mined after the block containing your events and have `confirmed:true`. This number of blocks is also called `number of confirmations`.
 
 [This table](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#supported-chains) shows the number of confirmations required for Moralis to consider a block confirmed.
 
