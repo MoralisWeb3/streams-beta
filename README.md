@@ -13,9 +13,11 @@ Get events streamed to your backend whenever:
 - Any other smart contract event fires on-chain based on your filters
 
 ### Other features
+
 - Fully typed
 - Contract Factories supported
-- Filters supported 🔥 [see examples](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#filter-streams)
+- Filters supported 🔥
+  [see examples](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#filter-streams)
 - Internal transactions supported 🥃
 
 This README will introduce you to Moralis Streams API.
@@ -23,19 +25,19 @@ This README will introduce you to Moralis Streams API.
 ## Supported Chains
 
 |    Chain    | Streams | Confirmations Until Confirmed [read more](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#two-webhooks-for-each-block) | Internal Tx (all will be supported at launch) |
-| :---------: | :-----: | :--------------------: | :---------: |
-|     ETH     |    ✅    |           12           |      ✅      |
-|   ROPSTEN   |    ✅    |           12           |      ❌      |
-|   GOERLI    |    ✅    |           12           |      ❌      |
-|     BSC     |    ✅    |           18           |      ✅      |
-|  BSC TEST   |    ✅    |           18           |      ✅      |
-|   POLYGON   |    ✅    |          100           |      ✅      |
-|   MUMBAI    |    ✅    |          100           |      ✅      |
-|   FANTOM    |    ✅    |          100           |      ❌      |
-|    AVAX     |    ✅    |          100           |      ❌      |
-|  AVAX TEST  |    ✅    |          100           |      ❌      |
-|   CRONOS    |    ✅    |          100           |      ❌      |
-| CRONOS TEST |    ✅    |          100           |      ❌      |
+| :---------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------: |
+|     ETH     |    ✅    |                                                                   12                                                                   |                       ✅                       |
+|   ROPSTEN   |    ✅    |                                                                   12                                                                   |                       ❌                       |
+|   GOERLI    |    ✅    |                                                                   12                                                                   |                       ❌                       |
+|     BSC     |    ✅    |                                                                   18                                                                   |                       ✅                       |
+|  BSC TEST   |    ✅    |                                                                   18                                                                   |                       ✅                       |
+|   POLYGON   |    ✅    |                                                                  100                                                                   |                       ✅                       |
+|   MUMBAI    |    ✅    |                                                                  100                                                                   |                       ✅                       |
+|   FANTOM    |    ✅    |                                                                  100                                                                   |                       ❌                       |
+|    AVAX     |    ✅    |                                                                  100                                                                   |                       ❌                       |
+|  AVAX TEST  |    ✅    |                                                                  100                                                                   |                       ❌                       |
+|   CRONOS    |    ✅    |                                                                  100                                                                   |                       ❌                       |
+| CRONOS TEST |    ✅    |                                                                  100                                                                   |                       ❌                       |
 
 ### Useful links
 
@@ -60,7 +62,8 @@ This is not a finished product but a preview.
 - The response structure may change
 - We are still collecting feedback and may adjust according to it
 - You can create maximum 100 streams
-- Pricing and limitaions based on pricing will be announced in October - during beta there are no limitations outside of the one mentioned above
+- Pricing and limitaions based on pricing will be announced in October - during
+  beta there are no limitations outside of the one mentioned above
 
 We expect a full production ready roll-out in October.
 
@@ -89,7 +92,11 @@ Meaning all incoming and outgoing transactions of that wallet will be monitored!
 
 We will use Moralis SDK to create a stream.
 
-You can install the Moralis SDK
+You can install the Moralis SDK via npm/pnpm/yarn:
+
+```bash
+npm install moralis
+```
 
 ```typescript
 import Moralis from 'moralis';
@@ -111,6 +118,14 @@ const stream = {
 
 const newStream = await Moralis.Streams.add(stream);
 newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
+```
+
+## Types
+
+You can get typings for webhooks from the `@moralisweb3/streams` package.
+
+```typescript
+import { Types } from "@moralisweb3/streams";
 ```
 
 ### Via WebUI
@@ -170,9 +185,13 @@ The first webhook will come as soon as the block is mined and have
 `confirmed:false`. This means that the block is still running the risk of being
 dropped due to a reorganization of the blockchain.
 
-The second webhook will come once enough blocks have been mined after the block containing your events and have `confirmed:true`. This number of blocks is also called `number of confirmations`.
+The second webhook will come once enough blocks have been mined after the block
+containing your events and have `confirmed:true`. This number of blocks is also
+called `number of confirmations`.
 
-[This table](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#supported-chains) shows the number of confirmations required for Moralis to consider a block confirmed.
+[This table](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#supported-chains)
+shows the number of confirmations required for Moralis to consider a block
+confirmed.
 
 ### Edge cases
 
@@ -454,18 +473,18 @@ await Moralis.Streams.update({
 
 ## Operators
 
-| Filter | Function                          | Note                    | Example                                 | Demo                                         |
-| ------ | --------------------------------- | ----------------------- | --------------------------------------- | -------------------------------------------- |
-| or     | either ... or ...                 | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} | [Mint/Burn USDC](#example-burnmint-tokens)                                            |
-| and    | all filters must satisfy          | Need at least 2 filters | { "and" : [ {..filter1}, {...filter2} ]} |  [ENS Registration](#example-monitor-ens-name-registrations)                                            |
-| eq     | checks for equality               |                         | { "eq": ["value", "1000"] }             | [Specifc NFT](#example-monitor-specific-nft) |
-| ne     | checks for inequality             |                         | { "ne": ["address", "0x...325"] }      |                                              |
-| lt     | value is less than                | Value must be a number  | { "lt": ["amount", "50"] }              |                                              |
-| gt     | value is greater than             | Value must be a number  | { "gt": ["price", "500000"] }           | [USDT Whales](#example-get-usdt-transfers-above-100k-usdt)                                             |
-| lte    | value is less than or equal to    | Value must be a number  | { "lte": ["value", "100"] }             |                                              |
-| gte    | value is greater than or equal to | Value must be a number  | { "gte": ["value", "100"] }             | [Mint/Burn USDC](#example-burnmint-tokens)                                             |
-| in     | value is in array                 | Must provide an array   | { "in": ["city": ["berlin", "paris"]]}  | [Specifc CryptoPunks](#example-monitor-specific-cryptopunk-nfts-based-on-an-array-of-token-ids)                                            |
-| nin    | value is not in array             | Must provide an array   | { "nin": ["name": ["bob", "alice"]]}    |                                              |
+| Filter | Function                          | Note                    | Example                                  | Demo                                                                                            |
+| ------ | --------------------------------- | ----------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| or     | either ... or ...                 | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]}  | [Mint/Burn USDC](#example-burnmint-tokens)                                                      |
+| and    | all filters must satisfy          | Need at least 2 filters | { "and" : [ {..filter1}, {...filter2} ]} | [ENS Registration](#example-monitor-ens-name-registrations)                                     |
+| eq     | checks for equality               |                         | { "eq": ["value", "1000"] }              | [Specifc NFT](#example-monitor-specific-nft)                                                    |
+| ne     | checks for inequality             |                         | { "ne": ["address", "0x...325"] }        |                                                                                                 |
+| lt     | value is less than                | Value must be a number  | { "lt": ["amount", "50"] }               |                                                                                                 |
+| gt     | value is greater than             | Value must be a number  | { "gt": ["price", "500000"] }            | [USDT Whales](#example-get-usdt-transfers-above-100k-usdt)                                      |
+| lte    | value is less than or equal to    | Value must be a number  | { "lte": ["value", "100"] }              |                                                                                                 |
+| gte    | value is greater than or equal to | Value must be a number  | { "gte": ["value", "100"] }              | [Mint/Burn USDC](#example-burnmint-tokens)                                                      |
+| in     | value is in array                 | Must provide an array   | { "in": ["city": ["berlin", "paris"]]}   | [Specifc CryptoPunks](#example-monitor-specific-cryptopunk-nfts-based-on-an-array-of-token-ids) |
+| nin    | value is not in array             | Must provide an array   | { "nin": ["name": ["bob", "alice"]]}     |                                                                                                 |
 
 In some cases you might want to filter the data you receive from the webhook.
 You can do this by adding a filter to the stream. Important: You must add a
@@ -648,7 +667,8 @@ Lets check if a specific wallet burns or mints at least 100K USDC
 
 ### Programmatically
 
-Lets check all USDC transfers but filter transaction where the recipent or the sender is the zero address and if the amount is greater or equal to 10000 USDC
+Lets check all USDC transfers but filter transaction where the recipent or the
+sender is the zero address and if the amount is greater or equal to 10000 USDC
 
 ```typescript
 const transferUsdcAbi = 
@@ -703,21 +723,9 @@ const stream = await Moralis.Streams.add(options);
 2. Fill out the form
 3. Add the Abi and choose from the topic dropdown
 4. Add a filter
-   - { 'or': [
-    {
-      and: [
-        { eq: ['sender', '0x00000...00000'] },
-        { gte: ['amount', '10000000000'] }
-      ]
-    },
-    {
-      and: [
-        { eq: ['receiver', '0x00000...00000'] },
-        { gte: ['amount', '10000000000'] }
-      ]
-    },
-  ]
- }
+   - { 'or': [ { and: [ { eq: ['sender', '0x00000...00000'] }, { gte: ['amount',
+     '10000000000'] } ] }, { and: [ { eq: ['receiver', '0x00000...00000'] }, {
+     gte: ['amount', '10000000000'] } ] }, ] }
 5. Save the stream
 
 # Update/Pause a Stream
@@ -799,6 +807,7 @@ You can replay (retry) a failed webhook by calling the specific endpoint.
 ```typescript
 await Moralis.Streams.retryWebhook({ id: "WEBHOOK_ID" });
 ```
+
 ## Via WebUI
 
 The UI for this feature is currently under development
