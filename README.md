@@ -11,7 +11,7 @@ networks are added soon.
 - Any other smart contract event fires on-chain based on your filters
 - Fully typed
 - Contract Factories supported
-- Filters supported 🔥
+- Filters supported 🔥 [see examples](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#filter-streams)
 - Internal transactions supported 🥃
 
 This README will intorduce you to Moralis Streams API.
