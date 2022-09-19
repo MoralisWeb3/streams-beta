@@ -448,7 +448,7 @@ await Moralis.Streams.update({
 | or     | either ... or ...                 | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} |                                              |
 | and    | all filters must satisfy          | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} |                                              |
 | eq     | checks for equality               |                         | { "eq": ["value", "1000"] }             | [Specifc NFT](#example-monitor-specific-nft) |
-| ne     | checks for inequality             |                         | { "neq": ["address", "0x...325"] }      |                                              |
+| ne     | checks for inequality             |                         | { "ne": ["address", "0x...325"] }      |                                              |
 | lt     | value is less than                | Value must be a number  | { "lt": ["amount", "50"] }              |                                              |
 | gt     | value is greater than             | Value must be a number  | { "gt": ["price", "500000"] }           |                                              |
 | lte    | value is less than or equal to    | Value must be a number  | { "lte": ["value", "100"] }             |                                              |
