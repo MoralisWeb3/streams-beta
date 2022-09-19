@@ -56,6 +56,8 @@ This is not a finished product but a preview.
 - The response structure may change
 - We are still collecting feedback and may adjust according to it
 
+We expect a full production ready roll-out in October.
+
 ## Bug reports and Questions
 
 If you experience any issues - please let us know
