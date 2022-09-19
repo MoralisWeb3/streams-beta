@@ -474,16 +474,17 @@ const stream = await Moralis.Streams.add(stream);
 ### Programmatically
 
 ```typescript
-const transferAbi = {
-                      "anonymous":false,
-                      "inputs":[
-                        {"indexed":true,"name":"from","type":"address"},
-                        {"indexed":true,"name":"to","type":"address"},
-                        {"indexed":false,"name":"value","type":"uint256"}
-                      ],
-                      "name":"Transfer",
-                      "type":"event"
-                    }, // valid abi of the event
+const transferAbi = 
+{
+  "anonymous":false,
+  "inputs":[
+    {"indexed":true,"name":"from","type":"address"},
+    {"indexed":true,"name":"to","type":"address"},
+    {"indexed":false,"name":"value","type":"uint256"}
+  ],
+  "name":"Transfer",
+  "type":"event"
+} // valid abi of the event
 
 const options = {
     address: '0xdAC17F958D2ee523a2206206994597C13D831ec7' // address to monitor
