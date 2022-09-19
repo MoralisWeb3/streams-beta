@@ -300,10 +300,9 @@ Example Body:
 }
 ```
 
-### Custom Parsed Data
+### Parsing Smart Contract Events
 
-If you are monitoring a custom custom contract you can parse the data yourself.
-with the following code:
+If you are streaming a smart contract event you can use the code below to extract the data from the webhook into a typed data structure.
 
 ```typescript
 // event MyEvent(address indexed from, address indexed to);
