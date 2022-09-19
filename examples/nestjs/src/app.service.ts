@@ -1,5 +1,5 @@
 import Moralis from 'moralis';
-import StreamsTypes from '@moralisweb3/streams-typings';
+import { Types as StreamsTypes } from '@moralisweb3/streams';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
