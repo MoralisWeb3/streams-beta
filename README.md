@@ -437,18 +437,18 @@ await Moralis.Streams.update({
 
 ## Operators
 
-| Filter | Function                          | Note                     | Example                                |
-| ------ | --------------------------------- | ------------------------ | -------------------------------------- |
-| or     | either ... or ...                 | Need at least 2 filters  |                                        |
-| and    | all filters must satisfy          | Need at least 2 filters  |                                        |
-| eq     | checks for equality               |                          | { "eq": ["value", "1000"] }            |
-| ne     | checks for inequality             |                          | { "neq": ["address", "0x...325"] }     |
-| lt     | value is less than                | ensure value is a number |                                        |
-| gt     | value is greater than             | ensure value is a number |                                        |
-| lte    | value is less than or equal to    | ensure value is a number |                                        |
-| gte    | value is greater than or equal to | ensure value is a number |                                        |
-| in     | value is in array                 |                          | { "in": ["city": ["berlin", "paris"]]} |
-| nin    | value is not in array             |                          | { "nin": ["name": ["bob", "alice"]]}   |
+| Filter | Function                          | Note                    | Example                                 |
+| ------ | --------------------------------- | ----------------------- | --------------------------------------- |
+| or     | either ... or ...                 | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} |
+| and    | all filters must satisfy          | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} |
+| eq     | checks for equality               |                         | { "eq": ["value", "1000"] }             |
+| ne     | checks for inequality             |                         | { "neq": ["address", "0x...325"] }      |
+| lt     | value is less than                | Value must be a number  | { "lt": ["amount", "50"] }              |
+| gt     | value is greater than             | Value must be a number  | { "gt": ["price", "500000"] }           |
+| lte    | value is less than or equal to    | Value must be a number  | { "lte": ["value", "100"] }             |
+| gte    | value is greater than or equal to | Value must be a number  | { "gte": ["value", "100"] }             |
+| in     | value is in array                 | Must provide an array   | { "in": ["city": ["berlin", "paris"]]}  |
+| nin    | value is not in array             | Must provide an array   | { "nin": ["name": ["bob", "alice"]]}    |
 
 In some cases you might want to filter the data you receive from the webhook.
 You can do this by adding a filter to the stream. Important: You must add a
