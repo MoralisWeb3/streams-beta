@@ -1,23 +1,23 @@
-import { IWebhook } from './types';
-import { Injectable } from '@nestjs/common';
 import Moralis from 'moralis';
+import StreamsTypes from '@moralisweb3/streams-typings';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  handleContractEvent(webhook: IWebhook) {
+  handleContractEvent(webhook: StreamsTypes.IWebhook) {
     // Check and handle if the event contains ERC20/721/1155 events such as transfers or approvals.
     this.checkForErcStandard(webhook);
 
     // if the event contains custom events, you can decode the logs using the abi and a typed interface.
-    interface MyContractEvent {
+    interface MyCustomEvent {
       player: string;
       bet: string;
       win: boolean;
     }
 
-    const logs = Moralis.Streams.parsedLogs<MyContractEvent>({
+    const logs = Moralis.Streams.parsedLogs<MyCustomEvent>({
       webhookData: webhook,
-      tag: 'myCustomContract',
+      tag: 'myCustomEvent',
     });
 
     logs[0]; // { player: '0x...', bet: '1000000000000000000', win: true }
@@ -25,15 +25,15 @@ export class AppService {
     return { success: true };
   }
 
-  handleWalletEvent(body: IWebhook) {
+  handleWalletEvent(body: StreamsTypes.IWebhook) {
     const { erc20Transfers, erc20Approvals, nftApprovals, nftTransfers, txs } =
       body;
 
     if (txs.length) {
       txs.forEach((tx) => {
         console.log('txHash', tx.hash);
-        console.log('from', tx.from_address);
-        console.log('to', tx.to_address);
+        console.log('from', tx.fromAddress);
+        console.log('to', tx.toAddress);
         console.log('value', tx.value);
       });
     }

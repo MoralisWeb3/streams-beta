@@ -20,10 +20,10 @@ For this we will have 2 controllers. One for each webhook.
 ## Controller
 
 ```typescript
-import { VerifySignature } from "./guards/VerifySignature";
-import { IWebhook } from "./types";
-import { Body, Controller, Post, UseGuards } from "@nestjs/common";
+import StreamsTypes from "@moralisweb3/streams-typings";
 import { AppService } from "./app.service";
+import { Body, Controller, Post, UseGuards } from "@nestjs/common";
+import { VerifySignature } from "./guards/VerifySignature";
 
 @Controller()
 export class AppController {
@@ -31,13 +31,13 @@ export class AppController {
 
   @UseGuards(VerifySignature)
   @Post("wallet")
-  walletEvent(@Body() body: IWebhook) {
+  walletEvent(@Body() body: StreamsTypes.IWebhook) {
     return this.appService.handleWalletEvent(body);
   }
 
   @UseGuards(VerifySignature)
   @Post("contract")
-  contractEvent(@Body() body: IWebhook) {
+  contractEvent(@Body() body: StreamsTypes.IWebhook) {
     return this.appService.handleContractEvent(body);
   }
 }
@@ -63,8 +63,8 @@ Services are used to handle the webhook data.
     if (txs.length) {
       txs.forEach((tx) => {
         console.log('txHash', tx.hash);
-        console.log('from', tx.from_address);
-        console.log('to', tx.to_address);
+        console.log('from', tx.fromAddress);
+        console.log('to', tx.toAddress);
         console.log('value', tx.value);
       });
     }
@@ -81,7 +81,7 @@ Services are used to handle the webhook data.
 The handler for a contract event can look like this.
 
 ```typescript
-  handleContractEvent(body: IWebhook) {
+  handleContractEvent(body: StreamsTypes.IWebhook) {
     const webhook = body;
 
     // Check and handle if the event contains ERC20/721/1155 events such as transfers or approvals.
@@ -170,7 +170,10 @@ export class VerifySignature implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const signature = request.headers["x-signature"];
     const body = request.body;
-    Moralis.Streams.verifySignature(body, signature);
+    Moralis.Streams.verifySignature({
+      body,
+      signature,
+    });
     return true;
   }
 }
