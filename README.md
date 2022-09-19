@@ -460,7 +460,7 @@ In some cases you might want to filter the data you receive from the webhook.
 You can do this by adding a filter to the stream. Important: You must add a
 (valid!) ABI of the event you want to filter! Otherwise the stream will not work
 
-## Example: Monitor Specific NFT
+## Example: Monitor Specific NFT Based on Token ID
 
 ### Programmatically
 
@@ -533,7 +533,7 @@ const stream = await Moralis.Streams.add(stream);
    - {"gt": ["value", "100000000000"]}
 5. Save the stream
 
-## Example: Monitor specific CryptoPunk NFTs
+## Example: Monitor specific CryptoPunk NFTs Based on an array of Token IDs
 
 ### Programmatically
 
