@@ -412,6 +412,34 @@ const stream = await Moralis.Streams.add(stream);
    - {"eq": ["tokenId", "1"]}
 5. Save the stream
 
+# Update/Pause a Stream
+
+In some cases you might want to pause a stream. You can do this by calling the
+specific endpoint.
+
+## Programmatically
+
+```typescript
+await Moralis.Streams.updateStatus({
+  network: 'evm';
+  id: 'YOUR_STREAM_ID',
+  status: 'paused'
+})
+```
+
+## Manually
+
+```curl
+curl -X 'POST' \
+  'https://api.moralis-streams.com/streams/evm/STREAM_ID/status' \
+  -H 'accept: application/json' \
+  -H 'x-api-key: YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{"status": "paused"}'
+```
+
+Possible values for status are `active`, `paused` and `error`
+
 # Get Error
 
 The Streams API provides an endpoint to get all failed webhooks. It is useful to
@@ -457,34 +485,6 @@ The payload contains the webhook details.
   "cursor": "string"
 }
 ```
-
-# Update/Pause a Stream
-
-In some cases you might want to pause a stream. You can do this by calling the
-specific endpoint.
-
-## Programmatically
-
-```typescript
-await Moralis.Streams.updateStatus({
-  network: 'evm';
-  id: 'YOUR_STREAM_ID',
-  status: 'paused'
-})
-```
-
-## Manually
-
-```curl
-curl -X 'POST' \
-  'https://api.moralis-streams.com/streams/evm/STREAM_ID/status' \
-  -H 'accept: application/json' \
-  -H 'x-api-key: YOUR_API_KEY' \
-  -H 'Content-Type: application/json' \
-  -d '{"status": "paused"}'
-```
-
-Possible values for status are `active`, `paused` and `error`
 
 # Replay Failed Webhook
 
