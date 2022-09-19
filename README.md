@@ -458,6 +458,25 @@ The payload contains the webhook details.
 }
 ```
 
+# Pause Stream
+
+In some cases you might want to pause a stream. You can do this by calling the
+specific endpoint.
+
+## Manually
+
+```curl
+curl -X 'POST' \
+  'https://api.moralis-streams.com/streams/evm/STREAM_ID/status' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "status": "paused"
+  }'
+```
+
+Possible values for status are `active`, `paused` and `error`
+
 # Replay Failed Webhook
 
 You can replay (replay) a failed webhook by calling the specific endpoint.
@@ -479,6 +498,13 @@ curl -X 'POST' \
   -H 'x-api-key: YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
 ```
+
+# Webhook Successrate
+
+Every Stream starts with a successrate of 100%. For every failed webhook the
+rate decreases by 1%. For every successful webhook the rate increases by 1%
+where the maximum is 100%. If the successrate is below 70% the stream will be
+paused and an email is sent to you.
 
 # Get Stats (Beta - This endpoint could be replaced or removed)
 
