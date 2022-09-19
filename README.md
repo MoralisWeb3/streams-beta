@@ -414,8 +414,11 @@ const stream = await Moralis.Streams.add(stream);
 
 # Update/Pause a Stream
 
-In some cases you might want to pause a stream. You can do this by calling the
-specific endpoint.
+You can update the status of a stream at any time. Possible values for status
+are `active`, `paused` and `error`.
+
+For example: In some cases you might want to pause a stream. You can do this by
+calling the specific endpoint.
 
 ## Programmatically
 
@@ -437,8 +440,6 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -d '{"status": "paused"}'
 ```
-
-Possible values for status are `active`, `paused` and `error`
 
 # Get Error
 
@@ -517,7 +518,7 @@ discontinued and an email is sent to you. The status of your stream will be set
 to `error`.
 
 If you want to continue receiving events you can
-[update the status of a stream](#update-stream) to `active`.
+[update the status of a stream](#updatepause-a-stream) to `active`.
 
 # Get Stats (Beta - This endpoint could be replaced or removed)
 
