@@ -650,7 +650,11 @@ await Moralis.Streams.updateStatus({
 })
 ```
 
-## Manually
+## Via WebUI
+
+The UI for this feature is currently under development
+
+## Via HTTP Request
 
 ```curl
 curl -X 'POST' \
@@ -738,7 +742,11 @@ If you want to continue receiving events you can
 
 You can get stats about your streams usage
 
-## Manually
+## Via WebUI
+
+The UI for this feature is currently under development
+
+## Via HTTP Request
 
 You can use the Swagger UI or make an API call to the endpoint.
 
