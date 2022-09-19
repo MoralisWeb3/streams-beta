@@ -17,7 +17,7 @@ This README will intorduce you to Moralis Streams API.
 
 ## Supported Chains
 
-|    Chain    | Streams | Lag | Internal Tx |
+|    Chain    | Streams | Blocks Until Confirmed | Internal Tx |
 | :---------: | :-----: | :-: | :---------: |
 |     ETH     |    ✅    | 12  |      ✅      |
 |   ROPSTEN   |    ✅    | 12  |      ❌      |
