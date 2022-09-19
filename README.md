@@ -150,7 +150,7 @@ monitoring occurs, you will receive a webhook with the transaction details.
 
 You will receive two webhooks for each block that contains the events you are interested in.
 
-The first webhook will come as soon as the block is mined and have `confirmed:false`. This means that the block in which the events you are interested in is still running the risk of being dropped due to a reorganization of the blockchain.
+The first webhook will come as soon as the block is mined and have `confirmed:false`. This means that the block is still running the risk of being dropped due to a reorganization of the blockchain.
 
 The second webhook will come once the block has very minimal chance of being dropped (the chance is never zero as it is all
 probabalistic). This second webhook will have `confirmed:true`.
