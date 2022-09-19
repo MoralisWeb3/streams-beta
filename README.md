@@ -451,7 +451,7 @@ await Moralis.Streams.update({
 | Filter | Function                          | Note                    | Example                                 | Demo                                         |
 | ------ | --------------------------------- | ----------------------- | --------------------------------------- | -------------------------------------------- |
 | or     | either ... or ...                 | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} | [Mint/Burn USDC](#example-burnmint-tokens)                                            |
-| and    | all filters must satisfy          | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} |  [ENS Registration](#example-monitor-ens-name-registrations)                                            |
+| and    | all filters must satisfy          | Need at least 2 filters | { "and" : [ {..filter1}, {...filter2} ]} |  [ENS Registration](#example-monitor-ens-name-registrations)                                            |
 | eq     | checks for equality               |                         | { "eq": ["value", "1000"] }             | [Specifc NFT](#example-monitor-specific-nft) |
 | ne     | checks for inequality             |                         | { "ne": ["address", "0x...325"] }      |                                              |
 | lt     | value is less than                | Value must be a number  | { "lt": ["amount", "50"] }              |                                              |
