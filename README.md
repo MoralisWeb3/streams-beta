@@ -693,22 +693,21 @@ const stream = await Moralis.Streams.add(options);
 2. Fill out the form
 3. Add the Abi and choose from the topic dropdown
 4. Add a filter
-   - {  
-  "or": [
+   - { 'or': [
     {
-      "and": [
-       { "eq": ["sender", "0x00000...00000"] },  
-       { "gte": ["amount", "10000000000"]}  
-      ]  
-    },  
-    {  
-      "and": [  
-       { "eq": ["receiver", "0x00000...00000"] },  
-       { "gte": ["amount", "10000000000"]}  
-      ]  
-    }  
-  ]  
-}
+      and: [
+        { eq: ['sender', '0x00000...00000'] },
+        { gte: ['amount', '10000000000'] },
+      ];
+    },
+    {
+      and: [
+        { eq: ['receiver', '0x00000...00000'] },
+        { gte: ['amount', '10000000000'] },
+      ];
+    },
+  ]
+ }
 5. Save the stream
 
 # Update/Pause a Stream
