@@ -469,6 +469,7 @@ specific endpoint.
 curl -X 'POST' \
   'https://api.moralis-streams.com/streams/evm/STREAM_ID/status' \
   -H 'accept: application/json' \
+  -H 'x-api-key: YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
   "status": "paused"
