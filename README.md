@@ -155,7 +155,7 @@ The first webhook will come as soon as the block is mined and have `confirmed:fa
 The second webhook will come once the block has very minimal chance of being dropped (the chance is never zero as it is all
 probabalistic). This second webhook will have `confirmed:true`.
 
-The second webhook will come once enough blocks have been mined after the block containing your events (also called number of confirmations). [This table](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#supported-chains) shows the number of confirmations required for Moralis to consider a block confirmed. 
+The second webhook will come once enough blocks have been mined after the block containing your events. This number of blocks is also called `number of confirmations`. [This table](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#supported-chains) shows the number of confirmations required for Moralis to consider a block confirmed. 
 
 ### Edge cases
 
