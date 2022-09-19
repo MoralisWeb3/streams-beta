@@ -697,14 +697,14 @@ const stream = await Moralis.Streams.add(options);
     {
       and: [
         { eq: ['sender', '0x00000...00000'] },
-        { gte: ['amount', '10000000000'] },
-      ];
+        { gte: ['amount', '10000000000'] }
+      ]
     },
     {
       and: [
         { eq: ['receiver', '0x00000...00000'] },
-        { gte: ['amount', '10000000000'] },
-      ];
+        { gte: ['amount', '10000000000'] }
+      ]
     },
   ]
  }
