@@ -577,6 +577,61 @@ const stream = await Moralis.Streams.add(stream);
      { "eq": ["punkIndex", "1002"] } ] }
 5. Save the stream
 
+## Example: Monitor ENS Name Registrations
+
+Lets check if a specific address has registered an ENS name that costs higher
+than 1 ETH.
+
+### Programmatically
+
+```typescript
+const ensNameRegisteredAbi = 
+{
+  "anonymous":false,
+  "inputs":
+  [
+    {"indexed":false,"internalType":"string","name":"name","type":"string"},
+    {"indexed":true,"internalType":"bytes32","name":"label","type":"bytes32"},  
+    {"indexed":true,"internalType":"address","name":"owner","type":"address"},
+    {"indexed":false,"internalType":"uint256","name":"cost","type":"uint256"},
+    {"indexed":false,"internalType":"uint256","name":"expires","type":"uint256"}
+  ],
+  "name":"NameRegistered",
+  "type":"event"
+} // valid abi of the event
+
+const filter = {
+  "and": [
+    {"eq": ["owner", "0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5"]},
+    {"gt": ["cost", "1000000000000000000"]}
+  ]
+} // only receive registration events if the owner is the address and the cost is higher than 1 ETH
+
+const options = {
+    address: '0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5' // ENS Registry Controller
+    chains: [EvmChain.ETHEREUM] // Ethereum Name Service so we only monitor Ethereum
+    description: 'ENS Name Registrations', // your description
+    network: 'evm',
+    tag: 'ensRegistrationByBob', // give it a tag
+    type: 'contract' // contract as ENS is a contract,
+    abi: ensNameRegisteredAbi,
+    filter, 
+    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
+  }
+
+const stream = await Moralis.Streams.add(options);
+```
+
+### Manually
+
+1. Create a new Smart Contract Stream
+2. Fill out the form
+3. Add the Abi and choose from the topic dropdown
+4. Add a filter
+   - { "and": [ {"eq": ["owner", "0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5"]},
+     {"gt": ["cost", "1000000000000000000"]} ] }
+5. Save the stream
+
 # Update/Pause a Stream
 
 You can update the status of a stream at any time. Possible values for status
