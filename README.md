@@ -11,13 +11,14 @@ networks are added soon.
 - Any other smart contract event fires on-chain based on your filters
 - Fully typed
 - Contract Factories supported
-- Filters supported
+- Filters supported 🔥
+- Internal transactions supported 🥃
 
 This README will intorduce you to Moralis Streams API.
 
 ## Supported Chains
 
-|    Chain    | Streams | Confirmations Until Confirmed [read more](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#two-webhooks-for-each-block) | Internal Tx |
+|    Chain    | Streams | Blocks Until Confirmed | Internal Tx |
 | :---------: | :-----: | :--------------------: | :---------: |
 |     ETH     |    ✅    |           12           |      ✅      |
 |   ROPSTEN   |    ✅    |           12           |      ❌      |
@@ -44,20 +45,25 @@ This README will intorduce you to Moralis Streams API.
 - [x] Create an account on [Moralis.io](https://moralis.io)
 - [x] Get your API key [here](http://admin.moralis.io/web3apis)
 
-# Beta Limitations
+## Beta Limitations
 
 This is not a finished product but a preview.
 
 - High availability is not deployed yet
 - We may have to purge the history and logs
-- You may experience some bugs.
+- You may experience some bugs
+- The UI is not fully built out or polished - slick dashboards soon ftw 🤩
+- The response structure may change
+- We are still collecting feedback and may adjust according to it
+
+We expect a full production ready roll-out in October.
 
 ## Bug reports and Questions
 
 If you experience any issues - please let us know
 [in this dedicated Moralis Forum](https://forum.moralis.io/t/streams-api-beta/19664).
 
-# Roadmap 🚴‍♀️
+## Roadmap 🚴‍♀️
 
 These are features that are not included in this beta but that will be out in
 the near future:
@@ -148,14 +154,17 @@ monitoring occurs, you will receive a webhook with the transaction details.
 
 ### Two webhooks for each block
 
-You will receive two webhooks for each block that contains the events you are interested in.
+You will receive two webhooks for each block that contains the events you are
+interested in.
 
-The first webhook will come as soon as the block is mined and have `confirmed:false`. This means that the block is still running the risk of being dropped due to a reorganization of the blockchain.
+The first webhook will come as soon as the block is mined and have
+`confirmed:false`. This means that the block in which the events you are
+interested in is still running the risk of being dropped due to a reorganization
+of the blockchain.
 
-The second webhook will come once the block has very minimal chance of being dropped (the chance is never zero as it is all
-probabalistic). This second webhook will have `confirmed:true`.
-
-The second webhook will come once enough blocks have been mined after the block containing your events. This number of blocks is also called `number of confirmations`. [This table](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#supported-chains) shows the number of confirmations required for Moralis to consider a block confirmed. 
+The second webhook will come once the block has very minimal chance of being
+dropped (the chance is never zero as it is all probabalistic). This second
+webhook will have `confirmed:true`.
 
 ### Edge cases
 
@@ -432,6 +441,21 @@ await Moralis.Streams.update({
 
 # Filter Streams
 
+## Operators
+
+| Filter | Function                          | Note                    | Example                                 | Demo                                         |
+| ------ | --------------------------------- | ----------------------- | --------------------------------------- | -------------------------------------------- |
+| or     | either ... or ...                 | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} |                                              |
+| and    | all filters must satisfy          | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} |                                              |
+| eq     | checks for equality               |                         | { "eq": ["value", "1000"] }             | [Specifc NFT](#example-monitor-specific-nft) |
+| ne     | checks for inequality             |                         | { "neq": ["address", "0x...325"] }      |                                              |
+| lt     | value is less than                | Value must be a number  | { "lt": ["amount", "50"] }              |                                              |
+| gt     | value is greater than             | Value must be a number  | { "gt": ["price", "500000"] }           |                                              |
+| lte    | value is less than or equal to    | Value must be a number  | { "lte": ["value", "100"] }             |                                              |
+| gte    | value is greater than or equal to | Value must be a number  | { "gte": ["value", "100"] }             |                                              |
+| in     | value is in array                 | Must provide an array   | { "in": ["city": ["berlin", "paris"]]}  |                                              |
+| nin    | value is not in array             | Must provide an array   | { "nin": ["name": ["bob", "alice"]]}    |                                              |
+
 In some cases you might want to filter the data you receive from the webhook.
 You can do this by adding a filter to the stream. Important: You must add a
 (valid!) ABI of the event you want to filter! Otherwise the stream will not work
@@ -581,7 +605,7 @@ curl -X 'POST' \
   -d '{"status": "paused"}'
 ```
 
-# Get Error
+# See failed webhooks
 
 The Streams API provides an endpoint to get all failed webhooks. It is useful to
 replay the failed webhooks.
@@ -594,16 +618,7 @@ const history = await Moralis.Streams.getHistory({ limit: 100 });
 
 ## Manually
 
-You can use the Swagger UI or make an API call to the endpoint.
-
-[Swagger](https://api.moralis-streams.com/api-docs/#/History/GetHistory)
-
-```curl
-curl -X 'GET' \
-  'https://api.moralis-streams.com/history?limit=100' \
-  -H 'accept: application/json' \
-  -H 'x-api-key: YOUR_API_KEY'
-```
+The UI for this feature is still under development.
 
 ## Response
 
