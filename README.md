@@ -2,19 +2,23 @@
 
 Stream blockchain data into your backend via webhooks. Ethereum, Polygon,
 Avalanche, BNB Chain, Fantom, Cronos and all testnets are supported. More
-networks are added soon.
+networks to be added soon.
+
+Get events streamed to your backend whenever:
 
 - An address sends, receives, stakes, swaps or burns assets
-- An asset is being sent, received, staked, swaped or burned
+- An asset is being sent, received, staked, swapped or burned
 - A battle starts in your web3 game
 - Someone participates in your token sale
 - Any other smart contract event fires on-chain based on your filters
+
+### Other features
 - Fully typed
 - Contract Factories supported
 - Filters supported 🔥 [see examples](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#filter-streams)
 - Internal transactions supported 🥃
 
-This README will intorduce you to Moralis Streams API.
+This README will introduce you to Moralis Streams API.
 
 ## Supported Chains
 
@@ -810,7 +814,7 @@ curl -X 'POST' \
 Every Stream starts with a successrate of 100% per webhook URL. For every failed
 webhook the rate decreases by 1% per webhook URL. For every successful webhook
 the rate increases by 1% per webhook URL where the maximum is 100%. If the
-successrate is below 70% per webhook URL the stream will be discontinued and an
+success rate is below 70% per webhook URL the stream will be discontinued and an
 email is sent to you. The status of your stream will be set to `error`.
 
 If you want to continue receiving events you can
