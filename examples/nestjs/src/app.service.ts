@@ -1,16 +1,12 @@
 import { IWebhook } from './types';
 import { Injectable } from '@nestjs/common';
-import AbiUtils from 'web3-eth-abi';
-
-const { decodeLog } = AbiUtils;
+import Moralis from 'moralis';
 
 @Injectable()
 export class AppService {
-  handleContractEvent(body: IWebhook) {
-    const { logs, abis } = body;
-
+  handleContractEvent(webhook: IWebhook) {
     // Check and handle if the event contains ERC20/721/1155 events such as transfers or approvals.
-    this.checkForErcStandard(body);
+    this.checkForErcStandard(webhook);
 
     // if the event contains custom events, you can decode the logs using the abi and a typed interface.
     interface MyContractEvent {
@@ -19,19 +15,12 @@ export class AppService {
       win: boolean;
     }
 
-    if (logs.length) {
-      logs.forEach((log) => {
-        const { bet, player, win } = decodeLog(abis[log.streamId], log.data, [
-          log.topic1,
-          log.topic2,
-          log.topic3,
-        ]) as unknown as MyContractEvent;
+    const logs = Moralis.Streams.parsedLogs<MyContractEvent>({
+      webhookData: webhook,
+      tag: 'myCustomContract',
+    }) as MyContractEvent[];
 
-        console.log('player', player);
-        console.log('bet', bet);
-        console.log('win', win);
-      });
-    }
+    logs[0]; // { player: '0x...', bet: '1000000000000000000', win: true }
 
     return { success: true };
   }

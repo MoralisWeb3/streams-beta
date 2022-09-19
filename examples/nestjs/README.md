@@ -87,17 +87,19 @@ The handler for a contract event can look like this.
     // Check and handle if the event contains ERC20/721/1155 events such as transfers or approvals.
     this.checkForErcStandard(webhook);
 
-    // if the event contains custom events, you can decode the logs using the abi and a typed interface.
+    // event MyEvent(address indexed player, bet string, win bool);
     interface MyContractEvent {
       player: string;
       bet: string;
       win: boolean;
     }
 
-    
-    const decodedLogs = Moralis.Streams.parsedLogs<MyEvent>({ webhook, tag });
+    const logs = Moralis.Streams.parsedLogs<MyContractEvent>({
+      webhookData: webhook,
+      tag: 'myCustomContract',
+    }) as MyContractEvent[];
 
-    decodedLogs[0]; // { player: '0x...', bet: '1500', win: true }
+    logs[0]; // { player: '0x...', bet: '1000000000000000000', win: true }
 
     return { success: true };
   }
