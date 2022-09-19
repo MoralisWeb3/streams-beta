@@ -108,7 +108,7 @@ Moralis.start({
 
 const stream = {
     address: '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4' // address to monitor
-    chains: [EvmChain.ETHEREUM, EvmChain.POLYGON] // list of blockchains to monitor
+    chains: [EvmChain.ETHEREUM.hex, EvmChain.POLYGON.hex] // list of blockchains to monitor
     description: 'monitor Bobs wallet', // your description
     network: 'evm',
     tag: 'bob', // give it a tag
@@ -500,7 +500,7 @@ import { EvmChain } from '@moralisweb3/evm-utils'
 
 const options = {
     address: '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4' // address to monitor
-    chains: [EvmChain.ETHEREUM] // list of blockchains to monitor
+    chains: [EvmChain.ETHEREUM.hex] // list of blockchains to monitor
     description: 'monitor one NFT from Collection', // your description
     network: 'evm',
     tag: 'mySpecialNft', // give it a tag
@@ -541,7 +541,7 @@ const transferAbi =
 
 const options = {
     address: '0xdAC17F958D2ee523a2206206994597C13D831ec7' // address to monitor
-    chains: [EvmChain.ETHEREUM] // list of blockchains to monitor
+    chains: [EvmChain.ETHEREUM.hex] // list of blockchains to monitor
     description: 'whale transactions', // your description
     network: 'evm',
     tag: 'usdtwhale', // give it a tag
@@ -583,7 +583,7 @@ const punkTransferAbi =
 
 const options = {
     address: '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB' // crypto punks address
-    chains: [EvmChain.ETHEREUM] // list of blockchains to monitor
+    chains: [EvmChain.ETHEREUM.hex] // list of blockchains to monitor
     description: '1000 to 1002 cryptopunks', // your description
     network: 'evm',
     tag: 'cryptoPunks', // give it a tag
@@ -638,7 +638,7 @@ const filter = {
 
 const options = {
     address: '0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5' // ENS Registry Controller
-    chains: [EvmChain.ETHEREUM] // Ethereum Name Service so we only monitor Ethereum
+    chains: [EvmChain.ETHEREUM.hex] // Ethereum Name Service so we only monitor Ethereum
     description: 'ENS Name Registrations', // your description
     network: 'evm',
     tag: 'ensRegistrationByBob', // give it a tag
@@ -704,7 +704,7 @@ const filter =
 
 const options = {
     address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48' // USDC Contract
-    chains: [EvmChain.ETHEREUM] // Monitor USDC on ethereum
+    chains: [EvmChain.ETHEREUM.hex] // Monitor USDC on ethereum
     description: 'ENS Name Registrations', // your description
     network: 'evm',
     tag: 'mintsAndBurns', // give it a tag
