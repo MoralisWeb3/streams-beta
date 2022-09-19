@@ -55,6 +55,8 @@ This is not a finished product but a preview.
 - The UI is not fully built out or polished - slick dashboards soon ftw 🤩
 - The response structure may change
 - We are still collecting feedback and may adjust according to it
+- You can create maximum 100 streams
+- Pricing and limitaions based on pricing will be announced in October - during beta there are no limitations outside of the one mentioned above
 
 We expect a full production ready roll-out in October.
 
