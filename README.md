@@ -685,7 +685,7 @@ The payload contains the webhook details.
 {
   "result": [
     {
-      "id": "WEBHOOK_ID",
+      "id": "HISTORY_ID",
       "date": "string",
       "payload": {
         // the failed webhook
