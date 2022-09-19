@@ -17,20 +17,20 @@ This README will intorduce you to Moralis Streams API.
 
 ## Supported Chains
 
-|    Chain    | Lag | Internal Tx |
-| :---------: | :-: | :---------: |
-|     ETH     | 12  |      ✅      |
-|   ROPSTEN   | 12  |      ❌      |
-|   GOERLI    | 12  |      ❌      |
-|     BSC     | 18  |      ✅      |
-|  BSC TEST   | 18  |      ✅      |
-|   POLYGON   | 100 |      ✅      |
-|   MUMBAI    | 100 |      ✅      |
-|   FANTOM    | 100 |      ❌      |
-|    AVAX     | 100 |      ❌      |
-|  AVAX TEST  | 100 |      ❌      |
-|   CRONOS    | 100 |      ❌      |
-| CRONOS TEST | 100 |      ❌      |
+|    Chain    | Streams | Lag | Internal Tx |
+| :---------: | :-----: | :-: | :---------: |
+|     ETH     |    ✅    | 12  |      ✅      |
+|   ROPSTEN   |    ✅    | 12  |      ❌      |
+|   GOERLI    |    ✅    | 12  |      ❌      |
+|     BSC     |    ✅    | 18  |      ✅      |
+|  BSC TEST   |    ✅    | 18  |      ✅      |
+|   POLYGON   |    ✅    | 100 |      ✅      |
+|   MUMBAI    |    ✅    | 100 |      ✅      |
+|   FANTOM    |    ✅    | 100 |      ❌      |
+|    AVAX     |    ✅    | 100 |      ❌      |
+|  AVAX TEST  |    ✅    | 100 |      ❌      |
+|   CRONOS    |    ✅    | 100 |      ❌      |
+| CRONOS TEST |    ✅    | 100 |      ❌      |
 
 ### Useful links
 
