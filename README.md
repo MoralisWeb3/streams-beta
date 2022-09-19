@@ -446,14 +446,14 @@ await Moralis.Streams.update({
 
 | Filter | Function                          | Note                    | Example                                 | Demo                                         |
 | ------ | --------------------------------- | ----------------------- | --------------------------------------- | -------------------------------------------- |
-| or     | either ... or ...                 | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} |                                              |
+| or     | either ... or ...                 | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} | [Mint/Burn USDC](#example-burnmint-tokens)                                            |
 | and    | all filters must satisfy          | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} |  [ENS Registration](#example-monitor-ens-name-registrations)                                            |
 | eq     | checks for equality               |                         | { "eq": ["value", "1000"] }             | [Specifc NFT](#example-monitor-specific-nft) |
 | ne     | checks for inequality             |                         | { "ne": ["address", "0x...325"] }      |                                              |
 | lt     | value is less than                | Value must be a number  | { "lt": ["amount", "50"] }              |                                              |
 | gt     | value is greater than             | Value must be a number  | { "gt": ["price", "500000"] }           | [USDT Whales](#example-get-usdt-transfers-above-100k-usdt)                                             |
 | lte    | value is less than or equal to    | Value must be a number  | { "lte": ["value", "100"] }             |                                              |
-| gte    | value is greater than or equal to | Value must be a number  | { "gte": ["value", "100"] }             |                                              |
+| gte    | value is greater than or equal to | Value must be a number  | { "gte": ["value", "100"] }             | Mint/Burn USDC](#example-burnmint-tokens)                                             |
 | in     | value is in array                 | Must provide an array   | { "in": ["city": ["berlin", "paris"]]}  | [Specifc CryptoPunks](#example-monitor-specific-cryptopunk-nfts-based-on-an-array-of-token-ids)                                            |
 | nin    | value is not in array             | Must provide an array   | { "nin": ["name": ["bob", "alice"]]}    |                                              |
 
