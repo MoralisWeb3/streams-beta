@@ -758,9 +758,3 @@ curl -X 'GET' \
   "totalTxsInternalProcessed": 3
 }
 ```
-
-# Lag
-
-Use the --lag option to specify how many blocks to lag behind the head of the
-blockchain. It's the simplest way to handle chain reorganizations - they are
-less likely the further a block from the head.
