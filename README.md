@@ -149,6 +149,7 @@ monitoring occurs, you will receive a webhook with the transaction details.
 
 When events happen on the blockchain you will receive a webhook twice. Meaning
 that you will get the unconfirmed block first and then the confirmed block.
+There are very rare cases where you will receive the confirmed block first.
 
 # Webhook Data
 
