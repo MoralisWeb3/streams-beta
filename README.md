@@ -11,26 +11,27 @@ networks are added soon.
 - Any other smart contract event fires on-chain based on your filters
 - Fully typed
 - Contract Factories supported
-- Filters supported
+- Filters supported 🔥
+- Internal transactions supported 🥃
 
 This README will intorduce you to Moralis Streams API.
 
 ## Supported Chains
 
-|    Chain    | Streams | Confirmations Until Confirmed [read more](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#two-webhooks-for-each-block) | Internal Tx |
-| :---------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------: | :---------: |
-|     ETH     |    ✅    |                                                                   12                                                                   |      ✅      |
-|   ROPSTEN   |    ✅    |                                                                   12                                                                   |      ❌      |
-|   GOERLI    |    ✅    |                                                                   12                                                                   |      ❌      |
-|     BSC     |    ✅    |                                                                   18                                                                   |      ✅      |
-|  BSC TEST   |    ✅    |                                                                   18                                                                   |      ✅      |
-|   POLYGON   |    ✅    |                                                                  100                                                                   |      ✅      |
-|   MUMBAI    |    ✅    |                                                                  100                                                                   |      ✅      |
-|   FANTOM    |    ✅    |                                                                  100                                                                   |      ❌      |
-|    AVAX     |    ✅    |                                                                  100                                                                   |      ❌      |
-|  AVAX TEST  |    ✅    |                                                                  100                                                                   |      ❌      |
-|   CRONOS    |    ✅    |                                                                  100                                                                   |      ❌      |
-| CRONOS TEST |    ✅    |                                                                  100                                                                   |      ❌      |
+|    Chain    | Streams | Blocks Until Confirmed | Internal Tx |
+| :---------: | :-----: | :--------------------: | :---------: |
+|     ETH     |    ✅    |           12           |      ✅      |
+|   ROPSTEN   |    ✅    |           12           |      ❌      |
+|   GOERLI    |    ✅    |           12           |      ❌      |
+|     BSC     |    ✅    |           18           |      ✅      |
+|  BSC TEST   |    ✅    |           18           |      ✅      |
+|   POLYGON   |    ✅    |          100           |      ✅      |
+|   MUMBAI    |    ✅    |          100           |      ✅      |
+|   FANTOM    |    ✅    |          100           |      ❌      |
+|    AVAX     |    ✅    |          100           |      ❌      |
+|  AVAX TEST  |    ✅    |          100           |      ❌      |
+|   CRONOS    |    ✅    |          100           |      ❌      |
+| CRONOS TEST |    ✅    |          100           |      ❌      |
 
 ### Useful links
 
@@ -44,13 +45,16 @@ This README will intorduce you to Moralis Streams API.
 - [x] Create an account on [Moralis.io](https://moralis.io)
 - [x] Get your API key [here](http://admin.moralis.io/web3apis)
 
-# Beta Limitations
+## Beta Limitations
 
 This is not a finished product but a preview.
 
 - High availability is not deployed yet
 - We may have to purge the history and logs
-- You may experience some bugs.
+- You may experience some bugs
+- The UI is not fully built out or polished
+- The response structure may change
+- We are still collecting feedback and may adjust according to it
 
 ## Bug reports and Questions
 
@@ -152,19 +156,13 @@ You will receive two webhooks for each block that contains the events you are
 interested in.
 
 The first webhook will come as soon as the block is mined and have
-`confirmed:false`. This means that the block is still running the risk of being
-dropped due to a reorganization of the blockchain.
+`confirmed:false`. This means that the block in which the events you are
+interested in is still running the risk of being dropped due to a reorganization
+of the blockchain.
 
 The second webhook will come once the block has very minimal chance of being
 dropped (the chance is never zero as it is all probabalistic). This second
 webhook will have `confirmed:true`.
-
-The second webhook will come once enough blocks have been mined after the block
-containing your events. This number of blocks is also called
-`number of confirmations`.
-[This table](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#supported-chains)
-shows the number of confirmations required for Moralis to consider a block
-confirmed.
 
 ### Edge cases
 
@@ -443,18 +441,18 @@ await Moralis.Streams.update({
 
 ## Operators
 
-| Filter | Function                          | Note                    | Example                                 |
-| ------ | --------------------------------- | ----------------------- | --------------------------------------- |
-| or     | either ... or ...                 | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} |
-| and    | all filters must satisfy          | Need at least 2 filters | { "or" : [ {..filter1}, {...filter2} ]} |
-| eq     | checks for equality               |                         | { "eq": ["value", "1000"] }             |
-| ne     | checks for inequality             |                         | { "neq": ["address", "0x...325"] }      |
-| lt     | value is less than                | Value must be a number  | { "lt": ["amount", "50"] }              |
-| gt     | value is greater than             | Value must be a number  | { "gt": ["price", "500000"] }           |
-| lte    | value is less than or equal to    | Value must be a number  | { "lte": ["value", "100"] }             |
-| gte    | value is greater than or equal to | Value must be a number  | { "gte": ["value", "100"] }             |
-| in     | value is in array                 | Must provide an array   | { "in": ["city": ["berlin", "paris"]]}  |
-| nin    | value is not in array             | Must provide an array   | { "nin": ["name": ["bob", "alice"]]}    |
+| Filter | Function                          | Note                     | Example                                |
+| ------ | --------------------------------- | ------------------------ | -------------------------------------- |
+| or     | either ... or ...                 | Need at least 2 filters  |                                        |
+| and    | all filters must satisfy          | Need at least 2 filters  |                                        |
+| eq     | checks for equality               |                          | { "eq": ["value", "1000"] }            |
+| ne     | checks for inequality             |                          | { "neq": ["address", "0x...325"] }     |
+| lt     | value is less than                | ensure value is a number |                                        |
+| gt     | value is greater than             | ensure value is a number |                                        |
+| lte    | value is less than or equal to    | ensure value is a number |                                        |
+| gte    | value is greater than or equal to | ensure value is a number |                                        |
+| in     | value is in array                 |                          | { "in": ["city": ["berlin", "paris"]]} |
+| nin    | value is not in array             |                          | { "nin": ["name": ["bob", "alice"]]}   |
 
 In some cases you might want to filter the data you receive from the webhook.
 You can do this by adding a filter to the stream. Important: You must add a
