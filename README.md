@@ -300,16 +300,13 @@ with the following code:
 
 ```typescript
 // event MyEvent(address indexed from, address indexed to);
-import { decodeLogs } from "@moralisweb3/evm-utils"; // YET TO IMPLEMENT IN SDK!!
 
 interface MyEvent {
   from: string;
   to: string;
 }
 
-const webhook = { ...body, logs: [...logs] };
-
-const decodedLogs = decodeLogs<MyEvent>(webhook);
+const decodedLogs = Moralis.Streams.parsedLogs<MyEvent>(webhook);
 
 decodedLogs[0]; // { from: '0x...', to: '0x...' }
 ```
