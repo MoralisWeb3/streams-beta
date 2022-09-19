@@ -17,7 +17,7 @@ This README will intorduce you to Moralis Streams API.
 
 ## Supported Chains
 
-|    Chain    | Streams | Confirmations Until Confirmed | Internal Tx |
+|    Chain    | Streams | Confirmations Until Confirmed [read more](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#two-webhooks-for-each-block) | Internal Tx |
 | :---------: | :-----: | :--------------------: | :---------: |
 |     ETH     |    ✅    |           12           |      ✅      |
 |   ROPSTEN   |    ✅    |           12           |      ❌      |
