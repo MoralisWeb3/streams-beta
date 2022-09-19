@@ -510,7 +510,7 @@ const stream = await Moralis.Streams.add(stream);
    - {"gt": ["value", "100000000000"]}
 5. Save the stream
 
-## Example: Monitor a specific CryptoPunks
+## Example: Monitor specific CryptoPunk NFTs
 
 ### Programmatically
 
