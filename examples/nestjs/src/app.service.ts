@@ -18,7 +18,7 @@ export class AppService {
     const logs = Moralis.Streams.parsedLogs<MyContractEvent>({
       webhookData: webhook,
       tag: 'myCustomContract',
-    }) as MyContractEvent[];
+    });
 
     logs[0]; // { player: '0x...', bet: '1000000000000000000', win: true }
 
