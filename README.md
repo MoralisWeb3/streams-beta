@@ -315,7 +315,10 @@ Example Body:
   ],
   "erc20Approvals": [],
   "nftTransfers": [],
-  "nftApprovals": []
+  "nftApprovals": {
+    "ERC721": [],
+    "ERC1155": []
+  }
 }
 ```
 
