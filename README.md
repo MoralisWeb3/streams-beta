@@ -148,12 +148,17 @@ monitoring occurs, you will receive a webhook with the transaction details.
 
 ### Two webhooks for each block
 
-You will receive two webhooks for each block that contains the events you are interested in.
+You will receive two webhooks for each block that contains the events you are
+interested in.
 
-The first webhook will come as soon as the block is mined and have `confirmed:false`. This means that the block in which the events you are interested in is still running the risk of being dropped due to a reorganization of the blockchain.
+The first webhook will come as soon as the block is mined and have
+`confirmed:false`. This means that the block in which the events you are
+interested in is still running the risk of being dropped due to a reorganization
+of the blockchain.
 
-The second webhook will come once the block has very minimal chance of being dropped (the chance is never zero as it is all
-probabalistic). This second webhook will have `confirmed:true`.
+The second webhook will come once the block has very minimal chance of being
+dropped (the chance is never zero as it is all probabalistic). This second
+webhook will have `confirmed:true`.
 
 ### Edge cases
 
@@ -429,6 +434,21 @@ await Moralis.Streams.update({
 4. Click on `Save Changes`
 
 # Filter Streams
+
+## Operators
+
+| Filter | Function                          | Note                     | Example                                |
+| ------ | --------------------------------- | ------------------------ | -------------------------------------- |
+| or     | either ... or ...                 | Need at least 2 filters  |                                        |
+| and    | all filters must satisfy          | Need at least 2 filters  |                                        |
+| eq     | checks for equality               |                          | { "eq": ["value", "1000"] }            |
+| ne     | checks for inequality             |                          | { "neq": ["address", "0x...325"] }     |
+| lt     | value is less than                | ensure value is a number |                                        |
+| gt     | value is greater than             | ensure value is a number |                                        |
+| lte    | value is less than or equal to    | ensure value is a number |                                        |
+| gte    | value is greater than or equal to | ensure value is a number |                                        |
+| in     | value is in array                 |                          | { "in": ["city": ["berlin", "paris"]]} |
+| nin    | value is not in array             |                          | { "nin": ["name": ["bob", "alice"]]}   |
 
 In some cases you might want to filter the data you receive from the webhook.
 You can do this by adding a filter to the stream. Important: You must add a
