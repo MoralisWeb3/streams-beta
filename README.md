@@ -145,6 +145,11 @@ The test body will look like this:
 Now whenever an ingoing or outgoing transaction involving the address you are
 monitoring occurs, you will receive a webhook with the transaction details.
 
+### Important Note
+
+When events happen on the blockchain you will receive a webhook twice. Meaning
+that you will get the unconfirmed block first and then the confirmed block.
+
 # Webhook Data
 
 ## Header
