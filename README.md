@@ -148,7 +148,10 @@ The test body will look like this:
   "retries": 0,
   "erc20Approvals": [],
   "erc20Transfers": [],
-  "nftApprovals": [],
+  "nftApprovals": {
+    "ERC721": [],
+    "ERC1155": []
+  },
   "nftTransfers": []
 }
 ```
