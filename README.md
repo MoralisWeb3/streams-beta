@@ -15,6 +15,23 @@ networks are added soon.
 
 This README will intorduce you to Moralis Streams API.
 
+## Supported Chains
+
+|    Chain    | Lag | Internal Tx |
+| :---------: | :-: | :---------: |
+|     ETH     | 12  |      ✅      |
+|   ROPSTEN   | 12  |      ❌      |
+|   GOERLI    | 12  |      ❌      |
+|     BSC     | 18  |      ✅      |
+|  BSC TEST   | 18  |      ✅      |
+|   POLYGON   | 100 |      ✅      |
+|   MUMBAI    | 100 |      ✅      |
+|   FANTOM    | 100 |      ❌      |
+|    AVAX     | 100 |      ❌      |
+|  AVAX TEST  | 100 |      ❌      |
+|   CRONOS    | 100 |      ❌      |
+| CRONOS TEST | 100 |      ❌      |
+
 ### Useful links
 
 - This guide will be using Moralis SDK to interact with Moralis Streams API. But
@@ -573,3 +590,11 @@ curl -X 'GET' \
   "totalTxsInternalProcessed": 3
 }
 ```
+
+# Lag
+
+### Lag
+
+Use the --lag option to specify how many blocks to lag behind the head of the
+blockchain. It's the simplest way to handle chain reorganizations - they are
+less likely the further a block from the head.
