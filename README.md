@@ -57,7 +57,7 @@ This is not a finished product but a preview.
 If you experience any issues - please let us know
 [in this dedicated Moralis Forum](https://forum.moralis.io/t/streams-api-beta/19664).
 
-# Roadmap 🚴‍♀️
+## Roadmap 🚴‍♀️
 
 These are features that are not included in this beta but that will be out in
 the near future:
