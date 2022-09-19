@@ -18,19 +18,19 @@ This README will intorduce you to Moralis Streams API.
 ## Supported Chains
 
 |    Chain    | Streams | Blocks Until Confirmed | Internal Tx |
-| :---------: | :-----: | :-: | :---------: |
-|     ETH     |    ✅    | 12  |      ✅      |
-|   ROPSTEN   |    ✅    | 12  |      ❌      |
-|   GOERLI    |    ✅    | 12  |      ❌      |
-|     BSC     |    ✅    | 18  |      ✅      |
-|  BSC TEST   |    ✅    | 18  |      ✅      |
-|   POLYGON   |    ✅    | 100 |      ✅      |
-|   MUMBAI    |    ✅    | 100 |      ✅      |
-|   FANTOM    |    ✅    | 100 |      ❌      |
-|    AVAX     |    ✅    | 100 |      ❌      |
-|  AVAX TEST  |    ✅    | 100 |      ❌      |
-|   CRONOS    |    ✅    | 100 |      ❌      |
-| CRONOS TEST |    ✅    | 100 |      ❌      |
+| :---------: | :-----: | :--------------------: | :---------: |
+|     ETH     |    ✅    |           12           |      ✅      |
+|   ROPSTEN   |    ✅    |           12           |      ❌      |
+|   GOERLI    |    ✅    |           12           |      ❌      |
+|     BSC     |    ✅    |           18           |      ✅      |
+|  BSC TEST   |    ✅    |           18           |      ✅      |
+|   POLYGON   |    ✅    |          100           |      ✅      |
+|   MUMBAI    |    ✅    |          100           |      ✅      |
+|   FANTOM    |    ✅    |          100           |      ❌      |
+|    AVAX     |    ✅    |          100           |      ❌      |
+|  AVAX TEST  |    ✅    |          100           |      ❌      |
+|   CRONOS    |    ✅    |          100           |      ❌      |
+| CRONOS TEST |    ✅    |          100           |      ❌      |
 
 ### Useful links
 
@@ -149,13 +149,19 @@ monitoring occurs, you will receive a webhook with the transaction details.
 
 You will receive two webhooks for each event.
 
-The first webhook will come as soon as the transaction is included in a block and have `confirmed:false`. This means that the block in which the event occured is still running the risk of being dropped due to a reorganization of the blockchain.
+The first webhook will come as soon as the transaction is included in a block
+and have `confirmed:false`. This means that the block in which the event occured
+is still running the risk of being dropped due to a reorganization of the
+blockchain.
 
-The second webhook will come once the block in which the event happened has very minimal chance of being dropped (the chance is never zero as it is all probabalistic). This second webhook will have `confirmed:true`.
+The second webhook will come once the block in which the event happened has very
+minimal chance of being dropped (the chance is never zero as it is all
+probabalistic). This second webhook will have `confirmed:true`.
 
 ### Edge cases
 
-In rare cases the webhook with `confirmed: true` may come before the one with `confirmed:false`, please ensure to handle this scenario on your end.
+In rare cases the webhook with `confirmed: true` may come before the one with
+`confirmed:false`, please ensure to handle this scenario on your end.
 
 # Webhook Data
 
@@ -302,7 +308,8 @@ Example Body:
 
 ### Parsing Smart Contract Events
 
-If you are streaming a smart contract event you can use the code below to extract the data from the webhook into a typed data structure.
+If you are streaming a smart contract event you can use the code below to
+extract the data from the webhook into a typed data structure.
 
 ```typescript
 // event MyEvent(address indexed from, address indexed to);
@@ -312,7 +319,7 @@ interface MyEvent {
   to: string;
 }
 
-const decodedLogs = Moralis.Streams.parsedLogs<MyEvent>({webhook, tag});
+const decodedLogs = Moralis.Streams.parsedLogs<MyEvent>({ webhook, tag });
 
 decodedLogs[0]; // { from: '0x...', to: '0x...' }
 ```
@@ -427,13 +434,12 @@ await Moralis.Streams.update({
 # Filter Streams
 
 In some cases you might want to filter the data you receive from the webhook.
-For example you are monitoring a nft collection but you only want to know if a
-specific nft is transfered.
-
 You can do this by adding a filter to the stream. Important: You must add a
 (valid!) ABI of the event you want to filter! Otherwise the stream will not work
 
-## Programmatically
+## Example: Monitor Specific NFT
+
+### Programmatically
 
 ```typescript
 import { Moralis } from "moralis";
@@ -454,13 +460,53 @@ const options = {
 const stream = await Moralis.Streams.add(stream);
 ```
 
-## Manually
+### Manually
 
 1. Create a new Smart Contract Stream
 2. Fill out the form
 3. Add the Abi and choose from the topic dropdown
 4. Add a filter
    - {"eq": ["tokenId", "1"]}
+5. Save the stream
+
+## Example: Get USDT Transfers above 100K USDT
+
+### Programmatically
+
+```typescript
+const transferAbi = {
+                      "anonymous":false,
+                      "inputs":[
+                        {"indexed":true,"name":"from","type":"address"},
+                        {"indexed":true,"name":"to","type":"address"},
+                        {"indexed":false,"name":"value","type":"uint256"}
+                      ],
+                      "name":"Transfer",
+                      "type":"event"
+                    }, // valid abi of the event
+
+const options = {
+    address: '0xdAC17F958D2ee523a2206206994597C13D831ec7' // address to monitor
+    chains: [EvmChain.ETHEREUM] // list of blockchains to monitor
+    description: 'whale transactions', // your description
+    network: 'evm',
+    tag: 'usdtwhale', // give it a tag
+    type: 'contract' // contract as USDT is a contract,
+    abi: transferAbi,
+    filter: {"gt": ["value", "100000000000"]}, // only receive events where the value is above 100k USDT
+    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
+  }
+
+const stream = await Moralis.Streams.add(stream);
+```
+
+### Manually
+
+1. Create a new Smart Contract Stream
+2. Fill out the form
+3. Add the Abi and choose from the topic dropdown
+4. Add a filter
+   - {"gt": ["value", "100000000000"]}
 5. Save the stream
 
 # Update/Pause a Stream
