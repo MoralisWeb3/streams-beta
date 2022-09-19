@@ -455,7 +455,7 @@ await Moralis.Streams.update({
 | gt     | value is greater than             | Value must be a number  | { "gt": ["price", "500000"] }           | [USDT Whales](#example-get-usdt-transfers-above-100k-usdt)                                             |
 | lte    | value is less than or equal to    | Value must be a number  | { "lte": ["value", "100"] }             |                                              |
 | gte    | value is greater than or equal to | Value must be a number  | { "gte": ["value", "100"] }             |                                              |
-| in     | value is in array                 | Must provide an array   | { "in": ["city": ["berlin", "paris"]]}  | [Specifc CryptoPunks](##example-monitor-specific-cryptopunk-nfts-based-on-an-array-of-token-ids)                                            |
+| in     | value is in array                 | Must provide an array   | { "in": ["city": ["berlin", "paris"]]}  | [Specifc CryptoPunks](#example-monitor-specific-cryptopunk-nfts-based-on-an-array-of-token-ids)                                            |
 | nin    | value is not in array             | Must provide an array   | { "nin": ["name": ["bob", "alice"]]}    |                                              |
 
 In some cases you might want to filter the data you receive from the webhook.
