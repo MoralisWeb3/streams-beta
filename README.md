@@ -307,14 +307,40 @@ const streams = await Moralis.Streams.getAll({
 
 Or you can see all streams in the [Admin Panel](http://admin.moralis.io/streams)
 
-Checkout the type reference of a Stream
-[here](https://api.moralis-streams.com/api-docs/)
+### Response
+
+```json
+{
+  "result": [
+    {
+      "webhookUrl": "string",
+      "description": "string",
+      "tag": "string",
+      "tokenAddress": "string",
+      "topic0": "string",
+      "includeNativeTxs": true,
+      "abi": "string",
+      "filter": "string",
+      "address": "string",
+      "chainIds": [
+        "string"
+      ],
+      "type": "wallet",
+      "id": "3fa84f64-5717-4562-b3fc-2c963f66afa6",
+      "status": "active",
+      "statusMessage": "string"
+    }
+  ],
+  "cursor": "string",
+  "total": 1
+}
+```
 
 ## Monitor Stream
 
 Sometimes you want to check if a stream is still active or if something went
-wrong. When you query all your streams you can see the status of the stream.
-There are three possible states: `active`, `paused` and `error`.
+wrong. When you [query all your streams](#get-streams) you can see the status of
+the stream. There are three possible states: `active`, `paused` and `error`.
 
 ## Stream Settings
 
