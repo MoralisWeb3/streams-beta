@@ -458,10 +458,20 @@ The payload contains the webhook details.
 }
 ```
 
-# Pause Stream
+# Update/Pause a Stream
 
 In some cases you might want to pause a stream. You can do this by calling the
 specific endpoint.
+
+## Programmatically
+
+```typescript
+await Moralis.Streams.updateStatus({
+  network: 'evm';
+  id: 'YOUR_STREAM_ID',
+  status: 'paused'
+})
+```
 
 ## Manually
 
