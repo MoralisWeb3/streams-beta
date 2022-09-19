@@ -145,11 +145,13 @@ The test body will look like this:
 Now whenever an ingoing or outgoing transaction involving the address you are
 monitoring occurs, you will receive a webhook with the transaction details.
 
-### Important Note
+### Two webhooks for each event
 
-When events happen on the blockchain you will receive a webhook twice. Meaning
-that you will get the unconfirmed block first and then the confirmed block.
-There are very rare cases where you will receive the confirmed block first.
+When events happen on the blockchain you will receive the webhook twice. 
+
+The first webhook will come as soon as the transaction is included in a block and have `confirmed:false`. This means that the block in which the event occured is still running the risk of being dropped due to a reorganization of the blockchain.
+
+The second webhook will come once the block in which the event happened has very minimal chance of being dropped (the chance is never zero as it is all probabalistic). This second webhook will have `confirmed:true`.
 
 # Webhook Data
 
