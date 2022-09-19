@@ -510,6 +510,55 @@ const stream = await Moralis.Streams.add(stream);
    - {"gt": ["value", "100000000000"]}
 5. Save the stream
 
+## Example: Monitor a specific CryptoPunks
+
+### Programmatically
+
+```typescript
+const punkTransferAbi = 
+{
+  "anonymous":false,
+  "inputs":
+  [
+    {"indexed":true,"name":"from","type":"address"},
+    {"indexed":true,"name":"to","type":"address"},
+    {"indexed":false,"name":"punkIndex","type":"uint256"}
+  ],
+  "name":"PunkTransfer",
+  "type":"event"
+} // valid abi of the event
+
+const options = {
+    address: '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB' // crypto punks address
+    chains: [EvmChain.ETHEREUM] // list of blockchains to monitor
+    description: '1000 to 1002 cryptopunks', // your description
+    network: 'evm',
+    tag: 'cryptoPunks', // give it a tag
+    type: 'contract' // contract as CryptoPunks is a contract,
+    abi: punkTransferAbi,
+    filter: {
+      "or": [
+        { "eq": ["punkIndex", "1000"] },
+        { "eq": ["punkIndex", "1001"] }
+        { "eq": ["punkIndex", "1002"] }
+        ]
+    }, // only receive transfer events if the token id is 1000/1001/1002
+    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
+  }
+
+const stream = await Moralis.Streams.add(stream);
+```
+
+### Manually
+
+1. Create a new Smart Contract Stream
+2. Fill out the form
+3. Add the Abi and choose from the topic dropdown
+4. Add a filter
+   - { "or": [ { "eq": ["punkIndex", "1000"] }, { "eq": ["punkIndex", "1001"] }
+     { "eq": ["punkIndex", "1002"] } ] }
+5. Save the stream
+
 # Update/Pause a Stream
 
 You can update the status of a stream at any time. Possible values for status
