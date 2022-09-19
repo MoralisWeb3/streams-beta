@@ -94,8 +94,10 @@ The handler for a contract event can look like this.
       win: boolean;
     }
 
-    const logs = Moralis.Streams.getDecodedLogs<MyEvent>() as unknown as MyContractEvent;
-    const { player, bet, win } = logs[0];
+    
+    const decodedLogs = Moralis.Streams.parsedLogs<MyEvent>({ webhook, tag });
+
+    decodedLogs[0]; // { player: '0x...', bet: '1500', win: true }
 
     return { success: true };
   }
