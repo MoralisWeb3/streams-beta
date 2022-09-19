@@ -313,7 +313,7 @@ interface MyEvent {
   to: string;
 }
 
-const decodedLogs = Moralis.Streams.parsedLogs<MyEvent>(webhook);
+const decodedLogs = Moralis.Streams.parsedLogs<MyEvent>({webhook, tag});
 
 decodedLogs[0]; // { from: '0x...', to: '0x...' }
 ```
