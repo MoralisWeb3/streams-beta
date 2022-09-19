@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@moralisweb3/core": "^2.4.0",
-    "@moralisweb3/streams": "^2.4.0",
+    "@moralisweb3/streams": "^2.5.2",
     "@moralisweb3/streams-typings": "^1.0.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",

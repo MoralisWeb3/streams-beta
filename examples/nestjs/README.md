@@ -20,7 +20,7 @@ For this we will have 2 controllers. One for each webhook.
 ## Controller
 
 ```typescript
-import StreamsTypes from "@moralisweb3/streams-typings";
+import { Types as StreamsTypes } from "@moralisweb3/streams";
 import { AppService } from "./app.service";
 import { Body, Controller, Post, UseGuards } from "@nestjs/common";
 import { VerifySignature } from "./guards/VerifySignature";
