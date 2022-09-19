@@ -81,6 +81,7 @@ You can install the Moralis SDK
 
 ```typescript
 import Moralis from 'moralis';
+import { EvmChain } from '@moralisweb3/evm-utils'
 
 Moralis.start({
   apiKey: 'YOUR_API_KEY',
