@@ -52,7 +52,7 @@ This is not a finished product but a preview.
 - High availability is not deployed yet
 - We may have to purge the history and logs
 - You may experience some bugs
-- The UI is not fully built out or polished
+- The UI is not fully built out or polished - slick dashboards soon ftw 🤩
 - The response structure may change
 - We are still collecting feedback and may adjust according to it
 
@@ -605,7 +605,7 @@ curl -X 'POST' \
   -d '{"status": "paused"}'
 ```
 
-# Get Error
+# See failed webhooks
 
 The Streams API provides an endpoint to get all failed webhooks. It is useful to
 replay the failed webhooks.
@@ -618,16 +618,7 @@ const history = await Moralis.Streams.getHistory({ limit: 100 });
 
 ## Manually
 
-You can use the Swagger UI or make an API call to the endpoint.
-
-[Swagger](https://api.moralis-streams.com/api-docs/#/History/GetHistory)
-
-```curl
-curl -X 'GET' \
-  'https://api.moralis-streams.com/history?limit=100' \
-  -H 'accept: application/json' \
-  -H 'x-api-key: YOUR_API_KEY'
-```
+The UI for this feature is still under development.
 
 ## Response
 
