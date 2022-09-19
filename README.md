@@ -405,7 +405,7 @@ await Moralis.Streams.setSettings({
 });
 ```
 
-#### Manually
+#### Via WebUI
 
 1. Go to [Settings](http://admin.moralis.io/settings)
 2. Choose a region which is closest to your backend
@@ -433,7 +433,7 @@ await Moralis.Streams.update({
 });
 ```
 
-### Manually
+### Via WebUI
 
 1. Go to [Streams](http://admin.moralis.io/streams)
 2. Click the `Edit` Button on the stream you want to update
@@ -484,7 +484,7 @@ const options = {
 const stream = await Moralis.Streams.add(stream);
 ```
 
-### Manually
+### Via WebUI
 
 1. Create a new Smart Contract Stream
 2. Fill out the form
@@ -525,7 +525,7 @@ const options = {
 const stream = await Moralis.Streams.add(stream);
 ```
 
-### Manually
+### Via WebUI
 
 1. Create a new Smart Contract Stream
 2. Fill out the form
@@ -567,7 +567,7 @@ const options = {
 const stream = await Moralis.Streams.add(stream);
 ```
 
-### Manually
+### Via WebUI
 
 1. Create a new Smart Contract Stream
 2. Fill out the form
@@ -622,7 +622,7 @@ const options = {
 const stream = await Moralis.Streams.add(options);
 ```
 
-### Manually
+### Via WebUI
 
 1. Create a new Smart Contract Stream
 2. Fill out the form
@@ -672,7 +672,7 @@ replay the failed webhooks.
 const history = await Moralis.Streams.getHistory({ limit: 100 });
 ```
 
-## Manually
+## Via WebUI
 
 The UI for this feature is still under development.
 
@@ -707,8 +707,11 @@ You can replay (replay) a failed webhook by calling the specific endpoint.
 ```typescript
 await Moralis.Streams.retryWebhook({ id: "WEBHOOK_ID" });
 ```
+## Via WebUI
 
-## Manually
+The UI for this feature is currently under development
+
+## Via Swagger or HTTP
 
 You can use the Swagger UI or make an API call to the endpoint.
 
