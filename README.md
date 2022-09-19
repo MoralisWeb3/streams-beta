@@ -147,11 +147,15 @@ monitoring occurs, you will receive a webhook with the transaction details.
 
 ### Two webhooks for each event
 
-When events happen on the blockchain you will receive the webhook twice. 
+You will receive two webhooks for each event.
 
 The first webhook will come as soon as the transaction is included in a block and have `confirmed:false`. This means that the block in which the event occured is still running the risk of being dropped due to a reorganization of the blockchain.
 
 The second webhook will come once the block in which the event happened has very minimal chance of being dropped (the chance is never zero as it is all probabalistic). This second webhook will have `confirmed:true`.
+
+### Edge cases
+
+In rare cases the webhook with `confirmed: true` may come before the one with `confirmed:false`, please ensure to handle this scenario on your end.
 
 # Webhook Data
 
