@@ -55,7 +55,6 @@ This is not a finished product but a preview.
 - The UI is not fully built out or polished - slick dashboards soon ftw 🤩
 - The response structure may change
 - We are still collecting feedback and may adjust according to it
-- You can create maximum 100 streams
 
 We expect a full production ready roll-out in October.
 
@@ -451,7 +450,7 @@ await Moralis.Streams.update({
 | eq     | checks for equality               |                         | { "eq": ["value", "1000"] }             | [Specifc NFT](#example-monitor-specific-nft) |
 | ne     | checks for inequality             |                         | { "ne": ["address", "0x...325"] }      |                                              |
 | lt     | value is less than                | Value must be a number  | { "lt": ["amount", "50"] }              |                                              |
-| gt     | value is greater than             | Value must be a number  | { "gt": ["price", "500000"] }           |                                              |
+| gt     | value is greater than             | Value must be a number  | { "gt": ["price", "500000"] }           | [USDT Whales](#example-get-usdt-transfers-above-100k-usdt)                                             |
 | lte    | value is less than or equal to    | Value must be a number  | { "lte": ["value", "100"] }             |                                              |
 | gte    | value is greater than or equal to | Value must be a number  | { "gte": ["value", "100"] }             |                                              |
 | in     | value is in array                 | Must provide an array   | { "in": ["city": ["berlin", "paris"]]}  |                                              |
