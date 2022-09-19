@@ -536,13 +536,7 @@ const options = {
     tag: 'cryptoPunks', // give it a tag
     type: 'contract' // contract as CryptoPunks is a contract,
     abi: punkTransferAbi,
-    filter: {
-      "or": [
-        { "eq": ["punkIndex", "1000"] },
-        { "eq": ["punkIndex", "1001"] }
-        { "eq": ["punkIndex", "1002"] }
-        ]
-    }, // only receive transfer events if the token id is 1000/1001/1002
+    filter: { "in" : ["punkIndex", ["1000", "1001", "1002"]]}, // only receive transfer events if the token id is 1000/1001/1002
     webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
   }
 
