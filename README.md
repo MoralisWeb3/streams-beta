@@ -782,7 +782,7 @@ The payload contains the webhook details.
 
 # Replay Failed Webhook
 
-You can replay (replay) a failed webhook by calling the specific endpoint.
+You can replay (retry) a failed webhook by calling the specific endpoint.
 
 ## Programmatically
 
