@@ -471,9 +471,7 @@ curl -X 'POST' \
   -H 'accept: application/json' \
   -H 'x-api-key: YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
-  -d '{
-  "status": "paused"
-  }'
+  -d '{"status": "paused"}'
 ```
 
 Possible values for status are `active`, `paused` and `error`
