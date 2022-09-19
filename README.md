@@ -537,11 +537,11 @@ curl -X 'POST' \
 
 # Webhook Successrate
 
-Every Stream starts with a successrate of 100%. For every failed webhook the
-rate decreases by 1%. For every successful webhook the rate increases by 1%
-where the maximum is 100%. If the successrate is below 70% the stream will be
-discontinued and an email is sent to you. The status of your stream will be set
-to `error`.
+Every Stream starts with a successrate of 100% per webhook URL. For every failed
+webhook the rate decreases by 1% per webhook URL. For every successful webhook
+the rate increases by 1% per webhook URL where the maximum is 100%. If the
+successrate is below 70% per webhook URL the stream will be discontinued and an
+email is sent to you. The status of your stream will be set to `error`.
 
 If you want to continue receiving events you can
 [update the status of a stream](#updatepause-a-stream) to `active`.
