@@ -84,6 +84,16 @@ the near future:
 
 # Your first stream 🚀
 
+We will be using Moralis SDK to interact with Moralis Streams API.
+
+You can install the Moralis SDK via npm/pnpm/yarn:
+
+```bash
+npm install moralis
+```
+
+## Example 1 - Monitor a wallet
+
 In this example we will monitor a wallet.
 
 Meaning all incoming and outgoing transactions of that wallet will be monitored!
@@ -120,7 +130,58 @@ const newStream = await Moralis.Streams.add(stream);
 newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
 ```
 
-## Types
+### Via WebUI
+
+1. Go to http://admin.moralis.io/streams/wallets/new
+2. Click on `New Address Stream`.
+3. Fill out the Form:
+   - Address: `BOBS_WALLET`
+   - Webhook URL: `https://YOUR_WEBHOOK_URL`
+   - Tag: `bob`
+   - Select Blockchain (e.g. Ethereum Mainnet)
+4. Click on `Create Stream`
+
+## Example 2 - Monitor a smart contract
+
+Now let us monitor a specific event happening on a specific smart contract. In
+this example we will monitor all CryptoPunks Transfers.
+
+### Programmatically
+
+```typescript
+import Moralis from 'moralis';
+import { EvmChain } from '@moralisweb3/evm-utils'
+
+Moralis.start({
+  apiKey: 'YOUR_API_KEY',
+});
+
+const stream = {
+    address: '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB' // crypto punks address
+    chains: [EvmChain.ETHEREUM.hex] // punks are on ethereum mainnet
+    description: 'all cryptopunk transfers', // your description
+    network: 'evm',
+    tag: 'cryptoPunks', // give it a tag
+    type: 'contract' // contract as CryptoPunks is a contract,
+    abi: {
+      "anonymous":false,
+      "inputs":
+      [
+        {"indexed":true,"name":"from","type":"address"},
+        {"indexed":true,"name":"to","type":"address"},
+        {"indexed":false,"name":"punkIndex","type":"uint256"}
+      ],
+      "name":"PunkTransfer",
+      "type":"event"
+    },
+    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
+  }
+
+const newStream = await Moralis.Streams.add(stream);
+newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
+```
+
+### Types
 
 You can get typings for webhooks from the `@moralisweb3/streams` package.
 
@@ -130,11 +191,12 @@ import { Types } from "@moralisweb3/streams";
 
 ### Via WebUI
 
-1. Go to http://admin.moralis.io/streams/wallets/new
-2. Click on `New Address Stream`.
+1. Go to http://admin.moralis.io/streams
+2. Click on `New Contract Stream`.
 3. Fill out the Form:
    - Address: `BOBS_WALLET`
    - Webhook URL: `https://YOUR_WEBHOOK_URL`
+   - Paste in a valid ABI and select the topic from the dropdown
    - Tag: `bob`
    - Select Blockchain (e.g. Ethereum Mainnet)
 4. Click on `Create Stream`
@@ -175,6 +237,14 @@ The test body will look like this:
 
 Now whenever an ingoing or outgoing transaction involving the address you are
 monitoring occurs, you will receive a webhook with the transaction details.
+
+### Types
+
+You can get typings for webhooks from the `@moralisweb3/streams` package.
+
+```typescript
+import { Types } from "@moralisweb3/streams";
+```
 
 ### Two webhooks for each block
 
