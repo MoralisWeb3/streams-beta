@@ -3,10 +3,11 @@ import Moralis from 'moralis';
 
 @Injectable()
 export class VerifySignature implements CanActivate {
-  canActivate(context: ExecutionContext): boolean {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
     const signature = request.headers['x-signature'];
     const body = request.body;
+    console.log(body, signature);
     Moralis.Streams.verifySignature({
       signature,
       body,

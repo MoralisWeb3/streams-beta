@@ -1,6 +1,6 @@
 import { Types as StreamsTypes } from '@moralisweb3/streams';
 import { AppService } from './app.service';
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { VerifySignature } from './guards/VerifySignature';
 
 @Controller()
@@ -17,5 +17,10 @@ export class AppController {
   @Post('contract')
   contractEvent(@Body() body: StreamsTypes.IWebhook) {
     return this.appService.handleContractEvent(body);
+  }
+
+  @Get()
+  healthCheck() {
+    return { success: true };
   }
 }
