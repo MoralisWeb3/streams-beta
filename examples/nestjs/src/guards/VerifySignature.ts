@@ -7,7 +7,6 @@ export class VerifySignature implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const signature = request.headers['x-signature'];
     const body = request.body;
-    console.log(body, signature);
     Moralis.Streams.verifySignature({
       signature,
       body,

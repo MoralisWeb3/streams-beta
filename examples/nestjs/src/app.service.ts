@@ -7,45 +7,13 @@ import { TEST_PAYLOAD } from './utils';
 export class AppService {
   handleContractEvent(webhook: StreamsTypes.IWebhook) {
     if (webhook === TEST_PAYLOAD) return { success: true };
-
-    // Check and handle if the event contains ERC20/721/1155 events such as transfers or approvals.
-    this.checkForErcStandard(webhook);
-
-    // if the event contains custom events, you can decode the logs using the abi and a typed interface.
-    interface MyCustomEvent {
-      player: string;
-      bet: string;
-      win: boolean;
-    }
-
-    try {
-      const logs = Moralis.Streams.parsedLogs<MyCustomEvent>({
-        webhookData: webhook,
-        tag: 'myCustomEvent',
-      });
-
-      logs[0]; // { player: '0x...', bet: '1000000000000000000', win: true }
-    } catch {}
-
+    console.log(webhook);
     return { success: true };
   }
 
-  handleWalletEvent(body: StreamsTypes.IWebhook) {
-    if (body === TEST_PAYLOAD) return { success: true };
-    const { txs } = body;
-
-    if (txs.length) {
-      txs.forEach((tx) => {
-        console.log('txHash', tx.hash);
-        console.log('from', tx.fromAddress);
-        console.log('to', tx.toAddress);
-        console.log('value', tx.value);
-      });
-    }
-
-    // Check and handle if the transaction contains ERC20/721/1155 events such as transfers or approvals.
-    this.checkForErcStandard(body);
-
+  handleWalletEvent(webhook: StreamsTypes.IWebhook) {
+    if (webhook === TEST_PAYLOAD) return { success: true };
+    console.log(webhook);
     return { success: true };
   }
 
