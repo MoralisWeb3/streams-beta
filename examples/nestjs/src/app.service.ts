@@ -1,18 +1,16 @@
-import Moralis from 'moralis';
 import { Types as StreamsTypes } from '@moralisweb3/streams';
 import { Injectable } from '@nestjs/common';
 import { TEST_PAYLOAD } from './utils';
+import Moralis from 'moralis';
 
 @Injectable()
 export class AppService {
   handleContractEvent(webhook: StreamsTypes.IWebhook) {
-    if (webhook === TEST_PAYLOAD) return { success: true };
     console.log(webhook);
     return { success: true };
   }
 
   handleWalletEvent(webhook: StreamsTypes.IWebhook) {
-    if (webhook === TEST_PAYLOAD) return { success: true };
     console.log(webhook);
     return { success: true };
   }
@@ -51,6 +49,16 @@ export class AppService {
         console.log('owner', tx.owner);
         console.log('spender', tx.spender);
         console.log('value', tx.value);
+        console.log('txHash', tx.transactionHash);
+      });
+    }
+
+    if (nftApprovals.ERC1155.length) {
+      nftApprovals.ERC1155.forEach((tx) => {
+        console.log(tx);
+        console.log('account', tx.account);
+        console.log('operator', tx.operator);
+        console.log('approved', tx.approved);
         console.log('txHash', tx.transactionHash);
       });
     }
