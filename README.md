@@ -121,7 +121,6 @@ Moralis.start({
 });
 
 const stream = {
-    address: '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4' // address to monitor
     chains: [EvmChain.ETHEREUM.hex, EvmChain.POLYGON.hex] // list of blockchains to monitor
     description: 'monitor Bobs wallet', // your description
     network: 'evm',
@@ -131,7 +130,25 @@ const stream = {
   }
 
 const newStream = await Moralis.Streams.add(stream);
-newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
+const { id } = newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
+
+// Now we attach bobs address to the stream
+const address = '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4'
+
+await Moralis.Streams.addAddress({
+  id, 
+  address
+})
+
+// You can also delete and get addresses from a stream
+await Moralis.Streams.deleteAddress({
+  id, 
+  address
+})
+
+await Moralis.Streams.getAddresses({
+  id
+})
 ```
 
 ### Via WebUI
@@ -184,21 +201,6 @@ const { id } = newStream.toJSON() // id: StreamId
 
 // Now we attach the contract address to the stream
 const address = '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB'
-
-await Moralis.Streams.addAddress({
-  id, 
-  address
-})
-
-// You can also delete and get addresses from a stream
-await Moralis.Streams.deleteAddress({
-  id, 
-  address
-})
-
-await Moralis.Streams.getAddresses({
-  id
-})
 ```
 
 ### Types
