@@ -5,8 +5,8 @@ Avalanche, BNB Chain, Fantom, Cronos and all testnets are supported. More
 networks to be added soon.
 
 ## Video Demo Below
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/3DpJ15Z6q5w/0.jpg)](https://www.youtube.com/watch?v=3DpJ15Z6q5w&ab_channel=MoralisWeb3)
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/3DpJ15Z6q5w/0.jpg)](https://www.youtube.com/watch?v=3DpJ15Z6q5w&ab_channel=MoralisWeb3)
 
 Get events streamed to your backend whenever:
 
@@ -161,10 +161,8 @@ Moralis.start({
 });
 
 const stream = {
-    address: '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB' // crypto punks address
     chains: [EvmChain.ETHEREUM.hex] // punks are on ethereum mainnet
     description: 'all cryptopunk transfers', // your description
-    network: 'evm',
     tag: 'cryptoPunks', // give it a tag
     type: 'contract' // contract as CryptoPunks is a contract,
     abi: {
@@ -182,7 +180,25 @@ const stream = {
   }
 
 const newStream = await Moralis.Streams.add(stream);
-newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
+const { id } = newStream.toJSON() // id: StreamId
+
+// Now we attach the contract address to the stream
+const address = '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB'
+
+await Moralis.Streams.addAddress({
+  id, 
+  address
+})
+
+// You can also delete and get addresses from a stream
+await Moralis.Streams.deleteAddress({
+  id, 
+  address
+})
+
+await Moralis.Streams.getAddresses({
+  id
+})
 ```
 
 ### Types
