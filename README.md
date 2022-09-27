@@ -134,21 +134,6 @@ const { id } = newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
 
 // Now we attach bobs address to the stream
 const address = '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4'
-
-await Moralis.Streams.addAddress({
-  id, 
-  address
-})
-
-// You can also delete and get addresses from a stream
-await Moralis.Streams.deleteAddress({
-  id, 
-  address
-})
-
-await Moralis.Streams.getAddresses({
-  id
-})
 ```
 
 ### Via WebUI
@@ -161,6 +146,28 @@ await Moralis.Streams.getAddresses({
    - Tag: `bob`
    - Select Blockchain (e.g. Ethereum Mainnet)
 4. Click on `Create Stream`
+
+### Monitor multiple wallets
+
+If you want to add multiple addresses to another stream you can always attach them to an existing stream
+
+```typescript
+
+await Moralis.Streams.addAddress({
+  id: streamId,  
+  address: ['0x.3252624'] // Charlies address
+})
+
+// You can also delete and get addresses from a stream
+await Moralis.Streams.deleteAddress({
+  id, 
+  address
+})
+
+await Moralis.Streams.getAddresses({
+  id
+})
+```
 
 ## Example 2 - Monitor a smart contract
 
