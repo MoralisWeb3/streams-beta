@@ -122,8 +122,7 @@ Moralis.start({
 
 const stream = {
     chains: [EvmChain.ETHEREUM.hex, EvmChain.POLYGON.hex] // list of blockchains to monitor
-    description: 'monitor Bobs wallet', // your description
-    network: 'evm',
+    description: 'monitor Bobs wallet', // your description  
     tag: 'bob', // give it a tag
     webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
   }
@@ -134,11 +133,7 @@ const { id } = newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
 // Now we attach bobs address to the stream
 const address = '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4'
 
-await Moralis.Streams.addAddress({
-  address,
-  id,
-  network: 'evm' 
-});
+await Moralis.Streams.addAddress({ address, id });
 ```
 
 ### Via WebUI
@@ -161,7 +156,6 @@ them to an existing stream
 await Moralis.Streams.addAddress({
   id: streamId,
   address: ["0x.32c2624", "0x.323q4t124"], // Charlies and Douglas address
-  network: "evm",
 });
 ```
 
@@ -175,18 +169,16 @@ aswell as adding new ones at any time.
 await Moralis.Streams.addAddress({
   id: streamId,
   address: ["0x.32c2624", "0x.323q4t124"], // Can also be a single string
-  network: "evm",
 });
 
 // Delete an address
 await Moralis.Streams.deleteAddress({
   id,
   address,
-  network: "evm",
 });
 
 // Get all addresses
-await Moralis.Streams.getAddresses({ id, network: "evm" });
+await Moralis.Streams.getAddresses({ id });
 ```
 
 ## Example 2 - Monitor a smart contract
@@ -230,11 +222,7 @@ const { id } = newStream.toJSON() // id: StreamId
 // Now we attach the contract address to the stream
 const address = '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB'
 
-await Moralis.Streams.addAddress({
-  address,
-  id,
-  network: 'evm' 
-});
+await Moralis.Streams.addAddress({ address, id });
 ```
 
 ### Types
@@ -496,8 +484,7 @@ You can see a list of all your streams by calling the following method:
 
 ```typescript
 const streams = await Moralis.Streams.getAll({
-    limit: 100 // limit the number of streams to return
-    network: 'evm', // filter by network
+  limit: 100, // limit the number of streams to return
 });
 ```
 
@@ -627,7 +614,6 @@ import { EvmChain } from '@moralisweb3/evm-utils'
 const options = {
     chains: [EvmChain.ETHEREUM.hex] // list of blockchains to monitor
     description: 'monitor one NFT from Collection', // your description
-    network: 'evm',
     tag: 'mySpecialNft', // give it a tag
     type: 'contract' // contract as NFT is a contract,
     topic0: 'Transfer(address,address,uint256)', // the event you want to monitor
@@ -651,7 +637,6 @@ const stream = await Moralis.Streams.add(stream);
 await Moralis.Streams.addAddress({
   id: stream.id,
   address: '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4', // contract address of the NFT
-  network: 'evm' 
 });
 ```
 
@@ -685,7 +670,6 @@ const options = {
     address: '0xdAC17F958D2ee523a2206206994597C13D831ec7' // address to monitor
     chains: [EvmChain.ETHEREUM.hex] // list of blockchains to monitor
     description: 'whale transactions', // your description
-    network: 'evm',
     tag: 'usdtwhale', // give it a tag
     type: 'contract' // contract as USDT is a contract,
     topic: 'Transfer(address,address,uint256)', // topic of the event
@@ -726,8 +710,7 @@ const punkTransferAbi =
 
 const options = {
     chains: [EvmChain.ETHEREUM.hex] // list of blockchains to monitor
-    description: '1000 to 1002 cryptopunks', // your description
-    network: 'evm',
+    description: '1000 to 1002 cryptopunks', // your description   
     tag: 'cryptoPunks', // give it a tag
     type: 'contract' // contract as CryptoPunks is a contract,
     abi: punkTransferAbi,
@@ -742,7 +725,6 @@ const stream = await Moralis.Streams.add(stream);
 await Moralis.Streams.addAddress({
   id: stream.id,
   address: '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB', // crypto punks address
-  network: 'evm' 
 });
 ```
 
@@ -789,7 +771,6 @@ const filter = {
 const options = {
     chains: [EvmChain.ETHEREUM.hex] // Ethereum Name Service so we only monitor Ethereum
     description: 'ENS Name Registrations', // your description
-    network: 'evm',
     tag: 'ensRegistrationByBob', // give it a tag
     type: 'contract' // contract as ENS is a contract,
     abi: ensNameRegisteredAbi,
@@ -803,7 +784,6 @@ const stream = await Moralis.Streams.add(options);
 await Moralis.Streams.addAddress({
   id: stream.id,
   address: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e', // ENS Registry address
-  network: 'evm' 
 });
 ```
 
@@ -861,7 +841,6 @@ const filter =
 const options = {
     chains: [EvmChain.ETHEREUM.hex] // Monitor USDC on ethereum
     description: 'ENS Name Registrations', // your description
-    network: 'evm',
     tag: 'mintsAndBurns', // give it a tag
     type: 'contract' // contract as USDC is a contract,
     abi: transferUsdcAbi,
@@ -874,8 +853,7 @@ const stream = await Moralis.Streams.add(options);
 // Attach the contract address to the stream
 await Moralis.Streams.addAddress({
   id: stream.id,
-  address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', // USDC address
-  network: 'evm' 
+  address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48' // USDC address
 });
 ```
 
@@ -902,10 +880,9 @@ calling the specific endpoint.
 
 ```typescript
 await Moralis.Streams.updateStatus({
-  network: 'evm';
-  id: 'YOUR_STREAM_ID',
-  status: 'paused'
-})
+  id: "YOUR_STREAM_ID",
+  status: "paused",
+});
 ```
 
 ## Via WebUI
