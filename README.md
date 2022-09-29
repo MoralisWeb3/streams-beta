@@ -182,10 +182,11 @@ await Moralis.Streams.addAddress({
 await Moralis.Streams.deleteAddress({
   id,
   address,
+  network: "evm",
 });
 
 // Get all addresses
-await Moralis.Streams.getAddresses({ id });
+await Moralis.Streams.getAddresses({ id, network: "evm" });
 ```
 
 ## Example 2 - Monitor a smart contract
