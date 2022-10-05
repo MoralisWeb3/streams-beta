@@ -4,10 +4,6 @@ Stream blockchain data into your backend via webhooks. Ethereum, Polygon,
 Avalanche, BNB Chain, Fantom, Cronos and all testnets are supported. More
 networks to be added soon.
 
-## Video Demo Below
-
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/3DpJ15Z6q5w/0.jpg)](https://www.youtube.com/watch?v=3DpJ15Z6q5w&ab_channel=MoralisWeb3)
-
 Get events streamed to your backend whenever:
 
 - An address sends, receives, stakes, swaps or burns assets
