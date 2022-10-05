@@ -25,7 +25,7 @@
 
 - Changed `abi` type from object to array. Now allowing multiple abi items that are events.
 
-- Changed `topic0` type from string to array. No allowing multiple topic0 to be monitored
+- Changed `topic0` type from string to array. Now allowing multiple topic0 to be monitored
 
 ### Removed
 
