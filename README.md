@@ -614,12 +614,13 @@ await Moralis.Streams.update({
 });
 ```
 
-### Via WebUI
+## Via WebUI
 
-1. Go to [Streams](http://admin.moralis.io/streams)
-2. Click the `Edit` Button on the stream you want to update
-3. Change the things you want to update
-4. Click on `Edit Stream`
+1. Go to [Streams](http://admin.moralis.io/streams).
+2. Hover on the last column of the streams table. You will be able to see more options. (Edit, Delete, Pause Stream).
+3. Select `Edit` to go to edit form page.
+4. Change the things you want to update
+5. Click on `Edit Stream`
 
 # Filter Streams
 
@@ -755,7 +756,7 @@ await Moralis.Streams.addAddress({
 
 ### Via WebUI
 
-1. Create a new Smart Contract Stream
+1. Create a new Stream
 2. Fill out the form
 3. Add the Abi and select the topic
 4. Add a advanced options
@@ -1010,7 +1011,9 @@ await Moralis.Streams.updateStatus({
 
 ## Via WebUI
 
-The UI for this feature is currently under development
+1. Go to [Streams](http://admin.moralis.io/streams).
+2. Hover on the last column of the streams table. You will be able to see more options. (Edit, Delete, Pause Stream).
+3. Select `Pause Stream` to change the status of your stream
 
 ## Via HTTP Request
 
