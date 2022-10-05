@@ -27,7 +27,7 @@
 - Added new endpoint `streams/evm/${id}/address`
     - POST: Add single or multiple addresses to the stream
     - GET: Get all addresses from the stream
-    - DELETE: Delete a single or multiple addresses from the stream
+    - DELETE: Delete a single addresses from the stream
  
 
 ### Changed
