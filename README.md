@@ -138,10 +138,11 @@ await Moralis.Streams.addAddress({ address, id });
 
 ### Via WebUI
 
-1. Go to http://admin.moralis.io/streams/wallets/new
-2. Click on `New Address Stream`.
+1. Go to http://admin.moralis.io/streams/wallets/new/0
+2. Click on `New Stream` button.
 3. Fill out the Form:
    - Address: `BOBS_WALLET`
+   - Description: `monitor Bobs wallet`
    - Webhook URL: `https://YOUR_WEBHOOK_URL`
    - Tag: `bob`
    - Select Blockchain (e.g. Ethereum Mainnet)
@@ -241,11 +242,12 @@ import { Types } from "@moralisweb3/streams";
 ### Via WebUI
 
 1. Go to http://admin.moralis.io/streams
-2. Click on `New Contract Stream`.
+2. Click on `New Stream`.
 3. Fill out the Form:
-   - Address: `BOBS_WALLET`
+   - Address: `0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB`
    - Webhook URL: `https://YOUR_WEBHOOK_URL`
-   - Paste in a valid ABI and select the topic from the dropdown
+   - Paste in a valid ABI and select the topic
+   - Descripition: `all cryptopunk transfers`
    - Tag: `bob`
    - Select Blockchain (e.g. Ethereum Mainnet)
 4. Click on `Create Stream`
@@ -612,12 +614,13 @@ await Moralis.Streams.update({
 });
 ```
 
-### Via WebUI
+## Via WebUI
 
-1. Go to [Streams](http://admin.moralis.io/streams)
-2. Click the `Edit` Button on the stream you want to update
-3. Change the things you want to update
-4. Click on `Save Changes`
+1. Go to [Streams](http://admin.moralis.io/streams).
+2. Hover on the last column of the streams table. You will be able to see more options. (Edit, Delete, Pause Stream).
+3. Select `Edit` to go to edit form page.
+4. Change the things you want to update
+5. Click on `Edit Stream`
 
 # Filter Streams
 
@@ -687,11 +690,11 @@ await Moralis.Streams.addAddress({
 
 ### Via WebUI
 
-1. Create a new Smart Contract Stream
+1. Create a new Stream
 2. Fill out the form
-3. Add the Abi and choose from the topic dropdown
-4. Add a filter
-   - {"eq": ["tokenId", "1"]}
+3. Add the Abi and select the topic.
+4. Add advanced options
+   - ```[{topic0:'<add topic here>', filter:{"eq": ["tokenId", "1"]}}]```
 5. Save the stream
 
 ## Example: Get USDT Transfers above 100K USDT AND Approvals Above 100k
@@ -753,11 +756,11 @@ await Moralis.Streams.addAddress({
 
 ### Via WebUI
 
-1. Create a new Smart Contract Stream
+1. Create a new Stream
 2. Fill out the form
-3. Add the Abi and choose from the topic dropdown
-4. Add a filter
-   - {"gt": ["value", "100000000000"]}
+3. Add the Abi and select the topic
+4. Add a advanced options
+   - ```[{topic0:'<add topic here>', filter:{"gt": ["value", "100000000000"]}}]```
 5. Save the stream
 
 ## Example: Monitor specific CryptoPunk NFTs Based on an array of Token IDs
@@ -804,12 +807,11 @@ await Moralis.Streams.addAddress({
 
 ### Via WebUI
 
-1. Create a new Smart Contract Stream
+1. Create a new  Stream
 2. Fill out the form
-3. Add the Abi and choose from the topic dropdown
-4. Add a filter
-   - { "or": [ { "eq": ["punkIndex", "1000"] }, { "eq": ["punkIndex", "1001"] }
-     { "eq": ["punkIndex", "1002"] } ] }
+3. Add the Abi and select the topic
+4. Add advanced options
+   - ```[{topic0: '<add topic here>' ,filter:{ "or": [ { "eq": ["punkIndex", "1000"] }, { "eq": ["punkIndex", "1001"] }, { "eq": ["punkIndex", "1002"] }]}}]```
 5. Save the stream
 
 ## Example: Monitor ENS Name Registrations
@@ -894,12 +896,11 @@ await Moralis.Streams.addAddress({
 
 ### Via WebUI
 
-1. Create a new Smart Contract Stream
+1. Create a new Stream
 2. Fill out the form
-3. Add the Abi and choose from the topic dropdown
+3. Add the Abi and select topic.
 4. Add a filter
-   - { "and": [ {"eq": ["owner", "0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5"]},
-     {"gt": ["cost", "1000000000000000000"]} ] }
+   - ```[ {topic0:'<add topic here>',filter:{ "and": [ {"eq": ["owner", "0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5"]},{"gt": ["cost", "1000000000000000000"]} ] }}]```
 5. Save the stream
 
 ## Example: Burn/Mint Tokens
@@ -984,13 +985,11 @@ await Moralis.Streams.addAddress({
 
 ### Via WebUI
 
-1. Create a new Smart Contract Stream
+1. Create a new Stream
 2. Fill out the form
 3. Add the Abi and choose from the topic dropdown
 4. Add a filter
-   - { 'or': [ { and: [ { eq: ['sender', '0x00000...00000'] }, { gte: ['amount',
-     '10000000000'] } ] }, { and: [ { eq: ['receiver', '0x00000...00000'] }, {
-     gte: ['amount', '10000000000'] } ] }, ] }
+   - ```[{topic0:'<add topic here>', filter: { 'or': [ { and: [ { eq: ['sender', '0x00000...00000'] }, { gte: ['amount','10000000000'] } ] }, { and: [ { eq: ['receiver', '0x00000...00000'] }, {gte: ['amount', '10000000000'] } ] }, ] }}]```
 5. Save the stream
 
 # Update/Pause a Stream
@@ -1012,7 +1011,9 @@ await Moralis.Streams.updateStatus({
 
 ## Via WebUI
 
-The UI for this feature is currently under development
+1. Go to [Streams](http://admin.moralis.io/streams).
+2. Hover on the last column of the streams table. You will be able to see more options. (Edit, Delete, Pause Stream).
+3. Select `Pause Stream` to change the status of your stream
 
 ## Via HTTP Request
 
@@ -1038,7 +1039,7 @@ const history = await Moralis.Streams.getHistory({ limit: 100 });
 
 ## Via WebUI
 
-The UI for this feature is still under development.
+1. Go to [Failed Deliveries](http://admin.moralis.io/streams/failed). All your failed deliveries will listed here.
 
 ## Response
 
@@ -1075,7 +1076,8 @@ await Moralis.Streams.retryWebhook({ id: "WEBHOOK_ID" });
 
 ## Via WebUI
 
-The UI for this feature is currently under development
+1. Go to [Failed Deliveries](http://admin.moralis.io/streams/failed).
+2. Click on the `replay` icon against your failed delivery
 
 ## Via Swagger or HTTP
 
