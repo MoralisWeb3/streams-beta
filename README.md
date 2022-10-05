@@ -171,7 +171,10 @@ aswell as adding new ones at any time.
 // Add addresses
 await Moralis.Streams.addAddress({
   id: streamId,
-  address: ["0x.32c2624", "0x.323q4t124"], // Can also be a single string
+  address: [
+    "0xCFDF6Aaae9f6B927E3736FBD327853B622c5060E",
+    "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B",
+  ], // Can also be a single string
 });
 
 // Delete an address
