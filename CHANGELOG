@@ -1,0 +1,47 @@
+## 2022-10-05
+
+### Intro
+
+
+1. We have removed all notion of wallet/contract type in order to make the API more clean and flexible.
+2. Wether you want to watch contracts or user wallets you specify which addresses you are interested in and the address level options such as wether you want logs, internal transactions, native transactions etc
+3. If the addresses you are watching are contracts and you want to watch the events they emit you can provide an array of ABIs to the stream
+4. You can monitor multiple topics in the same stream as the Streams API now expects an array of ABIs
+5. For each topic you can specify advanced topic-level options such as wether you want internal and native transactions included or not. For each topic you can also provide a filter. 
+
+### Added
+
+- Added `advancedOptions` option to create streams. With this option you can have more control over the topics you are passing to the stream. For each topic you can have advanced options that include the `topic`, a `filter` and a `includeNativeTxs` field
+
+- Added `includeContractLogs` option to include or not all logs where the
+  attached address is present in the logs [_address_, _topic1_, _topic2_,
+  _topic3_]. Meaning if you are monitoring a wallet that interacts with a contract, you can decide to include the event logs besides the transaction details 
+
+- Added `includeInternalTxs` option to include or not all internal transactions
+  where the attached address is present in the from or to address of a the
+  internal transaction
+
+- Added `allAddresses` option to monitor **ALL ADDRESSESS** where the topic0 is
+  emitted. Meaning if you are monitoring ['Transfer(address,address,uint256)'] and allAddresses is set to true you will get every transfer event from every contract that emits this event
+
+- Added new endpoint `streams/evm/${id}/address`
+    - POST: Add single or multiple addresses to the stream
+    - GET: Get all addresses from the stream
+    - DELETE: Delete a single or multiple addresses from the stream
+ 
+
+### Changed
+
+- Changed `abi` type from object to array. Now allowing multiple abi items that are events.
+
+- Changed `topic0` type from string to array. Now allowing multiple topic0 to be monitored
+
+### Removed
+
+- Removed `tokenAddress` from create stream options. Removed in favor of attaching addressess to an exisiting stream
+
+- Removed `address` from create stream options.  Removed in favor of attaching addressess to an exisiting stream
+
+- Removed `type` from create stream options. Removed in favor of attaching addressess to an exisiting stream
+
+- Removed `filter` from create stream options. This is now part of the `advancedOptions` field mentioned above

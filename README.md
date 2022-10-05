@@ -200,7 +200,8 @@ const stream = {
   chains: [EvmChain.ETHEREUM.hex], // punks are on ethereum mainnet
   description: "all cryptopunk transfers", // your description
   tag: "cryptoPunks", // give it a tag
-  topic0: "PunkTransfer(address,address,uint256)", // topic0 is the event signature
+  topic0: ["PunkTransfer(address,address,uint256)"], // topic0 is the event signature
+  includeContractLogs: true, // we want to include contract logs
   abi: [{
     "anonymous": false,
     "inputs": [
@@ -274,6 +275,35 @@ The test body will look like this:
   "nftTransfers": []
 }
 ```
+
+### Useful Stream Options
+
+#### Include Contract Logs
+
+The `includeContractLogs` option will include all contract logs in the webhook,
+should be set to true if you are monitoring a contract. If you are monitoring a
+wallet address you can set this to `true` to also get the contract logs if a
+wallet interacts with a contract
+
+#### Internal Transactions
+
+You can also monitor all internal transactions happening on chain by setting the
+`includeInternalTxs` to `true`.
+
+#### Advanced Options
+
+The Create Stream endpoint also supports advanced options. With this option you
+can have more control over the topics you are passing to the stream. For each
+topic you can have advanced options that include the `topic`, a
+[filter](#filter-streams) and a `includeNativeTxs` field which indicates if you
+want to include native transactions.
+
+#### Monitor All Transactions by Topic
+
+Say you have the following topic `Transfer(address,address,uint256)`. You can
+get every transfer happening on chain by setting the topic to
+`Transfer(address,address,uint256)` and setting `allAddresses` to `true`. That
+means you will get all transactions that match this topic.
 
 ## We are live! 🎉
 
@@ -605,7 +635,8 @@ const options = {
   chains: [EvmChain.ETHEREUM.hex], // list of blockchains to monitor
   description: "monitor one NFT from Collection", // your description
   tag: "mySpecialNft", // give it a tag
-  topic0: "Transfer(address,address,uint256)", // the event you want to monitor
+  topic0: ["Transfer(address,address,uint256)"], // the event you want to monitor
+  includeContractLogs: true,
   abi: [{
     "anonymous": false,
     "inputs": [
@@ -616,7 +647,15 @@ const options = {
     "name": "Transfer",
     "type": "event",
   }], // valid abi of the event
-  filter: { "eq": ["tokenId", "1"] }, // only receive events where tokenId is 1
+  advancedOptions: [
+    {
+      topic0: "Transfer(address,address,uint256)",
+      filter: {
+        eq: ["tokenId", "1"], // only receive events where tokenId is 1
+      },
+      includeNativeTxs: true,
+    },
+  ],
   webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
 };
 
@@ -659,9 +698,16 @@ const options = {
   chains: [EvmChain.ETHEREUM.hex], // list of blockchains to monitor
   description: "whale transactions", // your description
   tag: "usdtwhale", // give it a tag
-  topic: "Transfer(address,address,uint256)", // topic of the event
+  topic0: ["Transfer(address,address,uint256)"], // topic of the event
+  includeContractLogs: true,
   abi: transferAbi,
-  filter: { "gt": ["value", "100000000000"] }, // only receive events where the value is above 100k USDT
+  advancedOptions: [
+    {
+      topic0: "Transfer(address,address,uint256)",
+      filter: { "gt": ["value", "100000000000"] }, // only receive events where the value is above 100k USDT
+      includeNativeTxs: true,
+    },
+  ],
   webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
 };
 
@@ -698,8 +744,15 @@ const options = {
   description: "1000 to 1002 cryptopunks", // your description
   tag: "cryptoPunks", // give it a tag
   abi: punkTransferAbi,
-  topic0: "PunkTransfer(address,address,uint256)", // topic of the event
-  filter: { "in": ["punkIndex", ["1000", "1001", "1002"]] }, // only receive transfer events if the token id is 1000/1001/1002
+  includeContractLogs: true,
+  topic0: ["PunkTransfer(address,address,uint256)"], // topic of the event
+  advancedOptions: [
+    {
+      topic0: "PunkTransfer(address,address,uint256)",
+      filter: { "in": ["punkIndex", ["1000", "1001", "1002"]] }, // only receive transfer events if the token id is 1000/1001/1002
+      includeNativeTxs: true,
+    },
+  ],
   webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
 };
 
@@ -781,6 +834,15 @@ const options = {
   tag: "ensRegistrationByBob", // give it a tag
   abi: ensNameRegisteredAbi,
   filter,
+  topic0: ["NameRegistered(string,bytes32,address,uint256,uint256)"],
+  includeContractLogs: true,
+  advancedOptions: [
+    {
+      topic0: "NameRegistered(string,bytes32,address,uint256,uint256)",
+      filter,
+      includeNativeTxs: true,
+    },
+  ],
   webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
 };
 
@@ -861,6 +923,15 @@ const options = {
   description: "ENS Name Registrations", // your description
   tag: "mintsAndBurns", // give it a tag
   abi: transferUsdcAbi,
+  includeContractLogs: true,
+  topic0: ["Transfer(address,address,uint256)"],
+  advancedOptions: [
+    {
+      topic0: "Transfer(address,address,uint256)",
+      filter,
+      includeNativeTxs: true,
+    },
+  ],
   filter,
   webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
 };
