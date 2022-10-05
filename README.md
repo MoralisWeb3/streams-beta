@@ -292,7 +292,8 @@ You can also monitor all internal transactions happening on chain by setting the
 
 #### Include Native Transactions
 
-If you are monitoring contract events you can decide to also include the native transaction details
+If you are monitoring contract events you can decide to also include the native
+transaction details
 
 #### Advanced Options
 
@@ -681,12 +682,12 @@ await Moralis.Streams.addAddress({
    - {"eq": ["tokenId", "1"]}
 5. Save the stream
 
-## Example: Get USDT Transfers above 100K USDT
+## Example: Get USDT Transfers above 100K USDT AND Approvals Above 100k
 
 ### Programmatically
 
 ```typescript
-const transferAbi = [{
+const transferAbi = {
   "anonymous": false,
   "inputs": [
     { "indexed": true, "name": "from", "type": "address" },
@@ -695,22 +696,38 @@ const transferAbi = [{
   ],
   "name": "Transfer",
   "type": "event",
-}]; // valid abi of the event
+}; // valid abi of the event
+
+const approvalAbi = {
+  "anonymous": false,
+  "inputs": [{ "indexed": true, "name": "owner", "type": "address" }, {
+    "indexed": true,
+    "name": "spender",
+    "type": "address",
+  }, { "indexed": false, "name": "value", "type": "uint256" }],
+  "name": "Approval",
+  "type": "event",
+};
 
 const options = {
   address: "0xdAC17F958D2ee523a2206206994597C13D831ec7", // address to monitor
   chains: [EvmChain.ETHEREUM.hex], // list of blockchains to monitor
   description: "whale transactions", // your description
   tag: "usdtwhale", // give it a tag
-  topic0: ["Transfer(address,address,uint256)"], // topic of the event
+  topic0: ["Transfer(address,address,uint256)", "Approval(address,address,uint256)], // topic of the event
   includeContractLogs: true,
-  abi: transferAbi,
+  abi: [transferAbi, approvalAbi],
   advancedOptions: [
     {
       topic0: "Transfer(address,address,uint256)",
       filter: { "gt": ["value", "100000000000"] }, // only receive events where the value is above 100k USDT
       includeNativeTxs: true,
     },
+    {
+      topic0: "Approval(address,address,uint256)",
+      filter: { "gt": ["value", "100000000000"] },
+      includeNativeTxs: true,
+    }
   ],
   webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
 };
