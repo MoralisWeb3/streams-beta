@@ -1,0 +1,36 @@
+## 2022-10-03
+
+### Added
+
+- Added `advancedOptions` option to create streams. With this option you can have more control over the topics you are passing to the stream. For each topic you can have advanced options that include the `topic`, a `filter` and a `includeNativeTxs` field
+
+### Removed
+
+- Removed `filter` from create stream options. This is now part of the `advancedOptions` field mentioned above
+
+## 2022-09-30
+
+### Added
+
+- Added `includeContractLogs` option to include or not all logs where the
+  attached address is present in the logs [_address_, _topic1_, _topic2_,
+  _topic3_]. Meaning if you are monitoring a wallet that interacts with a contract, you can decide to include the event logs besides the transaction details 
+
+- Added `includeInternalTxs` option to include or not all internal transactions
+  where the attached address is present in the from or to address of a the
+  internal transaction
+
+- Added `allAddresses` option to monitor **ALL ADDRESSESS** where the topic0 is
+  emitted. Meaning if you are monitoring ['Transfer(address,address,uint256)'] and allAddresses is set to true you will get every transfer event from every contract that emits this event
+
+### Changed
+
+- Changed `abi` type from object to array. Now allowing multiple abi items that are events.
+
+- Changed `topic0` type from string to array. No allowing multiple topic0 to be monitored
+
+### Removed
+
+- Removed `tokenAddress` from create stream options. Removed in favor of attaching addressess to an exisiting stream
+
+- Removed `address` from create stream options.  Removed in favor of attaching addressess to an exisiting stream
