@@ -113,25 +113,25 @@ npm install moralis
 ```
 
 ```typescript
-import Moralis from 'moralis';
-import { EvmChain } from '@moralisweb3/evm-utils'
+import Moralis from "moralis";
+import { EvmChain } from "@moralisweb3/evm-utils";
 
 Moralis.start({
-  apiKey: 'YOUR_API_KEY',
+  apiKey: "YOUR_API_KEY",
 });
 
 const stream = {
-    chains: [EvmChain.ETHEREUM.hex, EvmChain.POLYGON.hex] // list of blockchains to monitor
-    description: 'monitor Bobs wallet', // your description  
-    tag: 'bob', // give it a tag
-    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
-  }
+  chains: [EvmChain.ETHEREUM.hex, EvmChain.POLYGON.hex], // list of blockchains to monitor
+  description: "monitor Bobs wallet", // your description
+  tag: "bob", // give it a tag
+  webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
+};
 
 const newStream = await Moralis.Streams.add(stream);
-const { id } = newStream.toJSON() // { id: 'YOUR_STREAM_ID', ...newStream }
+const { id } = newStream.toJSON(); // { id: 'YOUR_STREAM_ID', ...newStream }
 
 // Now we attach bobs address to the stream
-const address = '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4'
+const address = "0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4";
 
 await Moralis.Streams.addAddress({ address, id });
 ```
@@ -189,37 +189,36 @@ this example we will monitor all CryptoPunks Transfers.
 ### Programmatically
 
 ```typescript
-import Moralis from 'moralis';
-import { EvmChain } from '@moralisweb3/evm-utils'
+import Moralis from "moralis";
+import { EvmChain } from "@moralisweb3/evm-utils";
 
 Moralis.start({
-  apiKey: 'YOUR_API_KEY',
+  apiKey: "YOUR_API_KEY",
 });
 
 const stream = {
-    chains: [EvmChain.ETHEREUM.hex] // punks are on ethereum mainnet
-    description: 'all cryptopunk transfers', // your description
-    tag: 'cryptoPunks', // give it a tag
-    topic0: 'PunkTransfer(address,address,uint256)', // topic0 is the event signature
-    abi: [{
-      "anonymous":false,
-      "inputs":
-      [
-        {"indexed":true,"name":"from","type":"address"},
-        {"indexed":true,"name":"to","type":"address"},
-        {"indexed":false,"name":"punkIndex","type":"uint256"}
-      ],
-      "name":"PunkTransfer",
-      "type":"event"
-    }],
-    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
-  }
+  chains: [EvmChain.ETHEREUM.hex], // punks are on ethereum mainnet
+  description: "all cryptopunk transfers", // your description
+  tag: "cryptoPunks", // give it a tag
+  topic0: "PunkTransfer(address,address,uint256)", // topic0 is the event signature
+  abi: [{
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "from", "type": "address" },
+      { "indexed": true, "name": "to", "type": "address" },
+      { "indexed": false, "name": "punkIndex", "type": "uint256" },
+    ],
+    "name": "PunkTransfer",
+    "type": "event",
+  }],
+  webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
+};
 
 const newStream = await Moralis.Streams.add(stream);
-const { id } = newStream.toJSON() // id: StreamId
+const { id } = newStream.toJSON(); // id: StreamId
 
 // Now we attach the contract address to the stream
-const address = '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB'
+const address = "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB";
 
 await Moralis.Streams.addAddress({ address, id });
 ```
@@ -280,14 +279,6 @@ The test body will look like this:
 
 Now whenever an ingoing or outgoing transaction involving the address you are
 monitoring occurs, you will receive a webhook with the transaction details.
-
-### Types
-
-You can get typings for webhooks from the `@moralisweb3/streams` package.
-
-```typescript
-import { Types } from "@moralisweb3/streams";
-```
 
 ### Two webhooks for each block
 
@@ -608,33 +599,33 @@ You can do this by adding a filter to the stream. Important: You must add a
 
 ```typescript
 import { Moralis } from "moralis";
-import { EvmChain } from '@moralisweb3/evm-utils'
+import { EvmChain } from "@moralisweb3/evm-utils";
 
 const options = {
-    chains: [EvmChain.ETHEREUM.hex] // list of blockchains to monitor
-    description: 'monitor one NFT from Collection', // your description
-    tag: 'mySpecialNft', // give it a tag
-    topic0: 'Transfer(address,address,uint256)', // the event you want to monitor
-    abi: [{
-      "anonymous":false,
-      "inputs":[
-        {"indexed":true,"name":"from","type":"address"},
-        {"indexed":true,"name":"to","type":"address"},
-        {"indexed":false,"name":"tokenId","type":"uint256"}
-      ],
-      "name":"Transfer",
-      "type":"event"
-    }], // valid abi of the event
-    filter: {"eq": ["tokenId", "1"]}, // only receive events where tokenId is 1
-    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
-  }
+  chains: [EvmChain.ETHEREUM.hex], // list of blockchains to monitor
+  description: "monitor one NFT from Collection", // your description
+  tag: "mySpecialNft", // give it a tag
+  topic0: "Transfer(address,address,uint256)", // the event you want to monitor
+  abi: [{
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "from", "type": "address" },
+      { "indexed": true, "name": "to", "type": "address" },
+      { "indexed": false, "name": "tokenId", "type": "uint256" },
+    ],
+    "name": "Transfer",
+    "type": "event",
+  }], // valid abi of the event
+  filter: { "eq": ["tokenId", "1"] }, // only receive events where tokenId is 1
+  webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
+};
 
 const stream = await Moralis.Streams.add(stream);
 
 // Attach the contract address to the stream
 await Moralis.Streams.addAddress({
   id: stream.id,
-  address: '0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4', // contract address of the NFT
+  address: "0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4", // contract address of the NFT
 });
 ```
 
@@ -652,28 +643,27 @@ await Moralis.Streams.addAddress({
 ### Programmatically
 
 ```typescript
-const transferAbi = 
-[{
-  "anonymous":false,
-  "inputs":[
-    {"indexed":true,"name":"from","type":"address"},
-    {"indexed":true,"name":"to","type":"address"},
-    {"indexed":false,"name":"value","type":"uint256"}
+const transferAbi = [{
+  "anonymous": false,
+  "inputs": [
+    { "indexed": true, "name": "from", "type": "address" },
+    { "indexed": true, "name": "to", "type": "address" },
+    { "indexed": false, "name": "value", "type": "uint256" },
   ],
-  "name":"Transfer",
-  "type":"event"
-}] // valid abi of the event
+  "name": "Transfer",
+  "type": "event",
+}]; // valid abi of the event
 
 const options = {
-    address: '0xdAC17F958D2ee523a2206206994597C13D831ec7' // address to monitor
-    chains: [EvmChain.ETHEREUM.hex] // list of blockchains to monitor
-    description: 'whale transactions', // your description
-    tag: 'usdtwhale', // give it a tag
-    topic: 'Transfer(address,address,uint256)', // topic of the event
-    abi: transferAbi,
-    filter: {"gt": ["value", "100000000000"]}, // only receive events where the value is above 100k USDT
-    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
-  }
+  address: "0xdAC17F958D2ee523a2206206994597C13D831ec7", // address to monitor
+  chains: [EvmChain.ETHEREUM.hex], // list of blockchains to monitor
+  description: "whale transactions", // your description
+  tag: "usdtwhale", // give it a tag
+  topic: "Transfer(address,address,uint256)", // topic of the event
+  abi: transferAbi,
+  filter: { "gt": ["value", "100000000000"] }, // only receive events where the value is above 100k USDT
+  webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
+};
 
 const stream = await Moralis.Streams.add(stream);
 ```
@@ -692,35 +682,33 @@ const stream = await Moralis.Streams.add(stream);
 ### Programmatically
 
 ```typescript
-const punkTransferAbi = 
-[{
-  "anonymous":false,
-  "inputs":
-  [
-    {"indexed":true,"name":"from","type":"address"},
-    {"indexed":true,"name":"to","type":"address"},
-    {"indexed":false,"name":"punkIndex","type":"uint256"}
+const punkTransferAbi = [{
+  "anonymous": false,
+  "inputs": [
+    { "indexed": true, "name": "from", "type": "address" },
+    { "indexed": true, "name": "to", "type": "address" },
+    { "indexed": false, "name": "punkIndex", "type": "uint256" },
   ],
-  "name":"PunkTransfer",
-  "type":"event"
-}] // valid abi of the event
+  "name": "PunkTransfer",
+  "type": "event",
+}]; // valid abi of the event
 
 const options = {
-    chains: [EvmChain.ETHEREUM.hex] // list of blockchains to monitor
-    description: '1000 to 1002 cryptopunks', // your description   
-    tag: 'cryptoPunks', // give it a tag
-    abi: punkTransferAbi,
-    topic0: 'PunkTransfer(address,address,uint256)', // topic of the event
-    filter: { "in" : ["punkIndex", ["1000", "1001", "1002"]]}, // only receive transfer events if the token id is 1000/1001/1002
-    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
-  }
+  chains: [EvmChain.ETHEREUM.hex], // list of blockchains to monitor
+  description: "1000 to 1002 cryptopunks", // your description
+  tag: "cryptoPunks", // give it a tag
+  abi: punkTransferAbi,
+  topic0: "PunkTransfer(address,address,uint256)", // topic of the event
+  filter: { "in": ["punkIndex", ["1000", "1001", "1002"]] }, // only receive transfer events if the token id is 1000/1001/1002
+  webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
+};
 
 const stream = await Moralis.Streams.add(stream);
 
 // Attach the contract address to the stream
 await Moralis.Streams.addAddress({
   id: stream.id,
-  address: '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB', // crypto punks address
+  address: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB", // crypto punks address
 });
 ```
 
@@ -742,43 +730,66 @@ than 1 ETH.
 ### Programmatically
 
 ```typescript
-const ensNameRegisteredAbi = 
-[{
-  "anonymous":false,
-  "inputs":
-  [
-    {"indexed":false,"internalType":"string","name":"name","type":"string"},
-    {"indexed":true,"internalType":"bytes32","name":"label","type":"bytes32"},  
-    {"indexed":true,"internalType":"address","name":"owner","type":"address"},
-    {"indexed":false,"internalType":"uint256","name":"cost","type":"uint256"},
-    {"indexed":false,"internalType":"uint256","name":"expires","type":"uint256"}
+const ensNameRegisteredAbi = [{
+  "anonymous": false,
+  "inputs": [
+    {
+      "indexed": false,
+      "internalType": "string",
+      "name": "name",
+      "type": "string",
+    },
+    {
+      "indexed": true,
+      "internalType": "bytes32",
+      "name": "label",
+      "type": "bytes32",
+    },
+    {
+      "indexed": true,
+      "internalType": "address",
+      "name": "owner",
+      "type": "address",
+    },
+    {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "cost",
+      "type": "uint256",
+    },
+    {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "expires",
+      "type": "uint256",
+    },
   ],
-  "name":"NameRegistered",
-  "type":"event"
-}] // valid abi of the event
+  "name": "NameRegistered",
+  "type": "event",
+}]; // valid abi of the event
 
 const filter = {
   "and": [
-    {"eq": ["owner", "0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5"]},
-    {"gt": ["cost", "1000000000000000000"]}
-  ]
-} // only receive registration events if the owner is the address and the cost is higher than 1 ETH
+    { "eq": ["owner", "0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5"] },
+    { "gt": ["cost", "1000000000000000000"] },
+  ],
+}; // only receive registration events if the owner is the address and the cost is higher than 1 ETH
 
 const options = {
-    chains: [EvmChain.ETHEREUM.hex] // Ethereum Name Service so we only monitor Ethereum
-    description: 'ENS Name Registrations', // your description
-    tag: 'ensRegistrationByBob', // give it a tag
-    abi: ensNameRegisteredAbi,
-    filter, 
-    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
-  }
+  chains: [EvmChain.ETHEREUM.hex], // Ethereum Name Service so we only monitor Ethereum
+  description: "ENS Name Registrations", // your description
+  tag: "ensRegistrationByBob", // give it a tag
+  abi: ensNameRegisteredAbi,
+  filter,
+  webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
+};
 
 const stream = await Moralis.Streams.add(options);
 
 // Attach the contract address to the stream
 await Moralis.Streams.addAddress({
   id: stream.id,
-  address: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e', // ENS Registry address
+  address: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e", // ENS Registry address
 });
 ```
 
@@ -802,52 +813,64 @@ Lets check all USDC transfers but filter transaction where the recipent or the
 sender is the zero address and if the amount is greater or equal to 10000 USDC
 
 ```typescript
-const transferUsdcAbi = 
-[{
-  "anonymous":false,
-  "inputs":[
-    {"indexed":true,"internalType":"address","name":"from","type":"address"},
-    {"indexed":true,"internalType":"address","name":"to","type":"address"},
-    {"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}
+const transferUsdcAbi = [{
+  "anonymous": false,
+  "inputs": [
+    {
+      "indexed": true,
+      "internalType": "address",
+      "name": "from",
+      "type": "address",
+    },
+    {
+      "indexed": true,
+      "internalType": "address",
+      "name": "to",
+      "type": "address",
+    },
+    {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "value",
+      "type": "uint256",
+    },
   ],
-  "name":"Transfer",
-  "type":"event"
-}]
- 
-const filter = 
-{  
-  "or": [  
-    {  
-      "and": [  
-       { "eq": ["sender", "0x00000...00000"] },  
-       { "gte": ["amount", "10000000000"]}  
-      ]  
-    },  
-    {  
-      "and": [  
-       { "eq": ["receiver", "0x00000...00000"] },  
-       { "gte": ["amount", "10000000000"]}  
-      ]  
-    }  
-  ]  
-} // we will only receive events when the transfer recipent or the sender is the zero address meaning we are filtering mints and burn 
+  "name": "Transfer",
+  "type": "event",
+}];
 
+const filter = {
+  "or": [
+    {
+      "and": [
+        { "eq": ["sender", "0x00000...00000"] },
+        { "gte": ["amount", "10000000000"] },
+      ],
+    },
+    {
+      "and": [
+        { "eq": ["receiver", "0x00000...00000"] },
+        { "gte": ["amount", "10000000000"] },
+      ],
+    },
+  ],
+}; // we will only receive events when the transfer recipent or the sender is the zero address meaning we are filtering mints and burn
 
 const options = {
-    chains: [EvmChain.ETHEREUM.hex] // Monitor USDC on ethereum
-    description: 'ENS Name Registrations', // your description
-    tag: 'mintsAndBurns', // give it a tag
-    abi: transferUsdcAbi,
-    filter, 
-    webhookUrl: 'https://YOUR_WEBHOOK_URL' // webhook url to receive events,
-  }
+  chains: [EvmChain.ETHEREUM.hex], // Monitor USDC on ethereum
+  description: "ENS Name Registrations", // your description
+  tag: "mintsAndBurns", // give it a tag
+  abi: transferUsdcAbi,
+  filter,
+  webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
+};
 
 const stream = await Moralis.Streams.add(options);
 
 // Attach the contract address to the stream
 await Moralis.Streams.addAddress({
   id: stream.id,
-  address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48' // USDC address
+  address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", // USDC address
 });
 ```
 
