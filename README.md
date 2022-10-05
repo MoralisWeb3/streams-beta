@@ -138,7 +138,7 @@ await Moralis.Streams.addAddress({ address, id });
 
 ### Via WebUI
 
-1. Go to http://admin.moralis.io/streams/new/0
+1. Go to http://admin.moralis.io/streams/new/templates
 2. Click on `New Stream` button.
 3. Fill out the Form:
    - Address: `0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4`
