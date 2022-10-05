@@ -530,10 +530,16 @@ Or you can see all streams in the [Admin Panel](http://admin.moralis.io/streams)
       "webhookUrl": "string",
       "description": "string",
       "tag": "string",
-      "tokenAddress": "string",
-      "topic0": "string",
+      "topic0": [],
       "includeNativeTxs": true,
-      "abi": "string",
+      "allAddresses": false,
+      "includeContractLogs": true,
+      "advancedOptions": [{
+        "topic0": "string",
+        "includeNativeTxs": true,
+        "filter": {}
+      }],
+      "abi": [],
       "filter": "string",
       "address": "string",
       "chainIds": [
@@ -716,7 +722,6 @@ const approvalAbi = {
 };
 
 const options = {
-  address: "0xdAC17F958D2ee523a2206206994597C13D831ec7", // address to monitor
   chains: [EvmChain.ETHEREUM.hex], // list of blockchains to monitor
   description: "whale transactions", // your description
   tag: "usdtwhale", // give it a tag
@@ -739,6 +744,11 @@ const options = {
 };
 
 const stream = await Moralis.Streams.add(stream);
+
+await Moralis.Streams.addAddress({
+  id: stream.id,
+  address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+})
 ```
 
 ### Via WebUI
