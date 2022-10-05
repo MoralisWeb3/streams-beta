@@ -734,7 +734,8 @@ const options = {
   advancedOptions: [
     {
       topic0: "PunkTransfer(address,address,uint256)",
-      filter: { "in": ["punkIndex", ["1000", "1001", "1002"]] }, // only receive transfer events if the token id is 1000/1001/1002      includeNativeTxs: true,
+      filter: { "in": ["punkIndex", ["1000", "1001", "1002"]] }, // only receive transfer events if the token id is 1000/1001/1002
+      includeNativeTxs: true,
     },
   ],
   webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
