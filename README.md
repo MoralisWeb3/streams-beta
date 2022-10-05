@@ -138,10 +138,10 @@ await Moralis.Streams.addAddress({ address, id });
 
 ### Via WebUI
 
-1. Go to http://admin.moralis.io/streams/wallets/new/0
+1. Go to http://admin.moralis.io/streams/new/0
 2. Click on `New Stream` button.
 3. Fill out the Form:
-   - Address: `BOBS_WALLET`
+   - Address: `0x68b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4`
    - Description: `monitor Bobs wallet`
    - Webhook URL: `https://YOUR_WEBHOOK_URL`
    - Tag: `bob`
@@ -241,8 +241,8 @@ import { Types } from "@moralisweb3/streams";
 
 ### Via WebUI
 
-1. Go to http://admin.moralis.io/streams
-2. Click on `New Stream`.
+1. Go to [Streams](http://admin.moralis.io/streams)
+2. Click on `New Stream` button.
 3. Fill out the Form:
    - Address: `0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB`
    - Webhook URL: `https://YOUR_WEBHOOK_URL`
@@ -692,10 +692,17 @@ await Moralis.Streams.addAddress({
 
 1. Create a new Stream
 2. Fill out the form
-3. Add the Abi and select the topic.
-4. Add advanced options
-   - ```[{topic0:'<add topic here>', filter:{"eq": ["tokenId", "1"]}}]```
-5. Save the stream
+3. Switch on event emittance and add the Abi and select the topic.
+4. Add the below to Advanced options
+```json
+[
+  { 
+    "topic0": "Transfer(address,address,uint256)", 
+    "filter": { "eq": ["tokenId", "1"] } 
+  }
+]
+```
+5. Click on create stream.
 
 ## Example: Get USDT Transfers above 100K USDT AND Approvals Above 100k
 
@@ -758,10 +765,17 @@ await Moralis.Streams.addAddress({
 
 1. Create a new Stream
 2. Fill out the form
-3. Add the Abi and select the topic
-4. Add a advanced options
-   - ```[{topic0:'<add topic here>', filter:{"gt": ["value", "100000000000"]}}]```
-5. Save the stream
+3. Switch on Event Emittance and Add the Abi and select the topic
+4. Add below value to advanced options
+```json
+[
+  { 
+    "topic0": "Approval(address,address,uint256)", 
+    "filter": {"gt": ["value", "100000000000"]}
+  }
+]
+```
+5. Click on create stream button.
 
 ## Example: Monitor specific CryptoPunk NFTs Based on an array of Token IDs
 
@@ -809,10 +823,17 @@ await Moralis.Streams.addAddress({
 
 1. Create a new  Stream
 2. Fill out the form
-3. Add the Abi and select the topic
-4. Add advanced options
-   - ```[{topic0: '<add topic here>' ,filter:{ "or": [ { "eq": ["punkIndex", "1000"] }, { "eq": ["punkIndex", "1001"] }, { "eq": ["punkIndex", "1002"] }]}}]```
-5. Save the stream
+3. Switch on Event Emittance and Add the Abi and select the topic
+4. Add below value to advanced options
+```json
+[
+  { 
+    "topic0": "PunkTransfer(address,address,uint256)", 
+    "filter": { "in": ["punkIndex", ["1000", "1001", "1002"]] }
+  }
+]
+```
+5. Click on create stream button.
 
 ## Example: Monitor ENS Name Registrations
 
@@ -898,10 +919,22 @@ await Moralis.Streams.addAddress({
 
 1. Create a new Stream
 2. Fill out the form
-3. Add the Abi and select topic.
-4. Add a filter
-   - ```[ {topic0:'<add topic here>',filter:{ "and": [ {"eq": ["owner", "0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5"]},{"gt": ["cost", "1000000000000000000"]} ] }}]```
-5. Save the stream
+3. Switch on Event Emittance and Add the Abi and select the topic
+4. Add below value to advanced options
+```json
+[
+  { 
+    "topic0": "NameRegistered(string,bytes32,address,uint256,uint256)", 
+    "filter": {
+      "and": [
+        { "eq": ["owner", "0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5"] },
+        { "gt": ["cost", "1000000000000000000"] },
+      ],
+    }
+  }
+]
+```
+5. Click on create stream button.
 
 ## Example: Burn/Mint Tokens
 
@@ -987,10 +1020,32 @@ await Moralis.Streams.addAddress({
 
 1. Create a new Stream
 2. Fill out the form
-3. Add the Abi and choose from the topic dropdown
-4. Add a filter
-   - ```[{topic0:'<add topic here>', filter: { 'or': [ { and: [ { eq: ['sender', '0x00000...00000'] }, { gte: ['amount','10000000000'] } ] }, { and: [ { eq: ['receiver', '0x00000...00000'] }, {gte: ['amount', '10000000000'] } ] }, ] }}]```
-5. Save the stream
+3. Switch on Event Emittance and Add the Abi and select the topic
+4. Add below value to advanced options
+```json
+[
+  { 
+    "topic0": "Transfer(address,address,uint256)", 
+    "filter": {
+          "or": [
+            {
+              "and": [
+                { "eq": ["sender", "0x00000...00000"] },
+                { "gte": ["amount", "10000000000"] },
+              ],
+            },
+            {
+              "and": [
+                { "eq": ["receiver", "0x00000...00000"] },
+                { "gte": ["amount", "10000000000"] },
+              ],
+            },
+          ],
+        }
+  }
+]
+```
+5. Click on create stream button.
 
 # Update/Pause a Stream
 
@@ -1039,7 +1094,7 @@ const history = await Moralis.Streams.getHistory({ limit: 100 });
 
 ## Via WebUI
 
-1. Go to [Failed Deliveries](http://admin.moralis.io/streams/failed). All your failed deliveries will listed here.
+1. Go to [Failed Deliveries](http://admin.moralis.io/streams/failed). All your failed deliveries are listed here.
 
 ## Response
 
