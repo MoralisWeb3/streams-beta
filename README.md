@@ -290,6 +290,10 @@ wallet interacts with a contract
 You can also monitor all internal transactions happening on chain by setting the
 `includeInternalTxs` to `true`.
 
+#### Include Native Transactions
+
+If you are monitoring contract events you can decide to also include the native transaction details
+
 #### Advanced Options
 
 The Create Stream endpoint also supports advanced options. With this option you
