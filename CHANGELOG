@@ -1,16 +1,8 @@
-## 2022-10-03
+## 2022-10-05
 
 ### Added
 
 - Added `advancedOptions` option to create streams. With this option you can have more control over the topics you are passing to the stream. For each topic you can have advanced options that include the `topic`, a `filter` and a `includeNativeTxs` field
-
-### Removed
-
-- Removed `filter` from create stream options. This is now part of the `advancedOptions` field mentioned above
-
-## 2022-09-30
-
-### Added
 
 - Added `includeContractLogs` option to include or not all logs where the
   attached address is present in the logs [_address_, _topic1_, _topic2_,
@@ -23,6 +15,12 @@
 - Added `allAddresses` option to monitor **ALL ADDRESSESS** where the topic0 is
   emitted. Meaning if you are monitoring ['Transfer(address,address,uint256)'] and allAddresses is set to true you will get every transfer event from every contract that emits this event
 
+- Added new endpoint `streams/evm/${id}/address`
+    - POST: Add single or multiple addresses to the stream
+    - GET: Get all addresses from the stream
+    - DELETE: Delete a single or multiple addresses from the stream
+ 
+
 ### Changed
 
 - Changed `abi` type from object to array. Now allowing multiple abi items that are events.
@@ -34,3 +32,7 @@
 - Removed `tokenAddress` from create stream options. Removed in favor of attaching addressess to an exisiting stream
 
 - Removed `address` from create stream options.  Removed in favor of attaching addressess to an exisiting stream
+
+- Removed `type` from create stream options. Removed in favor of attaching addressess to an exisiting stream
+
+- Removed `filter` from create stream options. This is now part of the `advancedOptions` field mentioned above
