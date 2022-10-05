@@ -155,7 +155,10 @@ them to an existing stream
 ```typescript
 await Moralis.Streams.addAddress({
   id: streamId,
-  address: ["0x.32c2624", "0x.323q4t124"], // Charlies and Douglas address
+  address: [
+    "0xf977814e90da44bfa03b6295a0616a897441acec",
+    "0x5754284f345afc66a98fbb0a0afe71e0f007b949",
+  ], // Charlies and Douglas address
 });
 ```
 
