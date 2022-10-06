@@ -121,7 +121,7 @@ Moralis.start({
 });
 
 const stream = {
-  chains: [EvmChain.ETHEREUM.hex, EvmChain.POLYGON.hex], // list of blockchains to monitor
+  chains: [EvmChain.ETHEREUM, EvmChain.POLYGON], // list of blockchains to monitor
   description: "monitor Bobs wallet", // your description
   tag: "bob", // give it a tag
   webhookUrl: "https://YOUR_WEBHOOK_URL", // webhook url to receive events,
@@ -204,7 +204,7 @@ Moralis.start({
 });
 
 const stream = {
-  chains: [EvmChain.ETHEREUM.hex], // punks are on ethereum mainnet
+  chains: [EvmChain.ETHEREUM], // punks are on ethereum mainnet
   description: "all cryptopunk transfers", // your description
   tag: "cryptoPunks", // give it a tag
   topic0: ["PunkTransfer(address,address,uint256)"], // topic0 is the event signature
@@ -617,7 +617,8 @@ await Moralis.Streams.update({
 ## Via WebUI
 
 1. Go to [Streams](http://admin.moralis.io/streams).
-2. Hover on the last column of the streams table. You will be able to see more options. (Edit, Delete, Pause Stream).
+2. Hover on the last column of the streams table. You will be able to see more
+   options. (Edit, Delete, Pause Stream).
 3. Select `Edit` to go to edit form page.
 4. Change the things you want to update
 5. Click on `Edit Stream`
@@ -652,7 +653,7 @@ import { Moralis } from "moralis";
 import { EvmChain } from "@moralisweb3/evm-utils";
 
 const options = {
-  chains: [EvmChain.ETHEREUM.hex], // list of blockchains to monitor
+  chains: [EvmChain.ETHEREUM], // list of blockchains to monitor
   description: "monitor one NFT from Collection", // your description
   tag: "mySpecialNft", // give it a tag
   topic0: ["Transfer(address,address,uint256)"], // the event you want to monitor
@@ -694,14 +695,16 @@ await Moralis.Streams.addAddress({
 2. Fill out the form
 3. Switch on event emittance and add the Abi and select the topic.
 4. Add the below to Advanced options
+
 ```json
 [
-  { 
-    "topic0": "Transfer(address,address,uint256)", 
-    "filter": { "eq": ["tokenId", "1"] } 
+  {
+    "topic0": "Transfer(address,address,uint256)",
+    "filter": { "eq": ["tokenId", "1"] }
   }
 ]
 ```
+
 5. Click on create stream.
 
 ## Example: Get USDT Transfers above 100K USDT AND Approvals Above 100k
@@ -732,7 +735,7 @@ const approvalAbi = {
 };
 
 const options = {
-  chains: [EvmChain.ETHEREUM.hex], // list of blockchains to monitor
+  chains: [EvmChain.ETHEREUM], // list of blockchains to monitor
   description: "whale transactions", // your description
   tag: "usdtwhale", // give it a tag
   topic0: ["Transfer(address,address,uint256)", "Approval(address,address,uint256)], // topic of the event
@@ -767,14 +770,16 @@ await Moralis.Streams.addAddress({
 2. Fill out the form
 3. Switch on Event Emittance and Add the Abi and select the topic
 4. Add below value to advanced options
+
 ```json
 [
-  { 
-    "topic0": "Approval(address,address,uint256)", 
-    "filter": {"gt": ["value", "100000000000"]}
+  {
+    "topic0": "Approval(address,address,uint256)",
+    "filter": { "gt": ["value", "100000000000"] }
   }
 ]
 ```
+
 5. Click on create stream button.
 
 ## Example: Monitor specific CryptoPunk NFTs Based on an array of Token IDs
@@ -794,7 +799,7 @@ const punkTransferAbi = [{
 }]; // valid abi of the event
 
 const options = {
-  chains: [EvmChain.ETHEREUM.hex], // list of blockchains to monitor
+  chains: [EvmChain.ETHEREUM], // list of blockchains to monitor
   description: "1000 to 1002 cryptopunks", // your description
   tag: "cryptoPunks", // give it a tag
   abi: punkTransferAbi,
@@ -821,18 +826,20 @@ await Moralis.Streams.addAddress({
 
 ### Via WebUI
 
-1. Create a new  Stream
+1. Create a new Stream
 2. Fill out the form
 3. Switch on Event Emittance and Add the Abi and select the topic
 4. Add below value to advanced options
+
 ```json
 [
-  { 
-    "topic0": "PunkTransfer(address,address,uint256)", 
+  {
+    "topic0": "PunkTransfer(address,address,uint256)",
     "filter": { "in": ["punkIndex", ["1000", "1001", "1002"]] }
   }
 ]
 ```
+
 5. Click on create stream button.
 
 ## Example: Monitor ENS Name Registrations
@@ -889,7 +896,7 @@ const filter = {
 }; // only receive registration events if the owner is the address and the cost is higher than 1 ETH
 
 const options = {
-  chains: [EvmChain.ETHEREUM.hex], // Ethereum Name Service so we only monitor Ethereum
+  chains: [EvmChain.ETHEREUM], // Ethereum Name Service so we only monitor Ethereum
   description: "ENS Name Registrations", // your description
   tag: "ensRegistrationByBob", // give it a tag
   abi: ensNameRegisteredAbi,
@@ -921,19 +928,21 @@ await Moralis.Streams.addAddress({
 2. Fill out the form
 3. Switch on Event Emittance and Add the Abi and select the topic
 4. Add below value to advanced options
+
 ```json
 [
-  { 
-    "topic0": "NameRegistered(string,bytes32,address,uint256,uint256)", 
+  {
+    "topic0": "NameRegistered(string,bytes32,address,uint256,uint256)",
     "filter": {
       "and": [
         { "eq": ["owner", "0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5"] },
-        { "gt": ["cost", "1000000000000000000"] },
-      ],
+        { "gt": ["cost", "1000000000000000000"] }
+      ]
     }
   }
 ]
 ```
+
 5. Click on create stream button.
 
 ## Example: Burn/Mint Tokens
@@ -990,7 +999,7 @@ const filter = {
 }; // we will only receive events when the transfer recipent or the sender is the zero address meaning we are filtering mints and burn
 
 const options = {
-  chains: [EvmChain.ETHEREUM.hex], // Monitor USDC on ethereum
+  chains: [EvmChain.ETHEREUM], // Monitor USDC on ethereum
   description: "ENS Name Registrations", // your description
   tag: "mintsAndBurns", // give it a tag
   abi: transferUsdcAbi,
@@ -1022,29 +1031,31 @@ await Moralis.Streams.addAddress({
 2. Fill out the form
 3. Switch on Event Emittance and Add the Abi and select the topic
 4. Add below value to advanced options
+
 ```json
 [
-  { 
-    "topic0": "Transfer(address,address,uint256)", 
+  {
+    "topic0": "Transfer(address,address,uint256)",
     "filter": {
-          "or": [
-            {
-              "and": [
-                { "eq": ["sender", "0x00000...00000"] },
-                { "gte": ["amount", "10000000000"] },
-              ],
-            },
-            {
-              "and": [
-                { "eq": ["receiver", "0x00000...00000"] },
-                { "gte": ["amount", "10000000000"] },
-              ],
-            },
-          ],
+      "or": [
+        {
+          "and": [
+            { "eq": ["sender", "0x00000...00000"] },
+            { "gte": ["amount", "10000000000"] }
+          ]
+        },
+        {
+          "and": [
+            { "eq": ["receiver", "0x00000...00000"] },
+            { "gte": ["amount", "10000000000"] }
+          ]
         }
+      ]
+    }
   }
 ]
 ```
+
 5. Click on create stream button.
 
 # Update/Pause a Stream
@@ -1067,7 +1078,8 @@ await Moralis.Streams.updateStatus({
 ## Via WebUI
 
 1. Go to [Streams](http://admin.moralis.io/streams).
-2. Hover on the last column of the streams table. You will be able to see more options. (Edit, Delete, Pause Stream).
+2. Hover on the last column of the streams table. You will be able to see more
+   options. (Edit, Delete, Pause Stream).
 3. Select `Pause Stream` to change the status of your stream
 
 ## Via HTTP Request
@@ -1094,7 +1106,8 @@ const history = await Moralis.Streams.getHistory({ limit: 100 });
 
 ## Via WebUI
 
-1. Go to [Failed Deliveries](http://admin.moralis.io/streams/failed). All your failed deliveries are listed here.
+1. Go to [Failed Deliveries](http://admin.moralis.io/streams/failed). All your
+   failed deliveries are listed here.
 
 ## Response
 
