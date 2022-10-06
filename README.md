@@ -22,6 +22,10 @@ Get events streamed to your backend whenever:
 
 This README will introduce you to Moralis Streams API.
 
+## Video Demo Below
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/3DpJ15Z6q5w/0.jpg)](https://www.youtube.com/watch?v=KL3Sdsu50Jc&ab_channel=MoralisWeb3)
+
 ## Supported Chains
 
 |    Chain    | Streams | Confirmations Until Confirmed [read more](https://github.com/MoralisWeb3/streams-beta/blob/main/README.md#two-webhooks-for-each-block) | Internal Tx (all will be supported at launch) |
