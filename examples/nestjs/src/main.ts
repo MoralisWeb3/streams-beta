@@ -7,7 +7,7 @@ import Moralis from 'moralis';
 dotenv.config();
 
 async function getErrorAndRestart() {
-  const rawAll = await Moralis.Streams.getAll({ network: 'evm', limit: 100 });
+  const rawAll = await Moralis.Streams.getAll({ limit: 10 });
   const allStreams = rawAll.toJSON();
   const erroredStreams = allStreams.filter(({ status }) => status === 'error');
   if (erroredStreams.length > 0) {
@@ -23,10 +23,9 @@ async function restartStream({ id }: { id: string }) {
     await Moralis.Streams.updateStatus({
       id,
       status: 'active',
-      network: 'evm',
     });
   } catch (error) {
-    console.log('couldnt restart stream', id);
+    console.log('couldnt restart stream', error.message);
   }
 }
 
