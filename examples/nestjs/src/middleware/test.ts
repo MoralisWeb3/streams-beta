@@ -3,6 +3,9 @@ import { Request, Response, NextFunction } from 'express';
 import { TEST_PAYLOAD } from 'src/utils';
 import * as _ from 'lodash';
 
+/**
+ * This middleware is used to intercept the initial test webhooks coming from Moralis Streams API.
+ */
 @Injectable()
 export class TestMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {

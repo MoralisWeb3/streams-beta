@@ -5,17 +5,22 @@
 - run npm start:dev
 
 To receive real webhooks from the API, you need to expose your local server to
-the internet. You can use [ngrok](https://ngrok.com/) for this or deploy to
-heroku or production.
+the internet. You can use [ngrok](https://ngrok.com/) for this.
 
-NOTE: Heroku free hosting will be discontinued on 28th November
+## Environment variables
+
+| Variable          | Description                       | Default           |
+| ----------------- | --------------------------------- | ----------------- |
+| `PORT`            | Port to run the server on         | `3000`            |
+| `MORALIS_API_KEY` | API key to use for authentication | `MORALIS_API_KEY` |
 
 # Receive Webhooks
 
-In this example we will receive to webhooks. One for handling transactions of a
-specific wallet and on for handling events of a random ERC20 token contract.
+In this example we will have one endpoint that will receive all streams. Note
+that Webhooks are sent to the endpoint as a POST request. So we need to add a
+POST route to our controller.
 
-For this we will have 2 controllers. One for each webhook.
+Our endpoint path will be `stream`. Resulting in `YOUR_URL:PORT/stream`.
 
 ## Controller
 
@@ -30,76 +35,29 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @UseGuards(VerifySignature)
-  @Post("wallet")
+  @Post("stream")
   walletEvent(@Body() body: StreamsTypes.IWebhook) {
-    return this.appService.handleWalletEvent(body);
-  }
-
-  @UseGuards(VerifySignature)
-  @Post("contract")
-  contractEvent(@Body() body: StreamsTypes.IWebhook) {
-    return this.appService.handleContractEvent(body);
+    return this.appService.handleStream(body);
   }
 }
 ```
 
-The `walletEvent` function is called with the body of the webhook which contains
-the transaction details.
-
-The `contractEvent` function is called with the body of the webhook which
-contains the event details.
+The `handleStream` function is called with the body of the webhook which
+contains the transaction details.
 
 ## Services
 
-Services are used to handle the webhook data.
+Services are used to handle the webhook data. It contains the business logic of
+what to do with the webhook.
 
-### Wallet Transactions
+### Handle Webhook
 
 ```typescript
-  handleWalletEvent(body: IWebhook) {
-    const { erc20Transfers, erc20Approvals, nftApprovals, nftTransfers, txs } =
-      body;
-
-    if (txs.length) {
-      txs.forEach((tx) => {
-        console.log('txHash', tx.hash);
-        console.log('from', tx.fromAddress);
-        console.log('to', tx.toAddress);
-        console.log('value', tx.value);
-      });
-    }
+  handleWebhook(body: IWebhook) {
+    console.log(webhook);
 
     // Check and handle if the transaction contains ERC20/721/1155 events such as transfers or approvals.
     this.checkForErcStandard(body);
-
-    return { success: true };
-  }
-```
-
-### Smart Contract Events
-
-The handler for a contract event can look like this.
-
-```typescript
-  handleContractEvent(body: StreamsTypes.IWebhook) {
-    const webhook = body;
-
-    // Check and handle if the event contains ERC20/721/1155 events such as transfers or approvals.
-    this.checkForErcStandard(webhook);
-
-    // event MyEvent(address indexed player, bet string, win bool);
-    interface MyContractEvent {
-      player: string;
-      bet: string;
-      win: boolean;
-    }
-
-    const logs = Moralis.Streams.parsedLogs<MyContractEvent>({
-      webhookData: webhook,
-      tag: 'myCustomContract',
-    }) as MyContractEvent[];
-
-    logs[0]; // { player: '0x...', bet: '1000000000000000000', win: true }
 
     return { success: true };
   }
@@ -178,3 +136,10 @@ export class VerifySignature implements CanActivate {
   }
 }
 ```
+
+# Stream
+
+Create a stream in the Moralis dashboard. In case you are using ngrok the
+webhook url should be something like this:
+
+`https://<your-ngrok-url>/stream`

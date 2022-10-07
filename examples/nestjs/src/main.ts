@@ -30,9 +30,9 @@ async function restartStream({ id }: { id: string }) {
 }
 
 async function bootstrap() {
-  await Moralis.start({ apiKey: process.env.API_KEY });
+  await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
   const app = await NestFactory.create(AppModule, { bodyParser: false });
-  app.use(json({ limit: '5mb' }));
+  app.use(json({ limit: '10mb' }));
   await app.listen(process.env.PORT || 8080);
 
   try {

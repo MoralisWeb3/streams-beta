@@ -1,16 +1,9 @@
 import { Types as StreamsTypes } from '@moralisweb3/streams';
 import { Injectable } from '@nestjs/common';
-import { TEST_PAYLOAD } from './utils';
-import Moralis from 'moralis';
 
 @Injectable()
 export class AppService {
-  handleContractEvent(webhook: StreamsTypes.IWebhook) {
-    console.log(webhook);
-    return { success: true };
-  }
-
-  handleWalletEvent(webhook: StreamsTypes.IWebhook) {
+  handleStream(webhook: StreamsTypes.IWebhook) {
     console.log(webhook);
     return { success: true };
   }

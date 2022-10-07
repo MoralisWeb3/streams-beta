@@ -8,19 +8,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @UseGuards(VerifySignature)
-  @Post('wallet')
+  @Post('stream')
   walletEvent(@Body() body: StreamsTypes.IWebhook) {
-    return this.appService.handleWalletEvent(body);
-  }
-
-  @UseGuards(VerifySignature)
-  @Post('contract')
-  contractEvent(@Body() body: StreamsTypes.IWebhook) {
-    return this.appService.handleContractEvent(body);
-  }
-
-  @Get()
-  healthCheck() {
-    return { success: true };
+    return this.appService.handleStream(body);
   }
 }
