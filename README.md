@@ -262,7 +262,7 @@ The test body will look like this:
 
 ```json
 {
-  "abis": {},
+  "abi": [],
   "block": {
     "hash": "",
     "number": "",
@@ -270,6 +270,8 @@ The test body will look like this:
   },
   "txs": [],
   "txsInternal": [],
+  "tag": "",
+  "streamId": "",
   "logs": [],
   "chainId": "",
   "confirmed": true,
@@ -394,13 +396,13 @@ confirmed field that indicates if the block is confirmed.
       "v": "0",
       "r": "576982745954673806006784990416278341842152496504273944233060992947236722288",
       "s": "22542532798662050842266238043505315399614658322386149246105065480312118160986",
-      "tag": "WALLET_1",
-      "streamType": "wallet",
       "streamId": "4f08e7df-3753-41f0-83ff-3fb24f7d0266"
     },
     ...
   ],
   "logs": [],
+  "tag": "WALLET_1",
+  "streamType": "wallet",
   "chainId": "0x1",
   "confirmed": true,
   "block": {
@@ -431,13 +433,12 @@ confirmed field that indicates if the block is confirmed.
       "topic0": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
       "topic1": "0x00000000000000000000000068b3f12d6e8d85a8d3dbbc15bba9dc5103b888a4",
       "topic2": "0x0000000000000000000000002faf487a4414fe77e2327f0bf4ae2a264a776ad2",
-      "topic3": null,
-      "tag": "bob",
-      "streamType": "contract",
-      "streamId": "d63fff7a-1f49-45d8-ab99-1fe1f3aee449"
+      "topic3": null
     }
   ],
   "txs": [],
+  "streamId": "d63fff7a-1f49-45d8-ab99-1fe1f3aee449",
+  "tag": "bob",
   "txsInternal": [],
   "chainId": "0x1",
   "confirmed": true,
@@ -474,7 +475,6 @@ Example Body:
       "transactionHash": "0xb9730dd1b49061f3b5a6f93e0a66a03be199cad6f21ba5e8747a8087754e3e",
       "transactionIndex": "40",
       "logIndex": "48",
-      "tag": "shib_transfers",
       "tokenAddress": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
       "tokenName": "SHIBA INU",
       "tokenSymbol": "SHIB",
@@ -482,6 +482,8 @@ Example Body:
       "valueWithDecimals": "9999678895.5486"
     }
   ],
+  "tag": "shib_transfers",
+  "streamId": "d63fff7a-1f49-45d8-ab99-1fe1f3aee449",
   "erc20Approvals": [],
   "nftTransfers": [],
   "nftApprovals": {
@@ -547,7 +549,6 @@ Or you can see all streams in the [Admin Panel](http://admin.moralis.io/streams)
       "chainIds": [
         "string"
       ],
-      "type": "wallet",
       "id": "3fa84f64-5717-4562-b3fc-2c963f66afa6",
       "status": "active",
       "statusMessage": "string"
@@ -1123,6 +1124,13 @@ The payload contains the webhook details.
       "payload": {
         // the failed webhook
       },
+      "tinyPayload": {
+        "block": {},
+        "chainId": "",
+        "amount": 0
+      },
+      "streamId": "STREAM_ID",
+      "tag": "TAG",
       "errorMessage": "string",
       "webhookUrl": "string"
     }
@@ -1139,7 +1147,7 @@ You can replay (retry) a failed webhook by calling the specific endpoint.
 ## Programmatically
 
 ```typescript
-await Moralis.Streams.retryWebhook({ id: "WEBHOOK_ID" });
+await Moralis.Streams.retryWebhook({ id: "HISTORY_ID", streamId: "STREAM_ID" });
 ```
 
 ## Via WebUI
