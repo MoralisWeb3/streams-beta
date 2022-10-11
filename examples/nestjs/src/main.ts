@@ -34,12 +34,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bodyParser: false });
   app.use(json({ limit: '10mb' }));
   await app.listen(process.env.PORT || 8080);
-
-  try {
-    getErrorAndRestart();
-  } catch (error) {
-    console.log('couldnt restart stopped streams');
-  }
 }
 
 bootstrap();

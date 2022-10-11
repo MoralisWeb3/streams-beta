@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 export class TestMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     if (_.isEqual(req.body, TEST_PAYLOAD)) {
+      console.log('Test webhook received');
       return res.status(200).send({ success: true });
     }
     next();

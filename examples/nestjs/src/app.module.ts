@@ -10,6 +10,6 @@ import { TestMiddleware } from './middleware/test';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(TestMiddleware).forRoutes('*');
+    consumer.apply(TestMiddleware).forRoutes('stream');
   }
 }
