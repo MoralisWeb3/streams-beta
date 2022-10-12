@@ -1119,6 +1119,8 @@ still want to receive the failed webhooks after some time you can manuallay
 The Streams API provides an endpoint to get all failed webhooks. It is useful to
 replay the failed webhooks.
 
+While in BETA, all failed webhooks are store for 48 Hours
+
 ### Programmatically
 
 ```typescript
