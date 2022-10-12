@@ -1094,23 +1094,43 @@ curl -X 'POST' \
   -d '{"status": "paused"}'
 ```
 
-# See failed webhooks
+# Error Handling
+
+Moralis guarantees 100% delivery of webhooks. Still you can have errors in your
+streams for example if your server is down. Moralis will retry to send the
+webhook in intervals. If the webhook is not delivered after 24 hours but you
+still want to receive the failed webhooks after some time you can manuallay
+[replay](#replay-failed-webhook) the failed webhooks.
+
+## Retry Intervals
+
+| Retry | Interval |
+| ----- | -------- |
+| 0     | 1 min    |
+| 1     | 10 min   |
+| 2     | 1 hour   |
+| 3     | 2 hours  |
+| 4     | 6 hours  |
+| 5     | 12 hours |
+| 6     | 1 day    |
+
+## See failed webhooks
 
 The Streams API provides an endpoint to get all failed webhooks. It is useful to
 replay the failed webhooks.
 
-## Programmatically
+### Programmatically
 
 ```typescript
 const history = await Moralis.Streams.getHistory({ limit: 100 });
 ```
 
-## Via WebUI
+### Via WebUI
 
 1. Go to [Failed Deliveries](http://admin.moralis.io/streams/failed). All your
    failed deliveries are listed here.
 
-## Response
+### Response
 
 The Response is a list of failed webhooks that are uniquely identified by id.
 The payload contains the webhook details.
@@ -1140,17 +1160,17 @@ The payload contains the webhook details.
 }
 ```
 
-# Replay Failed Webhook
+## Replay Failed Webhook
 
 You can replay (retry) a failed webhook by calling the specific endpoint.
 
-## Programmatically
+### Programmatically
 
 ```typescript
 await Moralis.Streams.retryWebhook({ id: "HISTORY_ID", streamId: "STREAM_ID" });
 ```
 
-## Via WebUI
+### Via WebUI
 
 1. Go to [Failed Deliveries](http://admin.moralis.io/streams/failed).
 2. Click on the `replay` icon against your failed delivery
@@ -1167,7 +1187,7 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
 ```
 
-# Webhook Successrate
+## Webhook Successrate
 
 Every Stream starts with a successrate of 100% per webhook URL. For every failed
 webhook the rate decreases by 1% per webhook URL. For every successful webhook
