@@ -1,3 +1,33 @@
+## 2022-10-11
+
+### Intro
+
+1. We have decided to not sent a webhook per block meaning we will not send a webhook that contains information of more than 1 stream. Every Webhook will contain information of 1 stream only. Meaning 1 Webook = 1 Stream. This will make it easier for you to handle the webhook data. That resulted in some changes in the webhook data structure and the `history` endpoint response.
+
+2. The `abis` field (webhook) was renamed to `abi` and does not contain all abis anymore. Now it is the abi you have specified when creating a stream.
+
+3. Changed the `replay` endpoint to also require the `streamId` as a parameter.
+
+### Added
+
+- `history` endpoint now contains a `tinyPayload`, which includes `blockNumber`, `chainId` and
+amount of records, useful for UI pagination
+
+- `history` now contains streamId and tag
+
+### Changed
+
+- Changed Webhook Response to include `tag` and `streamId` in root object.
+
+- Changed `abis` to `abi` in webhook response. Abi is an array of AbiItems that you have specified when creating a stream.
+
+- Changed required parameters for replaying a webhook. Now requiring the `streamId` aswell.
+
+### Removed
+
+- Removed `tag` and `streamId` from `txs`, `internalTxs` and `logs`.
+
+
 ## 2022-10-05
 
 ### Intro
