@@ -2,7 +2,7 @@
 
 ### Intro
 
-1. We have decided to not sent a webhook per block meaning we will not send a webhook that contains information of more than 1 stream. Every Webhook will contain information of 1 stream only. Meaning 1 Webook = 1 Stream. This will make it easier for you to handle the webhook data. That resulted in some changes in the webhook data structure and the `history` endpoint response.
+1. Every Webhook will contain information of 1 stream only, before 1 webhook could contain multiple streams. Meaning 1 Webook = 1 Stream. This will make it easier for you to handle the webhook data. That resulted in some changes in the webhook data structure and the `history` endpoint response.
 
 2. The `abis` field (webhook) was renamed to `abi` and does not contain all abis anymore. Now it is the abi you have specified when creating a stream.
 
