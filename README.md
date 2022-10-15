@@ -148,10 +148,10 @@ await Moralis.Streams.addAddress({ address, id });
    - Select Blockchain (e.g. Ethereum Mainnet)
 4. Click on `Create Stream`
 
-### Monitor multiple wallets
+### Monitor multiple addresses
 
 If you want to add multiple addresses to another stream you can always attach
-them to an existing stream
+them to an existing stream. 
 
 ```typescript
 await Moralis.Streams.addAddress({
