@@ -1102,6 +1102,30 @@ webhook in intervals. If the webhook is not delivered after 24 hours but you
 still want to receive the failed webhooks after some time you can manuallay
 [replay](#replay-failed-webhook) the failed webhooks.
 
+## Error State
+
+Your Stream can enter into error state on the following 2 scenarios:
+
+1. Your webhook success-rate is below 70%
+
+2. Your webhook is not consuming the webhooks fast enough so a queue start to build up and reached the limit of 10k queued, 
+you can monitor the size of the queue with the header x-queue-size when you receive the webhook, You need to ensure your
+server can consume all webhooks fast enough so a queue doesnt build up, moving the streams to a closer region will help
+reduce the time.
+
+A stream in Error state will stop sending webhook but will continue saving them in history and the retry schedule will 
+resume when the stream is enabled again.
+
+If your Stream enters Error State you will receive a Email notification so you can act before it gets terminated.
+
+## Terminated State
+
+If your Stream stays in Error State for 24 Hours it will be terminated.
+
+A Terminated Stream will not send webhooks and will not process any new blocks, this means the blocks will be dropped.
+
+If your Stream is terminated you will receive a Email notification 
+
 ## Retry Intervals
 
 | Retry | Interval |
